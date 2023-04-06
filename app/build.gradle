@@ -13,7 +13,7 @@ android {
         applicationId "com.snaptrash.snaptrash"
         minSdk 21
         targetSdk 33
-        versionCode 0
+        versionCode 1
         versionName "0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -39,7 +39,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.2.0'
+        kotlinCompilerExtensionVersion '1.4.4'
     }
     packagingOptions {
         resources {
