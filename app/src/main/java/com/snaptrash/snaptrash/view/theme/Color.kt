@@ -17,9 +17,3 @@ val GreenText1LM = Color(0xFF44864B)
 val BackgroundDM = Color(0xFF181A18)
 val WhiteTextDM = Color(0xFFFBF8F1)
 
-val BackgroundLM =  Color(0xFFBF8F1)
-val GreenText1LM = Color(0xF44864B)
-
-
-val BackgroundDM = Color(0xF181A18)
-val WhiteTextDM = Color(0xFFBF8F1)
