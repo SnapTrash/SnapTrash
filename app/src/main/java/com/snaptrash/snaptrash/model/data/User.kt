@@ -1,11 +1,14 @@
 package com.snaptrash.snaptrash.model.data
 
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.PropertyName
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.*
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 // This class is intended for storing other users' information.
 data class User(
+    @DocumentId
+    val id: String,
     val name: String,
     @PropertyName("full_name")
     val fullName: String,
@@ -15,4 +18,8 @@ data class User(
     val associationId: String?,
     @PropertyName("is_admin")
     val isAdmin: Boolean
-)
+){
+    fun getSnapFetchingTask(): Task<QuerySnapshot> {
+        return Firebase.firestore.collection("users/${this.id}/snaps").get()
+    }
+}
