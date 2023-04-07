@@ -22,4 +22,13 @@ data class User(
     fun getSnapFetchingTask(): Task<QuerySnapshot> {
         return Firebase.firestore.collection("users/${this.id}/snaps").get()
     }
+    fun getPrivateDataFetchingTask(): Task<QuerySnapshot> {
+        return Firebase.firestore.collection("users/${this.id}/private").get()
+    }
+    fun getReportFetchingTask(): Task<QuerySnapshot> {
+        return Firebase.firestore.collection("users/${this.id}/reports").get()
+    }
+    fun getPointHistoryTask(): Task<QuerySnapshot>{
+        return Firebase.firestore.collection("users/${this.id}/pointsHistory").get()
+    }
 }
