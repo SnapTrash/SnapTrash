@@ -26,9 +26,9 @@ class LoginViewModel: ViewModel() {
     fun reload() {
         auth.currentUser?.reload()
     }
-    fun login(): Task<Void> {
-        return auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
+    fun login() {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
@@ -37,19 +37,10 @@ class LoginViewModel: ViewModel() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    updateUI(null)
                 }
             }
     }
     fun updateUI(user: FirebaseUser?) {
-        if (user != null) {
-            isLogin = true
-        } else {
-            isLogin = false
-        }
+        isLogin = user != null
     }
 }
