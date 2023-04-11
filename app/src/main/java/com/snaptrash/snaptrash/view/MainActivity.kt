@@ -10,6 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.snaptrash.snaptrash.view.LoginScreen.LoginScreen
+import com.snaptrash.snaptrash.view.Navigator.LoginNavigation
 import com.snaptrash.snaptrash.view.TopBar.TopAppBar
 import com.snaptrash.snaptrash.view.theme.SnapTrashTheme
 
@@ -25,9 +27,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     //Greeting("Android")
-                    TopAppBar {
-
-                    }
+                    //TopAppBar {}
+                    LoginNavigation()
 
                 }
             }

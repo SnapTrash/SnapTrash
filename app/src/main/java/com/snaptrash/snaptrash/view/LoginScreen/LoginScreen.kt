@@ -24,21 +24,23 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.navOptions
+
 
 
 @Composable
-fun LoginScreen(){
+fun LoginScreen(navController: NavController){
     Column {
         topBarLogin()
-        LoginBody()
+        LoginBody(navController)
 
     }
 }
 
 
-
 @Composable
-fun LoginBody(){
+fun LoginBody(navController: NavController){
     var username: String by remember { mutableStateOf("") }
     var password: String by remember { mutableStateOf("") }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
@@ -74,9 +76,9 @@ fun LoginBody(){
             placeholder = { Text(text = "Type your username") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             singleLine = true,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                containerColor = Color.White,
+                containerColor = androidx.compose.ui.graphics.Color.White,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
@@ -99,10 +101,10 @@ fun LoginBody(){
             label = {Text(text= "Password")},
             placeholder = { Text(text = "Type your password") },
             singleLine = true,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                containerColor = Color.White,
+                containerColor = androidx.compose.ui.graphics.Color.White,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
@@ -120,7 +122,7 @@ fun LoginBody(){
         Button(
             onClick = { },
             //modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
-            modifier = Modifier
+            modifier = androidx.compose.ui.Modifier
                 .width(235.dp)
                 .height(95.dp)
                 .padding(top = 36.dp),
@@ -132,7 +134,7 @@ fun LoginBody(){
                 text = "Login",
                 fontSize = 24.sp,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                modifier = androidx.compose.ui.Modifier.fillMaxWidth()
             )
         }
         Text(
@@ -161,7 +163,7 @@ fun LoginBody(){
         )
         ClickableText(text = , onClick = )
          */
-        SignUpClickableText()
+        SignUpClickableText(navController)
         Text(
             text = "",
             fontSize = 100.sp,
@@ -179,19 +181,16 @@ fun LoginBody(){
 
 }
 
-
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun topBarLogin() {
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(
-            modifier = Modifier
+            modifier = androidx.compose.ui.Modifier
                 .fillMaxWidth()
                 .height(100.dp)
                 .background(color = MaterialTheme.colorScheme.primary)
@@ -202,7 +201,7 @@ fun topBarLogin() {
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.background,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
+                modifier = androidx.compose.ui.Modifier
                     .align(Alignment.Center)
             )
         }
@@ -211,14 +210,13 @@ fun topBarLogin() {
 }
 
 
-
 @Composable
-fun SignUpClickableText() {
+fun SignUpClickableText(navController: NavController) {
     val annotatedText = buildAnnotatedString {
         //append your initial text
         withStyle(
             style = SpanStyle(
-                color = Color.Gray,
+                color = androidx.compose.ui.graphics.Color.Gray,
             )
         ) {
             append("No account yet? Sign up ")
@@ -237,7 +235,7 @@ fun SignUpClickableText() {
         }
         withStyle(
             style = SpanStyle(
-                color = Color.Gray,
+                color = androidx.compose.ui.graphics.Color.Gray,
             )
         ) {
             append("!")
@@ -254,10 +252,18 @@ fun SignUpClickableText() {
                 tag = "here",// tag which you used in the buildAnnotatedString
                 start = offset,
                 end = offset
-            )[0].let { annotation ->
-                //do your stuff when it gets clicked
-                Log.d("Clicked", annotation.item)
+            ).takeIf { it.isNotEmpty() }?.get(0).let { annotation ->
+                if (annotation != null) {
+                    if (annotation.tag == "here") {
+                        navController.navigate("SignUp", navOptions {
+                            this.launchSingleTop = true
+                            this.restoreState = true
+                        })
+                    }
+                }
             }
         }
+
     )
 }
+
