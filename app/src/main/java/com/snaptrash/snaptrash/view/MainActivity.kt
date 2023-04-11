@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.snaptrash.snaptrash.view.LoginScreen.LoginScreen
 import com.snaptrash.snaptrash.view.Navigator.LoginNavigation
+import com.snaptrash.snaptrash.view.Navigator.TopNavigation
 import com.snaptrash.snaptrash.view.TopBar.TopAppBar
 import com.snaptrash.snaptrash.view.theme.SnapTrashTheme
 
@@ -28,7 +29,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                     //Greeting("Android")
                     //TopAppBar {}
-                    LoginNavigation()
+                    //LoginNavigation()
+                    TopNavigation()
 
                 }
             }
