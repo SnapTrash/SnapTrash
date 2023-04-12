@@ -29,8 +29,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                     //Greeting("Android")
                     //TopAppBar {}
-                    //LoginNavigation()
-                    TopNavigation()
+                    LoginNavigation()
+                    //TopNavigation()
 
                 }
             }
