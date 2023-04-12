@@ -29,7 +29,7 @@ fun LoginNavigation(
 
             }
             composable("SignUp"){
-                SignUpScreen()
+                SignUpScreen(navController)
 
             }
 

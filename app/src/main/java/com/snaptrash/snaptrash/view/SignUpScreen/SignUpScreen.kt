@@ -6,6 +6,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -24,15 +25,21 @@ import androidx.compose.ui.unit.sp
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
 import com.google.android.material.datepicker.CalendarConstraints
 import java.time.LocalDate
 import java.util.*
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.snaptrash.snaptrash.view.LoginScreen.SignUpClickableText
 import com.snaptrash.snaptrash.view.LoginScreen.topBarLogin
 import kotlinx.coroutines.launch
 import java.time.Instant
@@ -40,10 +47,10 @@ import java.time.ZoneId
 
 
 @Composable
-fun SignUpScreen(){
+fun SignUpScreen(navController: NavController){
     Column {
         topBarLogin()
-        SignUpBody()
+        SignUpBody(navController)
 
     }
 }
@@ -52,9 +59,7 @@ fun SignUpScreen(){
 
 
 @Composable
-fun SignUpBody(){
-
-    val navController = rememberNavController()
+fun SignUpBody(navController: NavController){
 
     var name: String by remember { mutableStateOf("") }
     var surname: String by remember { mutableStateOf("") }
@@ -271,17 +276,10 @@ fun SignUpBody(){
                 ),
         )
 
-        Text(
-            text = "",
-            fontSize = 6.sp,
-        )
-
-
-
 
         Text(
             text = "",
-            fontSize = 12.sp,
+            fontSize = 10.sp,
         )
         Button(
             onClick = { },
@@ -331,6 +329,12 @@ fun SignUpBody(){
         )
         */
         Text(
+            text = "",
+            fontSize =10.sp,
+        )
+        LoginClickableText(navController)
+
+        Text(
             text = "by SnapTrash",
             color = MaterialTheme.colorScheme.primary,
             fontSize = 16.sp,
@@ -344,3 +348,63 @@ fun SignUpBody(){
     }
 
 }
+
+
+
+@Composable
+fun LoginClickableText(navController: NavController) {
+    val annotatedText = buildAnnotatedString {
+        //append your initial text
+        withStyle(
+            style = SpanStyle(
+                color = Color.Gray,
+            )
+        ) {
+            append("Already an account? Login ")
+
+        }
+
+        //Start of the pushing annotation which you want to color and make them clickable later
+        pushStringAnnotation(
+            tag = "here",// provide tag which will then be provided when you click the text
+            annotation = "here"
+        )
+        //add text with your different color/style
+        withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)
+        ) {
+            append("here")
+        }
+        withStyle(
+            style = SpanStyle(
+                color = Color.Gray,
+            )
+        ) {
+            append("!")
+
+        }
+        // when pop is called it means the end of annotation with current tag
+        pop()
+    }
+
+    ClickableText(
+        text = annotatedText,
+        onClick = { offset ->
+            annotatedText.getStringAnnotations(
+                tag = "here",// tag which you used in the buildAnnotatedString
+                start = offset,
+                end = offset
+            ).takeIf { it.isNotEmpty() }?.get(0).let { annotation ->
+                if (annotation != null) {
+                    if (annotation.tag == "here") {
+                        navController.navigate("Login", navOptions {
+                            this.launchSingleTop = true
+                            this.restoreState = true
+                        })
+                    }
+                }
+            }
+        }
+
+    )
+}
+
