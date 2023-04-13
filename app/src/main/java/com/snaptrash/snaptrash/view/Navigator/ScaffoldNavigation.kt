@@ -34,6 +34,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import com.snaptrash.snaptrash.view.AboutScreen.AboutUsScreen
 import com.snaptrash.snaptrash.view.ListSnapScreen.ListSnapScreen
 import kotlinx.coroutines.launch
 
@@ -118,6 +119,7 @@ fun TopNavigation(
 
                     }
                     composable("About"){
+                        AboutUsScreen()
 
                     }
 
