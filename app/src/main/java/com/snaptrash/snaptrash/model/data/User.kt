@@ -20,7 +20,7 @@ data class User(
     val isAdmin: Boolean
 ){
     fun getSnapFetchingTask(): Task<QuerySnapshot> {
-        return Firebase.firestore.collection("users/${this.id}/snaps").get()
+        return Firebase.firestore.collection("/snaps").whereEqualTo("user",id).get()
     }
     fun getPrivateDataFetchingTask(): Task<QuerySnapshot> {
         return Firebase.firestore.collection("users/${this.id}/private").get()
