@@ -1,4 +1,4 @@
-package com.snaptrash.snaptrash.view.TopBar
+package com.snaptrash.snaptrash.view.commonwidgets
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.size
