@@ -12,8 +12,9 @@ val Pink40 = Color(0xFF7D5260)
 
 val BackgroundLM =  Color(0xFFFBF8F1)
 val GreenText1LM = Color(0xFF44864B)
-
+val GreenDM = Color(0x7744864B)
 
 val BackgroundDM = Color(0xFF181A18)
 val WhiteTextDM = Color(0xFFFBF8F1)
+val GrayDM = Color(0xFF424642)
 
