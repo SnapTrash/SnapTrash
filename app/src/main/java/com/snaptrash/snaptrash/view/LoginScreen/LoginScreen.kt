@@ -39,6 +39,7 @@ fun LoginScreen(navController: NavController){
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginBody(navController: NavController){
     var username: String by remember { mutableStateOf("") }
@@ -46,7 +47,7 @@ fun LoginBody(navController: NavController){
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
     Column(
-        modifier = androidx.compose.ui.Modifier
+        modifier = Modifier
             .padding(8.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -76,18 +77,16 @@ fun LoginBody(navController: NavController){
             placeholder = { Text(text = "Type your username") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             singleLine = true,
-            modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                containerColor = androidx.compose.ui.graphics.Color.White,
+            modifier = Modifier.fillMaxWidth(),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                placeholderColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.primary,
-
-
-                ),
+            ),
         )
         Text(
             text = "",
@@ -101,19 +100,17 @@ fun LoginBody(navController: NavController){
             label = {Text(text= "Password")},
             placeholder = { Text(text = "Type your password") },
             singleLine = true,
-            modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                containerColor = androidx.compose.ui.graphics.Color.White,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                placeholderColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.primary,
-
-
-                ),
+            ),
         )
         Text(
             text = "",
@@ -122,7 +119,7 @@ fun LoginBody(navController: NavController){
         Button(
             onClick = { },
             //modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
-            modifier = androidx.compose.ui.Modifier
+            modifier = Modifier
                 .width(235.dp)
                 .height(95.dp)
                 .padding(top = 36.dp),
@@ -134,7 +131,7 @@ fun LoginBody(navController: NavController){
                 text = "Login",
                 fontSize = 24.sp,
                 textAlign = TextAlign.Center,
-                modifier = androidx.compose.ui.Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth()
             )
         }
         Text(
@@ -185,7 +182,7 @@ fun LoginBody(navController: NavController){
 @Composable
 fun topBarLogin() {
     Column(
-        modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
