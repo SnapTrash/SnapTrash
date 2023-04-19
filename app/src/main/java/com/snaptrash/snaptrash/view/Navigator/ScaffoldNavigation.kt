@@ -51,8 +51,6 @@ fun TopNavigation(
     //val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
 
     ModalNavigationDrawer(drawerContent = {DrawerContent(navController = navController, drawerState =drawerState )}, drawerState = drawerState,
-        drawerContainerColor = MaterialTheme.colorScheme.background
-
     ) {
         Scaffold(
             topBar = {
