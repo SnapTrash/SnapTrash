@@ -39,12 +39,15 @@ import com.snaptrash.snaptrash.view.ListSnapScreen.ListSnapScreen
 import kotlinx.coroutines.launch
 
 
-
+class MainAddressBook{
+    companion object {
+        val HOME = "home"
+    }
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopNavigation(
+fun TopNavigation(navController: NavHostController
 ) {
-    val navController = rememberNavController()
     val coroutineScope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 

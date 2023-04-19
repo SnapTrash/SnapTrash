@@ -10,44 +10,35 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.view.LoginScreen.LoginScreen
 import com.snaptrash.snaptrash.view.Navigator.LoginNavigation
+import com.snaptrash.snaptrash.view.Navigator.RootNav
 import com.snaptrash.snaptrash.view.Navigator.TopNavigation
 import com.snaptrash.snaptrash.view.TopBar.TopAppBar
 import com.snaptrash.snaptrash.view.theme.SnapTrashTheme
+import com.snaptrash.snaptrash.viewmodel.RootNavViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val rootNavViewModel = RootNavViewModel()
+        rootNavViewModel.isLoggedIn.value = Firebase.auth.uid != null
+        Firebase.auth.addAuthStateListener {
+            rootNavViewModel.isLoggedIn.value = Firebase.auth.uid != null
+        }
         setContent {
             SnapTrashTheme(dynamicColor = false) {
-
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //Greeting("Android")
-                    //TopAppBar {}
-                    LoginNavigation()
-                    //TopNavigation()
-
+                    RootNav(rememberNavController(), rootNavViewModel)
                 }
             }
         }
-    }
-}
-
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    SnapTrashTheme {
-        Greeting("Android")
     }
 }
