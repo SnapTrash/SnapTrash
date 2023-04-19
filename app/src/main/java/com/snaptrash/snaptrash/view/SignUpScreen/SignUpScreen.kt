@@ -29,6 +29,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.window.DialogProperties
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -39,6 +40,10 @@ import com.google.android.material.datepicker.CalendarConstraints
 import java.time.LocalDate
 import java.util.*
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
+import com.maxkeppeler.sheets.calendar.CalendarDialog
+import com.maxkeppeler.sheets.calendar.models.CalendarConfig
+import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.snaptrash.snaptrash.view.LoginScreen.SignUpClickableText
 import com.snaptrash.snaptrash.view.LoginScreen.topBarLogin
 import kotlinx.coroutines.launch
@@ -58,6 +63,7 @@ fun SignUpScreen(navController: NavController){
 
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpBody(navController: NavController){
 
@@ -75,18 +81,22 @@ fun SignUpBody(navController: NavController){
 
     var selectedDate: LocalDate = LocalDate.of(year,month,day)
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
+    var calendarState = rememberUseCaseState()
     val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
     var context = LocalContext.current
-    val datePicker = DatePickerDialog(context)
-    datePicker.setOnDateSetListener{picker,newYear,newMonth,newDay ->
-        run{
-            year = newYear
-            month = newMonth + 1
-            day = newDay
+    val datePicker = CalendarDialog(
+        state = calendarState,
+        config = CalendarConfig(yearSelection = true, monthSelection = true),
+        selection = CalendarSelection.Date {
+        date ->
+        run {
+            day = date.dayOfMonth
+            month = date.monthValue + 1
+            year = date.year
         }
-    }
+    } )
     Column(
-        modifier = androidx.compose.ui.Modifier
+        modifier = Modifier
             .padding(8.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -113,17 +123,15 @@ fun SignUpBody(navController: NavController){
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                containerColor = Color.White,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                placeholderColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.primary,
-
-
-                ),
+            ),
         )
 
         Text(
@@ -141,17 +149,15 @@ fun SignUpBody(navController: NavController){
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                containerColor = Color.White,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                placeholderColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.primary,
-
-
-                ),
+            ),
         )
         Text(
             text = "",
@@ -169,26 +175,23 @@ fun SignUpBody(navController: NavController){
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(onClick = {
-                    datePicker.show()
+                    calendarState.show()
                 }
                 ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-
-                containerColor = Color.White,
+            colors = OutlinedTextFieldDefaults.colors(
+                disabledTextColor = MaterialTheme.colorScheme.primary,
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary,
+                disabledBorderColor = MaterialTheme.colorScheme.primary,
+                disabledTrailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                placeholderColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.primary,
-
-                disabledBorderColor = MaterialTheme.colorScheme.primary,
                 disabledLabelColor = MaterialTheme.colorScheme.primary,
                 disabledPlaceholderColor = MaterialTheme.colorScheme.primary,
-                disabledTextColor = MaterialTheme.colorScheme.primary,
-                disabledTrailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant
-
             ),
         )
 
@@ -207,17 +210,15 @@ fun SignUpBody(navController: NavController){
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                containerColor = Color.White,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                placeholderColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.primary,
-
-
-                ),
+            ),
         )
 
         Text(
@@ -235,17 +236,15 @@ fun SignUpBody(navController: NavController){
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                containerColor = Color.White,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                placeholderColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.primary,
-
-
-                ),
+            ),
         )
 
         Text(
@@ -263,17 +262,15 @@ fun SignUpBody(navController: NavController){
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                containerColor = Color.White,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                placeholderColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.primary,
-
-
-                ),
+            ),
         )
 
 

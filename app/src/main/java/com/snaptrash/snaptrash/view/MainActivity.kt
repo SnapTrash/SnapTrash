@@ -30,7 +30,8 @@ class MainActivity : ComponentActivity() {
             rootNavViewModel.isLoggedIn.value = Firebase.auth.uid != null
         }
         setContent {
-            SnapTrashTheme(dynamicColor = false) {
+            SnapTrashTheme() {
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),

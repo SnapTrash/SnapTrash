@@ -8,7 +8,6 @@ plugins {
 android {
     namespace 'com.snaptrash.snaptrash'
     compileSdk 33
-
     defaultConfig {
         applicationId "com.snaptrash.snaptrash"
         minSdk 21
@@ -31,6 +30,7 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -49,18 +49,20 @@ android {
 }
 
 dependencies {
-
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
     implementation 'androidx.activity:activity-compose:1.3.1'
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.compose.material3:material3:1.0.0-alpha11'
+    implementation 'androidx.compose.material3:material3:1.1.0-beta02'
     implementation "androidx.navigation:navigation-compose:2.5.3"
 
     /** Custom added dependencies **/
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
     implementation "androidx.room:room-runtime:2.5.1"
+    implementation "com.maxkeppeler.sheets-compose-dialogs:core:1.1.1"
+    implementation "com.maxkeppeler.sheets-compose-dialogs:calendar:1.1.1"
     implementation 'com.google.firebase:firebase-firestore-ktx:24.1.1'
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.1'
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.3'
