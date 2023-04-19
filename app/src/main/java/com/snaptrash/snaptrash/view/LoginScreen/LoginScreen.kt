@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.navOptions
-
+import com.snaptrash.snaptrash.view.Navigator.AuthAddressBook
 
 
 @Composable
@@ -255,7 +255,7 @@ fun SignUpClickableText(navController: NavController) {
             ).takeIf { it.isNotEmpty() }?.get(0).let { annotation ->
                 if (annotation != null) {
                     if (annotation.tag == "here") {
-                        navController.navigate("SignUp", navOptions {
+                        navController.navigate(AuthAddressBook.SIGN_UP, navOptions {
                             this.launchSingleTop = true
                             this.restoreState = true
                         })
