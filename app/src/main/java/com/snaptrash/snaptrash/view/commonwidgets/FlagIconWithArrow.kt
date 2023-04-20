@@ -18,16 +18,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun FlagIconWithArrow(@DrawableRes flagResId: Int) {
-    var arrowDirection by remember { mutableStateOf(false) }
+fun FlagIconWithArrow(@DrawableRes flagResId: Int,arrowDirection: Boolean, onClick: () -> Unit) {
     Row {
         Box(
             Modifier
                 .padding(8.dp)
                 .size(48.dp)
                 .clickable(onClick = {
-                    arrowDirection = !arrowDirection
-                    /* Navigate to the "Language" screen */
+                    onClick()
                 }),
             contentAlignment = Alignment.Center
         ) {

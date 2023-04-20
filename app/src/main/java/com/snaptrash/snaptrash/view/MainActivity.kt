@@ -3,6 +3,7 @@ package com.snaptrash.snaptrash.view
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -14,7 +15,7 @@ import com.snaptrash.snaptrash.view.navigator.RootNav
 import com.snaptrash.snaptrash.view.theme.SnapTrashTheme
 import com.snaptrash.snaptrash.viewmodel.RootNavViewModel
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val rootNavViewModel = RootNavViewModel()
@@ -24,7 +25,6 @@ class MainActivity : ComponentActivity() {
         }
         setContent {
             SnapTrashTheme() {
-
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
