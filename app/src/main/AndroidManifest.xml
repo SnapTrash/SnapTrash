@@ -20,6 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SnapTrash"
         android:localeConfig="@xml/locales_config"
+        android:usesCleartextTraffic="true"
         tools:targetApi="33">
         <activity
             android:name=".view.MainActivity"

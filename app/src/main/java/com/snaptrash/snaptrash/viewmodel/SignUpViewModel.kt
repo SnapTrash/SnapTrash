@@ -5,6 +5,7 @@ import android.util.Patterns
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
@@ -17,7 +18,7 @@ import java.util.Date
 class SignUpViewModel: ViewModel() {
     var firstName = mutableStateOf("")
     var lastName = mutableStateOf("")
-    private val fullName = "$firstName $lastName"
+    private val fullName = "${firstName.value} ${lastName.value}"
     var dateOfBirth = mutableStateOf(LocalDate.now())
     var phoneNumber = mutableStateOf("")
     val phoneNumberValid: Boolean get() {
@@ -56,12 +57,11 @@ class SignUpViewModel: ViewModel() {
                         "email" to email.value,
                         "phoneNumber" to phoneNumber.value,
                         "password" to password.value,
-                        "birthDate" to dateOfBirth.value
+                        "birthDate" to dateOfBirth.value.toString()
                     )
                 ).addOnSuccessListener {
                     Firebase.auth.signInWithEmailAndPassword(email.value,password.value)
                     inProgress.value = false
-                    //TODO: put navigation code here
                 }.addOnFailureListener {
                     //TODO: look up the proper locale for the error message, if exists
                     error.value = it.message ?: ""

@@ -8,11 +8,10 @@ import com.snaptrash.snaptrash.viewmodel.RootNavViewModel
 
 @Composable
 fun RootNav(navController: NavHostController,vm: RootNavViewModel = viewModel()){
-    /*if(vm.isLoggedIn.value){
+    if(vm.isLoggedIn.value){
         MainScaffold(navController)
     }
     else{
         LoginNavigation(navController)
-    }*/
-    MainScaffold(navController)
+    }
 }
