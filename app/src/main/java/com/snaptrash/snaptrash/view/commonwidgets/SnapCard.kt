@@ -33,7 +33,7 @@ fun SnapCard(){
             .clickable(onClick = {/* screen with info of snap, the screen want the variable to now the content of the snap */}) ,
         shape = RoundedCornerShape(16.dp),
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
-        colors =  CardDefaults.cardColors(containerColor = Color.White,
+        colors =  CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,
         )
     ) {
         Row {
