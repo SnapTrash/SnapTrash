@@ -30,10 +30,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState,pad
         Divider(color = Color.LightGray)
         Spacer(modifier = Modifier.height(10.dp))
         NavigationDrawerItems(navController,drawerState)
-        Spacer(modifier = Modifier.height(30.dp))
-        Row( horizontalArrangement = Arrangement.Start,  modifier = Modifier.fillMaxWidth())  {
-            FlagIconWithArrow(R.drawable.united_kingdom)
-        }
+        Spacer(modifier = Modifier.height(10.dp))
     }
 
 }
