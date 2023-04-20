@@ -1,9 +1,12 @@
 package com.snaptrash.snaptrash.view.screens
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -24,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.navOptions
 import java.time.LocalDate
@@ -35,68 +39,54 @@ import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.snaptrash.snaptrash.R
 import com.snaptrash.snaptrash.view.navigator.AuthAddressBook
 import com.snaptrash.snaptrash.view.commonwidgets.TopBarLogin
+import com.snaptrash.snaptrash.viewmodel.SignUpViewModel
 
 
 @Composable
-fun SignUpScreen(navController: NavController){
+fun SignUpScreen(navController: NavController, vm: SignUpViewModel = viewModel()){
     Column {
         TopBarLogin()
-        SignUpBody(navController)
-
+        SignUpBody(navController,vm)
     }
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpBody(navController: NavController){
-
-    var name: String by remember { mutableStateOf("") }
-    var surname: String by remember { mutableStateOf("") }
-
-    var mobileCountryCode: String by remember {  mutableStateOf("") }
-    var phoneNumber: String by remember { mutableStateOf("") }
-    var email: String by remember { mutableStateOf("") }
-    var password: String by remember { mutableStateOf("") }
-
-    var day: Int by remember { mutableStateOf(LocalDate.now().dayOfMonth) }
-    var month: Int by remember { mutableStateOf(LocalDate.now().monthValue) }
-    var year: Int by remember { mutableStateOf(LocalDate.now().year) }
-
-    var selectedDate: LocalDate = LocalDate.of(year,month,day)
+fun SignUpBody(navController: NavController,vm:SignUpViewModel){
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     var calendarState = rememberUseCaseState()
     val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
     var context = LocalContext.current
     val datePicker = CalendarDialog(
         state = calendarState,
-        config = CalendarConfig(yearSelection = true, monthSelection = true),
+        config = CalendarConfig(yearSelection = true, monthSelection = true, boundary = LocalDate.of(1900,1,1)..LocalDate.now()),
         selection = CalendarSelection.Date {
-        date ->
-        run {
-            day = date.dayOfMonth
-            month = date.monthValue + 1
-            year = date.year
-        }
+        date -> vm.dateOfBirth.value = date
     } )
     Column(
         modifier = Modifier
             .padding(8.dp)
+            .verticalScroll(rememberScrollState())
             .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally){
+        horizontalAlignment = Alignment.CenterHorizontally) {
         OutlinedTextField(
-            value = name,
-            onValueChange = {name = it},
-            trailingIcon = { Icon(imageVector = Icons.Default.Person, contentDescription = stringResource(
-                            R.string.word_person)
-                        ) },
-            label = { Text(text= stringResource(R.string.word_name)) },
+            value = vm.firstName.value,
+            onValueChange = { vm.firstName.value = it },
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Person, contentDescription = stringResource(
+                        R.string.word_person
+                    )
+                )
+            },
+            label = { Text(text = stringResource(R.string.word_name)) },
             placeholder = { Text(text = stringResource(R.string.instruction_type_name)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                disabledContainerColor = Color.White,
+                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
@@ -110,18 +100,23 @@ fun SignUpBody(navController: NavController){
         )
 
         OutlinedTextField(
-            value = surname,
-            onValueChange = {surname = it},
-            trailingIcon = { Icon(imageVector = Icons.Default.Person, contentDescription = stringResource(id = R.string.word_person)) },
-            label = { Text(text= stringResource(R.string.word_surname)) },
+            value = vm.lastName.value,
+            onValueChange = { vm.lastName.value = it },
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = stringResource(id = R.string.word_person)
+                )
+            },
+            label = { Text(text = stringResource(R.string.word_surname)) },
             placeholder = { Text(text = stringResource(R.string.instruction_type_surname)) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                disabledContainerColor = Color.White,
+                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
@@ -134,12 +129,16 @@ fun SignUpBody(navController: NavController){
         )
 
         OutlinedTextField(
-            value = selectedDate.toString(),
+            value = vm.dateOfBirth.value.toString(),
             onValueChange = {},
-            trailingIcon = { Icon(imageVector = Icons.Filled.CalendarToday, contentDescription = stringResource(
-                            R.string.content_desc_calendar_icon)
-                        ) },
-            label = { Text(text= stringResource(R.string.word_birthdate)) },
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Filled.CalendarToday, contentDescription = stringResource(
+                        R.string.content_desc_calendar_icon
+                    )
+                )
+            },
+            label = { Text(text = stringResource(R.string.word_birthdate)) },
             placeholder = { Text(text = stringResource(R.string.instruction_type_birthdate)) },
             singleLine = true,
             enabled = false,
@@ -152,9 +151,9 @@ fun SignUpBody(navController: NavController){
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             colors = OutlinedTextFieldDefaults.colors(
                 disabledTextColor = MaterialTheme.colorScheme.primary,
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                disabledContainerColor = Color.White,
+                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                 disabledBorderColor = MaterialTheme.colorScheme.primary,
@@ -172,24 +171,35 @@ fun SignUpBody(navController: NavController){
         )
 
         OutlinedTextField(
-            value = phoneNumber,
-            onValueChange = {phoneNumber = it},
-            trailingIcon = { Icon(imageVector = Icons.Default.Call, contentDescription = stringResource(
-                            R.string.word_phone)
-                        ) },
-            label = { Text(text= stringResource(R.string.word_phone_number)) },
+            value = vm.phoneNumber.value,
+            onValueChange = { vm.phoneNumber.value = it },
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Call, contentDescription = stringResource(
+                        R.string.word_phone
+                    )
+                )
+            },
+            label = { Text(text = stringResource(R.string.word_phone_number)) },
             placeholder = { Text(text = stringResource(R.string.instruction_type_phone_number)) },
+            supportingText = {if(!vm.phoneNumberValid) Text(text = stringResource(R.string.error_invalid_phone_number))},
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                disabledContainerColor = Color.White,
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.primary,
+                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                focusedBorderColor = if(vm.phoneNumberValid) MaterialTheme.colorScheme.primary
+                else MaterialTheme.colorScheme.error,
+                unfocusedBorderColor =
+                if(vm.phoneNumberValid) MaterialTheme.colorScheme.primary
+                else MaterialTheme.colorScheme.error,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.primary,
+                focusedSupportingTextColor = MaterialTheme.colorScheme.error,
+                disabledSupportingTextColor = MaterialTheme.colorScheme.error,
+                unfocusedSupportingTextColor = MaterialTheme.colorScheme.error
             ),
         )
 
@@ -199,25 +209,41 @@ fun SignUpBody(navController: NavController){
         )
 
         OutlinedTextField(
-            value = email,
-            onValueChange = {email = it},
-            trailingIcon = { Icon(imageVector = Icons.Default.Mail, contentDescription = stringResource(
-                            R.string.word_email)
-                        ) },
-            label = { Text(text= stringResource(
-                R.string.word_email)) },
+            value = vm.email.value,
+            onValueChange = { vm.email.value = it },
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Mail, contentDescription = stringResource(
+                        R.string.word_email
+                    )
+                )
+            },
+            label = {
+                Text(
+                    text = stringResource(
+                        R.string.word_email
+                    )
+                )
+            },
             placeholder = { Text(text = stringResource(R.string.instruction_type_email)) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+            supportingText = {if(!vm.emailValid) Text(text =  stringResource(R.string.error_invalid_email_address))},
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                disabledContainerColor = Color.White,
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.primary,
+                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                focusedBorderColor = if(vm.emailValid) MaterialTheme.colorScheme.primary
+                else MaterialTheme.colorScheme.error,
+                unfocusedBorderColor =
+                if(vm.emailValid) MaterialTheme.colorScheme.primary
+                else MaterialTheme.colorScheme.error,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.primary,
+                focusedSupportingTextColor = MaterialTheme.colorScheme.error,
+                disabledSupportingTextColor = MaterialTheme.colorScheme.error,
+                unfocusedSupportingTextColor = MaterialTheme.colorScheme.error
             ),
         )
 
@@ -227,23 +253,34 @@ fun SignUpBody(navController: NavController){
         )
 
         OutlinedTextField(
-            value = password,
+            value = vm.password.value,
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            onValueChange = {password = it},
-            trailingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = stringResource(id = R.string.content_desc_lock_icon)) },
-            label = { Text(text= stringResource(id = R.string.word_password)) },
+            onValueChange = { vm.password.value = it },
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Lock,
+                    contentDescription = stringResource(id = R.string.content_desc_lock_icon)
+                )
+            },
+            label = { Text(text = stringResource(id = R.string.word_password)) },
             placeholder = { Text(text = stringResource(id = R.string.instruction_type_password)) },
+            supportingText = {if(!vm.passwordValid)  Text(text = stringResource(R.string.error_password_requirements))},
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                disabledContainerColor = Color.White,
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.primary,
+                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                focusedBorderColor = if(vm.passwordValid) MaterialTheme.colorScheme.primary
+                else MaterialTheme.colorScheme.error,
+                unfocusedBorderColor = if(vm.passwordValid) MaterialTheme.colorScheme.primary
+                else MaterialTheme.colorScheme.error,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = MaterialTheme.colorScheme.primary,
+                focusedSupportingTextColor = MaterialTheme.colorScheme.error,
+                disabledSupportingTextColor = MaterialTheme.colorScheme.error,
+                unfocusedSupportingTextColor = MaterialTheme.colorScheme.error
             ),
         )
 
@@ -252,8 +289,12 @@ fun SignUpBody(navController: NavController){
             text = "",
             fontSize = 10.sp,
         )
-        Button(
-            onClick = { },
+        if(vm.inProgress.value) CircularProgressIndicator() else
+        {
+            Button(
+            onClick = {
+                      vm.register()
+            },
             //modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
             modifier = Modifier
                 .width(235.dp)
@@ -271,9 +312,10 @@ fun SignUpBody(navController: NavController){
         }
         Text(
             text = "",
-            fontSize =10.sp,
+            fontSize = 10.sp,
         )
         LoginClickableText(navController)
+        }
 
         Text(
             text = stringResource(id = R.string.text_by_snaptrash),
@@ -289,8 +331,6 @@ fun SignUpBody(navController: NavController){
     }
 
 }
-
-
 
 @Composable
 fun LoginClickableText(navController: NavController) {
