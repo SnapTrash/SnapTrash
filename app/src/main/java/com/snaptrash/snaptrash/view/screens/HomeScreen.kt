@@ -29,7 +29,6 @@ fun HomeScreen() {
                 .height(400.dp)
                 .width(300.dp)
                 .align(Alignment.CenterHorizontally)
-
                 //.aspectRatio(1.0f) // fixed aspect ratio could be usefull to resize the map
                 .border(
                     width = 2.dp,
