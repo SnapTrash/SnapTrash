@@ -8,15 +8,25 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
+import com.google.i18n.phonenumbers.PhoneNumberUtil
+import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.util.Date
 
 class SignUpViewModel: ViewModel() {
-    var fullName = mutableStateOf("")
-    var dateOfBirth = mutableStateOf(Date())
+    var firstName = mutableStateOf("")
+    var lastName = mutableStateOf("")
+    private val fullName = "$firstName $lastName"
+    var dateOfBirth = mutableStateOf(LocalDate.now())
     var phoneNumber = mutableStateOf("")
     val phoneNumberValid: Boolean get() {
-        return PhoneNumberUtils.isGlobalPhoneNumber(phoneNumber.value)
+        return try {
+            val phoneNum = PhoneNumberUtil.getInstance().parse(phoneNumber.value,"fi")
+            PhoneNumberUtil.getInstance().isValidNumber(phoneNum)
+        } catch(e: Exception){
+            false
+        }
     }
     var email = mutableStateOf("")
     val emailValid: Boolean get(){
@@ -42,7 +52,7 @@ class SignUpViewModel: ViewModel() {
                 inProgress.value = true
                 functions.getHttpsCallable("registerAccount").call(
                     hashMapOf(
-                        "fullName" to fullName.value,
+                        "fullName" to fullName,
                         "email" to email.value,
                         "phoneNumber" to phoneNumber.value,
                         "password" to password.value,
