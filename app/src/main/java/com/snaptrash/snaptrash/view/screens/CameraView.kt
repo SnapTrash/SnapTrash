@@ -1,4 +1,4 @@
-package com.snaptrash.snaptrash.view.CameraView
+package com.snaptrash.snaptrash.view.screens
 
 import android.annotation.SuppressLint
 import android.content.Context
