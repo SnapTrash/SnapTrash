@@ -1,7 +1,5 @@
-package com.snaptrash.snaptrash.view.LoginScreen
+package com.snaptrash.snaptrash.view.screens
 
-import android.util.Log
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
@@ -14,33 +12,31 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.navOptions
-import com.snaptrash.snaptrash.view.Navigator.AuthAddressBook
+import com.snaptrash.snaptrash.R
+import com.snaptrash.snaptrash.view.navigator.AuthAddressBook
+import com.snaptrash.snaptrash.view.commonwidgets.TopBarLogin
 
 
 @Composable
 fun LoginScreen(navController: NavController){
     Column {
-        topBarLogin()
+        TopBarLogin()
         LoginBody(navController)
 
     }
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
+}@Composable
 fun LoginBody(navController: NavController){
     var username: String by remember { mutableStateOf("") }
     var password: String by remember { mutableStateOf("") }
@@ -54,27 +50,18 @@ fun LoginBody(navController: NavController){
         //verticalArrangement = Arrangement.Center
 
     ){
-        /*Text(
-            text = "Login",
-            color = MaterialTheme.colorScheme.primary,
-            fontSize = 36.sp,
-            fontWeight = FontWeight.SemiBold,
-            textAlign = TextAlign.Center,
-            modifier = androidx.compose.ui.Modifier
-                .fillMaxWidth()
-                .padding(top = 64.dp)
-        )*/
         Text(
             text = "",
             fontSize = 100.sp,
         )
-
         OutlinedTextField(
             value = username,
             onValueChange = {username = it},
-            trailingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "Email icon") },
-            label = {Text(text= "Username")},
-            placeholder = { Text(text = "Type your username") },
+            trailingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = stringResource(
+                            R.string.content_desc_email_icon)
+                        ) },
+            label = {Text(text= stringResource(R.string.word_username))},
+            placeholder = { Text(text = stringResource(R.string.instruction_type_username)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
@@ -96,9 +83,11 @@ fun LoginBody(navController: NavController){
             value = password,
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             onValueChange = {password = it},
-            trailingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "Lock icon") },
-            label = {Text(text= "Password")},
-            placeholder = { Text(text = "Type your password") },
+            trailingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = stringResource(
+                            R.string.content_desc_lock_icon)
+                        ) },
+            label = {Text(text= stringResource(R.string.word_password))},
+            placeholder = { Text(text = stringResource(R.string.instruction_type_password)) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -128,7 +117,7 @@ fun LoginBody(navController: NavController){
         ){ //button composable contains an other composable
             Text(
                 //text = "Submit",
-                text = "Login",
+                text = stringResource(R.string.word_login),
                 fontSize = 24.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
@@ -138,39 +127,17 @@ fun LoginBody(navController: NavController){
             text = "",
             fontSize = 20.sp,
         )
-
-        /*Text(
-            text = buildAnnotatedString {
-                append("No account yet? Sign up ")
-                //withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary), {
-                    //append("here")
-                    pushStringAnnotation(
-                        tag = "Here",
-                        annotation = "here"
-                    )
-                withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary), {
-                    append("here")
-
-                })
-                append("!")
-                pop()
-            }
-
-
-        )
-        ClickableText(text = , onClick = )
-         */
         SignUpClickableText(navController)
         Text(
             text = "",
             fontSize = 100.sp,
         )
         Text(
-            text = "by SnapTrash",
+            text = stringResource(R.string.text_by_snaptrash),
             color = MaterialTheme.colorScheme.primary,
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
-            modifier = androidx.compose.ui.Modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 64.dp)
         )
@@ -178,61 +145,32 @@ fun LoginBody(navController: NavController){
 
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun topBarLogin() {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Box(
-            modifier = androidx.compose.ui.Modifier
-                .fillMaxWidth()
-                .height(100.dp)
-                .background(color = MaterialTheme.colorScheme.primary)
-        ) {
-            Text(
-                "SnapTrash",
-                maxLines = 1,
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.background,
-                overflow = TextOverflow.Ellipsis,
-                modifier = androidx.compose.ui.Modifier
-                    .align(Alignment.Center)
-            )
-        }
-        // altri composable qui...
-    }
-}
-
-
 @Composable
 fun SignUpClickableText(navController: NavController) {
     val annotatedText = buildAnnotatedString {
         //append your initial text
         withStyle(
             style = SpanStyle(
-                color = androidx.compose.ui.graphics.Color.Gray,
+                color = Color.Gray,
             )
         ) {
-            append("No account yet? Sign up ")
+            append(stringResource(R.string.text_no_account_yet_sign_up))
 
         }
 
         //Start of the pushing annotation which you want to color and make them clickable later
         pushStringAnnotation(
             tag = "here",// provide tag which will then be provided when you click the text
-            annotation = "here"
+            annotation = " " + stringResource(R.string.word_here)
         )
         //add text with your different color/style
         withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)
         ) {
-            append("here")
+            append(" " + stringResource(R.string.word_here))
         }
         withStyle(
             style = SpanStyle(
-                color = androidx.compose.ui.graphics.Color.Gray,
+                color = Color.Gray,
             )
         ) {
             append("!")

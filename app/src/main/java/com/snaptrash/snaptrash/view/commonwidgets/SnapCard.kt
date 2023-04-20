@@ -1,12 +1,10 @@
-package com.snaptrash.snaptrash.view.ListSnapScreen
+package com.snaptrash.snaptrash.view.commonwidgets
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.R
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
@@ -20,37 +18,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
+import com.snaptrash.snaptrash.R
 
-
-@Composable
-fun ListSnapScreen(){
-    LazyColumn(modifier = Modifier.fillMaxSize()){
-        item{
-            SnapCard()
-        }
-        item{
-            SnapCard()
-        }
-        item{
-            SnapCard()
-        }
-        item{
-            SnapCard()
-        }
-        item{
-            SnapCard()
-        }
-        item{
-            SnapCard()
-        }
-        item{
-            SnapCard()
-        }
-    }
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SnapCard(){
     val navControllerList = rememberNavController()
@@ -87,7 +56,7 @@ fun SnapCard(){
                 Image(
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop,
-                    painter = painterResource(com.snaptrash.snaptrash.R.drawable.rifiuti_prova),
+                    painter = painterResource(R.drawable.rifiuti_prova),
                     contentDescription = "My Image"
                 )
 

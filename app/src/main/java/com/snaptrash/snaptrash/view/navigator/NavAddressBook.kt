@@ -1,4 +1,4 @@
-package com.snaptrash.snaptrash.view.Navigator
+package com.snaptrash.snaptrash.view.navigator
 
 class NavAddressBook {
     companion object{

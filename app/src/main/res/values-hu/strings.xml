@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">SnapTrash</string>
+    <string name="app_title">SnapTrash</string>
+    <string name="word_map">Térkép</string>
+    <string name="word_snap_list">Snap lista</string>
+    <string name="word_history">Előzmények</string>
+    <string name="word_logout">Kijelentkezés</string>
+    <string name="word_settings">Beállítások</string>
+    <string name="word_about">Névjegy</string>
+    <string name="word_about_us">Rólunk</string>
+    <string name="text_about_us">Üdv a SnapTrash-ben. Ezen alkalmazás mögött egy csapat elszánt környezetvédő áll, akiknek szívügyük a tisztább és élhetőbb környezet létrehozása mindenki számára. A küldetésünk a világszerte komoly problémát okozó szemetelés és szennyezés elleni harc azzal, hogy a hozzád hasonló felhasználóknak lehetővé tesszük, hogy egy egyszerű bejelentéssel tehessennek ellene.\nA mobilalkalmazásunkkal te is sokat tehetsz az ügy érdekében. Csak fotózd le a szemetet, amit találsz, mi pedig rögzítjük a pontos helyét, legyen az bárhol —  a városban, az erdőben, tóparton vagy épp egy hegytetőn. A platformunk ezután továbbítja ezeket partnerszervezeteknek, akik gondoskodnak a probléma felelős és szakszerű kezeléséről.\nA SnapTrash-nél hisszük, hogy minden apró szemétnek története van és ezen történetek megosztásával felhívhatjuk a figyelmet a szemetelés hatására és pozitív változásra ösztönözhetjük társadalmunkat. Az alkalmazás használatával nem csak a szemét eltüntetésében segítesz, hanem egy hozzád hasonlóakból álló közösséget gyarapítasz, akik elkötelezettek a bolygónk megóvása iránt, hogy az eljövendő generációknak is megmaradjon.\n</string>
+    <string name="content_desc_email_icon">Email-ikon</string>
+    <string name="word_username">Felhasználónév</string>
+    <string name="instruction_type_username">Írd be a felhasználóneved</string>
+    <string name="content_desc_lock_icon">Zár-ikon</string>
+    <string name="word_password">Jelszó</string>
+    <string name="instruction_type_password">Írd be a jelszavad</string>
+    <string name="word_login">Bejelentkezés</string>
+    <string name="text_by_snaptrash">a SnapTrash által</string>
+    <string name="text_no_account_yet_sign_up">Nincs fiókod? Regisztálj</string>
+    <string name="word_here">itt</string>
+    <string name="word_person">Személy</string>
+    <string name="word_name">Keresztnév</string>
+    <string name="instruction_type_name">Írd be a keresztneved</string>
+    <string name="word_surname">Vezetéknév</string>
+    <string name="instruction_type_surname">Írd be a vezetékneved</string>
+    <string name="content_desc_calendar_icon">Naptár-ikon</string>
+    <string name="word_birthdate">Születési dátum</string>
+    <string name="instruction_type_birthdate">Írd be a születési dátumod</string>
+    <string name="word_phone">Telefon</string>
+    <string name="word_phone_number">Telefonszám</string>
+    <string name="instruction_type_phone_number">Írd be a telefonszámod</string>
+    <string name="word_email">E-mail cím</string>
+    <string name="instruction_type_email">Írd be az e-mail címed</string>
+    <string name="word_sign_up">Regisztáció</string>
+    <string name="instruction_already_have_an_account">Van már fiókod? Jelentkezz be</string>
+</resources>
