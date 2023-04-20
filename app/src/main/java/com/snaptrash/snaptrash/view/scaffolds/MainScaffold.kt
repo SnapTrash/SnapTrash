@@ -22,58 +22,65 @@ fun MainScaffold(navController: NavHostController
     val coroutineScope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
-    ModalNavigationDrawer(drawerContent = {DrawerContent(navController = navController, drawerState =drawerState )}, drawerState = drawerState,
-    ) {
-        Scaffold(
-            topBar = {
-                CenterAlignedTopAppBar(
-                    title = {
-                        Text(
-                            "SnapTrash",
-                            maxLines = 1,
-                            style = MaterialTheme.typography.titleLarge,
-                            overflow = TextOverflow.Ellipsis,
-                        )
-                    },
-                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primary,
-                        navigationIconContentColor = MaterialTheme.colorScheme.background,
-                        titleContentColor = MaterialTheme.colorScheme.background
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        "SnapTrash",
+                        maxLines = 1,
+                        style = MaterialTheme.typography.titleLarge,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    navigationIconContentColor = MaterialTheme.colorScheme.background,
+                    titleContentColor = MaterialTheme.colorScheme.background
 
-                    ),
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            if (drawerState.isClosed) {
-                                coroutineScope.launch {
-                                    drawerState.open()
-                                }
-
-                            } else {
-                                coroutineScope.launch {
-                                    drawerState.close()
-                                }
+                ),
+                navigationIcon = {
+                    IconButton(onClick = {
+                        if (drawerState.isClosed) {
+                            coroutineScope.launch {
+                                drawerState.open()
                             }
-                        }) {
-                            Icon(
-                                imageVector = Icons.Filled.Menu,
-                                contentDescription = "Localized description",
-                                modifier = Modifier
-                                    .size(36.dp)
-                            )
+
+                        } else {
+                            coroutineScope.launch {
+                                drawerState.close()
+                            }
                         }
-                    },
-                )
-            },
-        ){
-            Box(modifier = Modifier.padding(it)){
+                    }) {
+                        Icon(
+                            imageVector = Icons.Filled.Menu,
+                            contentDescription = "Localized description",
+                            modifier = Modifier
+                                .size(36.dp)
+                        )
+                    }
+                },
+            )
+        },
+    ){
+        ModalNavigationDrawer(
+            drawerContent = {
+                DrawerContent(
+                    navController = navController,
+                    drawerState =drawerState,
+                    paddingValues = it) },
+            drawerState = drawerState,
+        ) {
+            Box(modifier = Modifier.padding(it)) {
                 NavHost(
                     navController = navController,
                     startDestination = MainAddressBook.HOME
 
-                ){
+                ) {
                     MainAddressBook.addMainGraph(this)
                 }
             }
         }
     }
 }
+
