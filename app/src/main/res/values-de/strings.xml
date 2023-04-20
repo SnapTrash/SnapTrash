@@ -1,4 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SnapTrash</string>
+    <string name="app_title">SnapTrash</string>
+    <string name="word_map">Karte</string>
+    <string name="word_snap_list">Liste</string>
+    <string name="word_history">Verlauf</string>
+    <string name="word_logout">Ausloggen</string>
+    <string name="word_settings">Einstellungen</string>
+    <string name="word_about">Über</string>
+    <string name="word_about_us">Über uns</string>
+    <string name="text_about_us">Willkommen bei SnapTrash! Wir sind ein engagiertes Team von Umweltenthusiasten, die sich leidenschaftlich für eine sauberere und gesündere Umwelt für alle einsetzen. Wir haben es uns zur Aufgabe gemacht, das globale Problem von Müll und Abfällen zu bekämpfen, indem wir Nutzern wie Ihnen die Möglichkeit geben, Müll zu melden und aktiv dagegen vorzugehen.\n\nMit unserer App haben Sie die Möglichkeit, etwas zu bewirken. Machen Sie einfach ein Foto von Müll, den Sie irgendwo finden - sei es in der Natur, in Städten, in den Bergen, an Seen oder an öffentlichen Plätzen - und laden Sie es zusammen mit den Koordinaten hoch. Unsere Plattform stellt dann eine Verbindung zu unseren Partnerorganisationen her, die für die Abfallentsorgung und -aufbereitung zuständig sind, und sorgt dafür, dass der Müll umgehend und verantwortungsvoll beseitigt wird.\n\nWir bei SnapTrash glauben, dass jedes Stück Müll eine Geschichte hat, und dass wir durch das Teilen dieser Geschichten das Bewusstsein für die Auswirkungen von Vermüllung schärfen und zu positiven Veränderungen anregen können. Durch die Nutzung unserer App helfen Sie nicht nur, die Umwelt zu säubern, sondern tragen auch zu einer globalen Gemeinschaft von Gleichgesinnten bei, die sich für den Schutz unseres Planeten für zukünftige Generationen einsetzen.\n\nUnser Engagement für die Nachhaltigkeit geht über die reine Aufräumarbeit hinaus. Wir engagieren uns auch aktiv in Bildungs- und Aufklärungsinitiativen, um ein verantwortungsvolles Abfallmanagement zu fördern und die Gesamtauswirkungen von Müll auf unseren Planeten zu verringern. Wir arbeiten mit lokalen Gemeinden, Unternehmen und Regierungen zusammen, um innovative Lösungen umzusetzen und eine Kultur der Umweltverantwortung zu fördern.\n\nHelfen Sie uns bei unserer Mission, eine sauberere Welt für alle zu schaffen. Gemeinsam können wir einen echten Unterschied machen, indem wir gegen Müll vorgehen und die Schönheit unseres Planeten bewahren. Machen Sie noch heute Ihren ersten Snap und werden Sie Teil der Lösung!</string>
+    <string name="content_desc_email_icon">E-mail Symbol</string>
+    <string name="word_username">Benutzername</string>
+    <string name="instruction_type_username">Geben Sie Ihren Benutzernamen ein</string>
+    <string name="content_desc_lock_icon">Schlosssymbol</string>
+    <string name="word_password">Passwort</string>
+    <string name="instruction_type_password">Geben Sie Ihr Passwort ein</string>
+    <string name="word_login">Einloggen</string>
+    <string name="text_by_snaptrash">von SnapTrash</string>
+    <string name="text_no_account_yet_sign_up">Noch keinen Account? Registrieren Sie sich</string>
+    <string name="word_here">hier</string>
+    <string name="word_person">Person</string>
+    <string name="word_name">Vorname</string>
+    <string name="instruction_type_name">Geben Sie Ihren Vornamen ein</string>
+    <string name="word_surname">Nachname</string>
+    <string name="instruction_type_surname">Geben Sie Ihren Nachnamen ein</string>
+    <string name="content_desc_calendar_icon">Kalender Symbol</string>
+    <string name="word_birthdate">Geburtsdatum</string>
+    <string name="instruction_type_birthdate">Geben Sie Ihr Geburtsdatum ein</string>
+    <string name="word_phone">Telefon</string>
+    <string name="word_phone_number">Telefonnummer</string>
+    <string name="instruction_type_phone_number">Geben Sie Ihre Telefonnummer ein</string>
+    <string name="word_email">E-Mail</string>
+    <string name="instruction_type_email">Geben Sie Ihre E-Mail Adresse ein</string>
+    <string name="word_sign_up">Registrieren</string>
+    <string name="instruction_already_have_an_account">Sie haben schon einen Account? Zum Einloggen drücken Sie</string>
 </resources>
