@@ -1,7 +1,10 @@
 package com.snaptrash.snaptrash.view.commonwidgets.navigation
 
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Help
 import androidx.compose.material.icons.outlined.History
@@ -115,6 +118,8 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
         Firebase.auth.signOut()
         scope.launch { drawerState.close() }
     }
-    Spacer(modifier = Modifier.height(100.dp))
-    //FlagIconWithArrow()
+    Spacer(modifier = Modifier.height(10.dp))
+    Row(modifier = Modifier.fillMaxWidth().padding(start = 10.dp)){
+        FlagIconWithArrow(R.drawable.united_kingdom)
+    }
 }
