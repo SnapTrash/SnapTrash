@@ -2,7 +2,16 @@ package com.snaptrash.snaptrash.view.commonwidgets.navigation
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Help
+import androidx.compose.material.icons.outlined.History
+import androidx.compose.material.icons.outlined.List
+import androidx.compose.material.icons.outlined.Logout
+import androidx.compose.material.icons.outlined.Map
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.DrawerState
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -33,6 +42,7 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
 
     NavigationItem(
         stringResource(R.string.word_map),
+        { Icon(Icons.Outlined.Map,"") },
         MainAddressBook.HOME,
         destination,
     ) {
@@ -45,6 +55,7 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
     Spacer(modifier = Modifier.height(10.dp))
     NavigationItem(
         stringResource(R.string.word_snap_list),
+        { Icon(Icons.Outlined.List,"") },
         MainAddressBook.LIST,
         destination,
     ) {
@@ -57,6 +68,7 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
     Spacer(modifier = Modifier.height(10.dp))
     NavigationItem(
         stringResource(R.string.word_history),
+        { Icon(Icons.Outlined.History,"") },
         MainAddressBook.HISTORY,
         destination,
     ) {
@@ -69,17 +81,8 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
     Spacer(modifier = Modifier.height(10.dp))
 
     NavigationItem(
-        stringResource(R.string.word_logout),
-        AuthAddressBook.LOGIN,
-        destination,
-    ) {
-        Firebase.auth.signOut()
-        scope.launch { drawerState.close() }
-    }
-    Spacer(modifier = Modifier.height(10.dp))
-
-    NavigationItem(
-        stringResource(R.string.word_settings),
+        stringResource(R.string.account),
+        { Icon(Icons.Outlined.Person,"") },
         MainAddressBook.SETTINGS,
         destination,
     ) {
@@ -92,6 +95,7 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
     Spacer(modifier = Modifier.height(10.dp))
     NavigationItem(
         stringResource(R.string.word_about),
+        { Icon(Icons.Outlined.Help,"") },
         MainAddressBook.ABOUT,
         destination,
     ) {
@@ -99,6 +103,16 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
             this.launchSingleTop = true
             this.restoreState = true
         })
+        scope.launch { drawerState.close() }
+    }
+    Spacer(modifier = Modifier.height(10.dp))
+    NavigationItem(
+        stringResource(R.string.word_logout),
+        { Icon(Icons.Outlined.Logout,"") },
+        AuthAddressBook.LOGIN,
+        destination,
+    ) {
+        Firebase.auth.signOut()
         scope.launch { drawerState.close() }
     }
     Spacer(modifier = Modifier.height(100.dp))

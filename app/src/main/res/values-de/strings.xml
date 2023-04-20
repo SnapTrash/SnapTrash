@@ -34,5 +34,7 @@
     <string name="word_email">E-Mail</string>
     <string name="instruction_type_email">Geben Sie Ihre E-Mail Adresse ein</string>
     <string name="word_sign_up">Registrieren</string>
-    <string name="instruction_already_have_an_account">Sie haben schon einen Account? Zum Einloggen drücken Sie</string>
+    <string name="instruction_already_have_an_account">Sie haben schon einen Account?\n Zum Einloggen drücken Sie</string>
+    <string name="instruction_take_a_snap">Machen Sie einen Snap</string>
+    <string name="account">Account</string>
 </resources>

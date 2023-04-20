@@ -22,13 +22,12 @@ fun AboutUsScreen() {
     val longText =
 
     Column(
-        modifier = Modifier.padding(30.dp)
+        modifier = Modifier.padding(start = 30.dp,top = 30.dp, end= 30.0.dp)
     ) {
         Text(text = stringResource(R.string.word_about_us), fontWeight = FontWeight.SemiBold, fontSize = 24.sp, color = MaterialTheme.colorScheme.secondary)
         Spacer(modifier = Modifier.height(20.dp))
         Box(
             Modifier
-                .height(600.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             Text(text = stringResource(id = R.string.text_about_us),fontSize = 16.sp,

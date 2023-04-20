@@ -34,4 +34,6 @@
     <string name="instruction_type_email">Írd be az e-mail címed</string>
     <string name="word_sign_up">Regisztáció</string>
     <string name="instruction_already_have_an_account">Van már fiókod? Jelentkezz be</string>
+    <string name="instruction_take_a_snap">Snap készíté</string>
+    <string name="account">Account</string>
 </resources>
