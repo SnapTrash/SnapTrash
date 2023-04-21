@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.snaptrash.snaptrash.view.HomeScreen.HomeScreen
 import com.snaptrash.snaptrash.view.screens.AboutUsScreen
+import com.snaptrash.snaptrash.view.screens.AccountScreen
 import com.snaptrash.snaptrash.view.screens.CameraScreen
 import com.snaptrash.snaptrash.view.screens.CameraView
 import com.snaptrash.snaptrash.view.screens.ListSnapScreen
@@ -28,7 +29,7 @@ class MainAddressBook{
 
             }
             navGraphBuilder.composable(MainAddressBook.SETTINGS){
-
+                AccountScreen()
             }
             navGraphBuilder.composable(MainAddressBook.ABOUT){
                 AboutUsScreen()
