@@ -18,6 +18,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
 import java.util.Date
+import kotlin.coroutines.Continuation
+import kotlin.coroutines.createCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class SignUpViewModel: ViewModel() {
     var firstName = mutableStateOf("")
@@ -64,13 +68,15 @@ class SignUpViewModel: ViewModel() {
                         "birthDate" to dateOfBirth.value.toString()
                     )
                 ).addOnSuccessListener {
-                    runBlocking{
+                    suspend{
                         delay(1000)
-                    }
-                    Firebase.auth.signInWithEmailAndPassword(email.value,password.value)
-                    inProgress.value = false
+                    }.createCoroutine(Continuation(viewModelScope.coroutineContext) {
+                        Firebase.auth.signInWithEmailAndPassword(
+                            email.value,
+                            password.value
+                        )
+                    }).resume(Unit)
                 }.addOnFailureListener {
-                    //TODO: look up the proper locale for the error message, if exists
                     error.value = when(it.message){
                         "1" -> R.string.error_at_least_one_field_is_missing
                         "2" -> R.string.error_at_least_one_of_the_fields_is_invalid
