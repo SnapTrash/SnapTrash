@@ -18,17 +18,23 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
+import com.snaptrash.snaptrash.BuildConfig
 import com.snaptrash.snaptrash.model.DeviceInfo
 import com.snaptrash.snaptrash.view.navigator.RootNav
 import com.snaptrash.snaptrash.view.screens.AboutUsScreen
 import com.snaptrash.snaptrash.view.theme.SnapTrashTheme
 import com.snaptrash.snaptrash.viewmodel.RootNavViewModel
+import org.osmdroid.config.Configuration
 
 
 
 
 class MainActivity : AppCompatActivity() {
 
+    private val missingPermissions = mutableListOf<String>()
+    fun requestMissingPermissions(){
+        if(missingPermissions.size > 0) ActivityCompat.requestPermissions(this,missingPermissions.toTypedArray(),2)
+    }
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ){
@@ -45,8 +51,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Create navigation ViewModel
         val rootNavViewModel = RootNavViewModel()
         rootNavViewModel.isLoggedIn.value = Firebase.auth.uid != null
+        //Init firebase
         Firebase.auth.addAuthStateListener {
             rootNavViewModel.isLoggedIn.value = Firebase.auth.uid != null
         }
@@ -56,6 +64,8 @@ class MainActivity : AppCompatActivity() {
             Firebase.functions.useEmulator("10.0.2.2",5001)
 
         }
+        //Init OSMDroid
+        Configuration.getInstance().userAgentValue = BuildConfig.APPLICATION_ID
         setContent {
             SnapTrashTheme() {
                 // A surface container using the 'background' color from the theme
@@ -64,6 +74,8 @@ class MainActivity : AppCompatActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     requestCameraPermission()
+                    requestLocationPermission()
+                    requestMissingPermissions()
                     RootNav(rememberNavController(), rootNavViewModel)
                     //AboutUsScreen()
                 }
@@ -73,16 +85,13 @@ class MainActivity : AppCompatActivity() {
 
 
     fun requestCameraPermission(){
-        when {
-            ContextCompat.checkSelfPermission(this,
-                android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED -> {
-                Log.i("kilo", "Permission previously granted")
-            }
-            ActivityCompat.shouldShowRequestPermissionRationale(
-                this,
-                android.Manifest.permission.CAMERA
-            ) -> Log.i("kilo", "Show camera permission dialog")
-            else -> requestPermissionLauncher.launch(android.Manifest.permission.CAMERA)
+        if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+           missingPermissions.add(android.Manifest.permission.CAMERA)
         }
+    }
+    fun requestLocationPermission(){
+       if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+           missingPermissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION)
+       }
     }
 }
