@@ -18,6 +18,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
+import com.snaptrash.snaptrash.model.DeviceInfo
 import com.snaptrash.snaptrash.view.navigator.RootNav
 import com.snaptrash.snaptrash.view.screens.AboutUsScreen
 import com.snaptrash.snaptrash.view.theme.SnapTrashTheme
@@ -48,6 +49,12 @@ class MainActivity : AppCompatActivity() {
         rootNavViewModel.isLoggedIn.value = Firebase.auth.uid != null
         Firebase.auth.addAuthStateListener {
             rootNavViewModel.isLoggedIn.value = Firebase.auth.uid != null
+        }
+        if(DeviceInfo.isEmulator){
+            Firebase.auth.useEmulator("10.0.2.2", 9099)
+            Firebase.firestore.useEmulator("10.0.2.2", 8080)
+            Firebase.functions.useEmulator("10.0.2.2",5001)
+
         }
         setContent {
             SnapTrashTheme() {
