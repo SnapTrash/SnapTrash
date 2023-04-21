@@ -69,12 +69,28 @@ class SignUpViewModel: ViewModel() {
                     )
                 ).addOnSuccessListener {
                     suspend{
+                        // Wait for Firebase to catch up
                         delay(1000)
                     }.createCoroutine(Continuation(viewModelScope.coroutineContext) {
                         Firebase.auth.signInWithEmailAndPassword(
                             email.value,
                             password.value
-                        )
+                        ).addOnFailureListener {
+                            // Retry login
+                            Firebase.auth.signInWithEmailAndPassword(
+                                email.value,
+                                password.value
+                            ).addOnFailureListener {
+                                // Retry for last time
+                                Firebase.auth.signInWithEmailAndPassword(
+                                    email.value,
+                                    password.value
+                                ).addOnFailureListener {
+                                    inProgress.value = false
+                                    // Add error message display
+                                }
+                            }
+                        }
                     }).resume(Unit)
                 }.addOnFailureListener {
                     error.value = when(it.message){
