@@ -19,10 +19,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImagePainter
+import coil.compose.rememberAsyncImagePainter
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 @Composable
@@ -53,16 +58,20 @@ fun AccountScreen(){
                     .fillMaxSize()
                     .clip(shape = CircleShape),
                 contentScale = ContentScale.Crop,
-                painter = painterResource(com.snaptrash.snaptrash.R.drawable.profile_image),
+                painter =
+                    if(Firebase.auth.currentUser?.photoUrl != null)
+                        rememberAsyncImagePainter(Firebase.auth.currentUser?.photoUrl)
+                    else
+                        painterResource(com.snaptrash.snaptrash.R.drawable.profile_image),
                 contentDescription = "Profile Image"
             )
 
         }
 
-        Text(text = "*username*",color = MaterialTheme.colorScheme.secondary,
+        Text(text = Firebase.auth.currentUser?.displayName ?: "Noname",color = MaterialTheme.colorScheme.secondary,
             fontWeight = FontWeight.SemiBold, fontSize = 24.sp,
             modifier = Modifier.align(Alignment.CenterHorizontally))
-        Text(text = "email@example.com",color = MaterialTheme.colorScheme.secondary,
+        Text(text = Firebase.auth.currentUser?.email ?: "invalid",color = MaterialTheme.colorScheme.secondary,
             fontWeight = FontWeight.Medium, fontSize = 20.sp,
             modifier = Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.height(80.dp))
@@ -73,7 +82,7 @@ fun AccountScreen(){
             //horizontalArrangement= Arrangement.End,
             verticalAlignment = Alignment.CenterVertically
         ){
-            Text(text = "Account",color = MaterialTheme.colorScheme.primary,
+            Text(text = stringResource(id = com.snaptrash.snaptrash.R.string.account),color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Normal, fontSize = 26.sp,
                 textAlign = TextAlign.Left
             )
@@ -90,65 +99,6 @@ fun AccountScreen(){
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        Row(modifier = Modifier
-            .padding(horizontal = 40.dp)
-            .fillMaxWidth(),
-            //horizontalArrangement= Arrangement.End,
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            Text(text = "Language",color = MaterialTheme.colorScheme.primary,
-                fontWeight = FontWeight.Normal, fontSize = 26.sp,
-                textAlign = TextAlign.Left
-            )
-            Spacer(modifier = Modifier.width(132.dp))
-            Icon(
-                Icons.Filled.KeyboardArrowRight,
-                contentDescription = "ArrowRight",
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier
-                    .size(32.dp)
-                    .align(Alignment.Bottom)
-                    .clickable(onClick = {})
-
-            )
-        }
-        Spacer(modifier = Modifier.height(20.dp))
-        Row(modifier = Modifier
-            .padding(horizontal = 40.dp),
-            //horizontalArrangement= Arrangement.End,
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            Text(text = "Dark mode",color = MaterialTheme.colorScheme.primary,
-                fontWeight = FontWeight.Normal, fontSize = 26.sp,
-                textAlign = TextAlign.Left
-            )
-            Spacer(modifier = Modifier.width(80.dp))
-
-            Switch(
-                checked = checkStateSwitch.value,
-                onCheckedChange = {checkStateSwitch.value = it},
-                colors = SwitchDefaults.colors(
-                    checkedBorderColor =  MaterialTheme.colorScheme.primary,
-                    uncheckedBorderColor =  MaterialTheme.colorScheme.primary,
-
-                    ),
-                modifier = Modifier.size(0.dp)
-            )
-            Spacer(modifier = Modifier.width(40.dp))
-
-            Icon(
-                Icons.Filled.KeyboardArrowRight,
-                contentDescription = "ArrowRight",
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier
-                    .size(32.dp)
-                    .align(Alignment.Bottom)
-                    .clickable(onClick = {})
-
-            )
-        }
-
-
 
     }
 
