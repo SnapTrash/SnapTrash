@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.navOptions
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.R
 import com.snaptrash.snaptrash.view.navigator.AuthAddressBook
 import com.snaptrash.snaptrash.view.commonwidgets.TopBarLogin
@@ -106,7 +108,9 @@ fun LoginBody(navController: NavController){
             fontSize = 12.sp,
         )
         Button(
-            onClick = { },
+            onClick = {
+                      Firebase.auth.signInWithEmailAndPassword(username,password)
+            },
             //modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
             modifier = Modifier
                 .width(235.dp)

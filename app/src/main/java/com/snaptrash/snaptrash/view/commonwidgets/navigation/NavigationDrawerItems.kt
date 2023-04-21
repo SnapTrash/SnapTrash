@@ -1,6 +1,7 @@
 package com.snaptrash.snaptrash.view.commonwidgets.navigation
 
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,11 +21,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -36,11 +33,13 @@ import androidx.navigation.navOptions
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.R
+import com.snaptrash.snaptrash.view.commonwidgets.LogoutDialog
 import com.snaptrash.snaptrash.view.navigator.AuthAddressBook
 import com.snaptrash.snaptrash.view.navigator.MainAddressBook
 import com.snaptrash.snaptrash.view.commonwidgets.NavigationItem
 import com.snaptrash.snaptrash.view.getActivity
 import com.snaptrash.snaptrash.view.getCurrentLocaleIcon
+import com.snaptrash.snaptrash.view.screens.DeleteDialog
 import kotlinx.coroutines.launch
 
 @Composable
@@ -54,6 +53,9 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
 
     val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
     val primaryColorTrasparent_L = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+
+    var showLogoutDialog : MutableState<Boolean> = remember { mutableStateOf(false) }
+
 
     NavigationItem(
         stringResource(R.string.word_map),
@@ -121,15 +123,20 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
         scope.launch { drawerState.close() }
     }
     Spacer(modifier = Modifier.height(10.dp))
+
     NavigationItem(
         stringResource(R.string.word_logout),
         { Icon(Icons.Outlined.Logout,"") },
         AuthAddressBook.LOGIN,
         destination,
-    ) {
-        Firebase.auth.signOut()
+        onClick= {
+        showLogoutDialog.value = true
         scope.launch { drawerState.close() }
+    })
+    if (showLogoutDialog.value) {
+        LogoutDialog(onDismiss = {showLogoutDialog.value = false})
     }
+
     Spacer(modifier = Modifier.height(10.dp))
     Row(modifier = Modifier
         .fillMaxWidth()

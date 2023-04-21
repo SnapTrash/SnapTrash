@@ -18,7 +18,7 @@ import java.util.Date
 class SignUpViewModel: ViewModel() {
     var firstName = mutableStateOf("")
     var lastName = mutableStateOf("")
-    private val fullName = "${firstName.value} ${lastName.value}"
+    val fullName = "${firstName.value} ${lastName.value}"
     var dateOfBirth = mutableStateOf(LocalDate.now())
     var phoneNumber = mutableStateOf("")
     val phoneNumberValid: Boolean get() {

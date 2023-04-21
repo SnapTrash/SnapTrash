@@ -77,7 +77,7 @@ fun MainScaffold(navController: NavHostController
                     startDestination = MainAddressBook.HOME
 
                 ) {
-                    MainAddressBook.addMainGraph(this)
+                    MainAddressBook.addMainGraph(this,navController)
                 }
             }
         }
