@@ -26,7 +26,7 @@ import kotlin.coroutines.suspendCoroutine
 class SignUpViewModel: ViewModel() {
     var firstName = mutableStateOf("")
     var lastName = mutableStateOf("")
-    val fullName = "${firstName.value} ${lastName.value}"
+    private val fullName: String get(){ return "${firstName.value} ${lastName.value}"}
     var dateOfBirth = mutableStateOf(LocalDate.now())
     var phoneNumber = mutableStateOf("")
     val phoneNumberValid: Boolean get() {
