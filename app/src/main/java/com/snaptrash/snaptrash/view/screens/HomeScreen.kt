@@ -14,11 +14,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.snaptrash.snaptrash.R
+import com.snaptrash.snaptrash.view.navigator.MainAddressBook
 
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
 
     Column(
         modifier = Modifier.padding(40.dp),
@@ -42,7 +44,9 @@ fun HomeScreen() {
         }
         Spacer(modifier = Modifier.height(30.dp))
         Button(
-            onClick = {  //on click go to CameraView already implement
+            onClick = {
+                      navController.navigate(MainAddressBook.CAMERA)
+
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -50,7 +54,6 @@ fun HomeScreen() {
 
         ) { //button composable contains an other composable
             Text(
-                //text = "Submit",
                 text = stringResource(R.string.instruction_take_a_snap),
                 fontSize = 24.sp,
                 textAlign = TextAlign.Center,

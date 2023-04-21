@@ -1,9 +1,11 @@
-package com.snaptrash.snaptrash.view.commonwidgets.navigation
+package com.snaptrash.snaptrash.view.commonwidgets
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 @Composable
@@ -14,7 +16,7 @@ fun LogoutDialog(onDismiss: () -> Unit) {
         text = { Text(text = "Are you sure you want to logout?") },
         confirmButton = {
             Button(
-                onClick = { /* Implement your share logic here */ },
+                onClick = { Firebase.auth.signOut() },
                 content = { Text(text = "Yes") }
             )
         },
