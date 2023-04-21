@@ -100,10 +100,10 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
     NavigationItem(
         stringResource(R.string.account),
         { Icon(Icons.Outlined.Person,"") },
-        MainAddressBook.SETTINGS,
+        MainAddressBook.ACCOUNT,
         destination,
     ) {
-        navController.navigate(MainAddressBook.SETTINGS, navOptions {
+        navController.navigate(MainAddressBook.ACCOUNT, navOptions {
             this.launchSingleTop = true
             this.restoreState = true
         })

@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
+import android.location.LocationListener
 import android.location.LocationManager
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.displayCutoutPadding
@@ -29,6 +30,7 @@ fun MapView(
     val mapViewState = rememberMapViewWithLifecycle()
     val context = LocalContext.current
     val nightMode = isSystemInDarkTheme()
+    var shouldUpdate = true
     AndroidView(
         { mapViewState },
     ) { mapView ->
@@ -47,11 +49,16 @@ fun MapView(
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
-                val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                geoPoint = GeoPoint(location?.latitude ?: 0.0,location?.longitude ?: 0.0)
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,0.0f,
+                 LocationListener { location ->
+                     if(shouldUpdate){
+                         mapView.controller.setCenter(GeoPoint(location.latitude, location.longitude))
+                         shouldUpdate = false
+                     }
+                })
+
             }
             if(nightMode) mapView.overlayManager.tilesOverlay.setColorFilter(TilesOverlay.INVERT_COLORS)
-            mapView.controller.setCenter(geoPoint)
             onLoad?.invoke(mapView)
         }
     }
