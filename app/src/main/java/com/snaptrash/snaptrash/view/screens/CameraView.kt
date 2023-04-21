@@ -40,6 +40,7 @@ import coil.compose.*
 import coil.request.ImageRequest
 import com.snaptrash.snaptrash.BuildConfig
 import com.snaptrash.snaptrash.R
+import com.snaptrash.snaptrash.viewmodel.CameraViewModel
 
 import java.io.File
 import java.nio.file.Files
@@ -50,17 +51,6 @@ import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
-
-class CameraViewModel: ViewModel(){
-    var photoUri = mutableStateOf(Uri.EMPTY)
-    var takeImage = mutableStateOf(true)
-    fun handleImageCapture(uri: Uri) {
-        Log.i("kilo", "Image captured: $uri")
-        photoUri.value = uri
-        takeImage.value = false
-    }
-}
-
 @Composable
 fun CameraScreen(vm: CameraViewModel = viewModel()){
     val cameraExecutor = Executors.newSingleThreadExecutor()
