@@ -1,7 +1,9 @@
 package com.snaptrash.snaptrash.view.HomeScreen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -16,12 +18,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.snaptrash.snaptrash.R
+import com.snaptrash.snaptrash.view.commonwidgets.map.MapView
 import com.snaptrash.snaptrash.view.navigator.MainAddressBook
 
 
+@SuppressLint("ClickableViewAccessibility")
 @Composable
 fun HomeScreen(navController: NavController) {
-
     Column(
         modifier = Modifier.padding(40.dp),
     ) {
@@ -35,18 +38,26 @@ fun HomeScreen(navController: NavController) {
                 .border(
                     width = 2.dp,
                     color = MaterialTheme.colorScheme.primary,
-
                     )
                 .background(color = Color.White)
         ) {
-            //put the initial map inside the box as in the screen in figma
-
+            MapView(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                it.controller.setZoom(14.0)
+                it.setOnTouchListener { v, e ->
+                    run {
+                        if(navController.currentBackStackEntry?.destination?.route != MainAddressBook.MAP)
+                            navController.navigate(MainAddressBook.MAP)
+                        true
+                    }
+                }
+            }
         }
         Spacer(modifier = Modifier.height(30.dp))
         Button(
             onClick = {
-                      navController.navigate(MainAddressBook.CAMERA)
-
+                navController.navigate(MainAddressBook.CAMERA)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -54,6 +65,7 @@ fun HomeScreen(navController: NavController) {
 
         ) { //button composable contains an other composable
             Text(
+                //text = "Submit",
                 text = stringResource(R.string.instruction_take_a_snap),
                 fontSize = 24.sp,
                 textAlign = TextAlign.Center,

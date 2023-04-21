@@ -11,6 +11,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.snaptrash.snaptrash.view.navigator.MainAddressBook
 import com.snaptrash.snaptrash.view.commonwidgets.navigation.DrawerContent
 import kotlinx.coroutines.launch
@@ -21,7 +22,7 @@ fun MainScaffold(navController: NavHostController
 ) {
     val coroutineScope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-
+    val currentBackStack = navController.currentBackStackEntryAsState()
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -64,6 +65,7 @@ fun MainScaffold(navController: NavHostController
         },
     ){
         ModalNavigationDrawer(
+            gesturesEnabled = currentBackStack.value?.destination?.route != MainAddressBook.MAP,
             drawerContent = {
                 DrawerContent(
                     navController = navController,
