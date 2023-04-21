@@ -9,6 +9,7 @@ import com.snaptrash.snaptrash.view.screens.AccountScreen
 import com.snaptrash.snaptrash.view.screens.CameraScreen
 import com.snaptrash.snaptrash.view.screens.CameraView
 import com.snaptrash.snaptrash.view.screens.ListSnapScreen
+import com.snaptrash.snaptrash.view.screens.MapScreen
 
 class MainAddressBook{
     companion object {
@@ -18,6 +19,7 @@ class MainAddressBook{
         const val ABOUT = "about"
         const val SETTINGS = "settings"
         const val CAMERA = "camera"
+        const val MAP = "map"
         fun addMainGraph(navGraphBuilder: NavGraphBuilder,navController: NavController){
             navGraphBuilder.composable(MainAddressBook.HOME){
                 HomeScreen(navController)
@@ -36,7 +38,9 @@ class MainAddressBook{
             }
             navGraphBuilder.composable(MainAddressBook.CAMERA){
                 CameraScreen()
-
+            }
+            navGraphBuilder.composable(MainAddressBook.MAP){
+                MapScreen(navController = navController)
             }
         }
     }
