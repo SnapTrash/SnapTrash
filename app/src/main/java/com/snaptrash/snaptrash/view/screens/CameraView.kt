@@ -38,11 +38,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.*
 import coil.request.ImageRequest
+import com.snaptrash.snaptrash.BuildConfig
 import com.snaptrash.snaptrash.R
 
 import java.io.File
 import java.nio.file.Files
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
@@ -61,34 +63,29 @@ class CameraViewModel: ViewModel(){
 
 @Composable
 fun CameraScreen(vm: CameraViewModel = viewModel()){
-    val outputDirectory = LocalContext.current.externalMediaDirs.firstOrNull()?.let {
-        File(it, LocalContext.current.resources.getString(R.string.app_name)).apply { mkdirs() }
-    }
     val cameraExecutor = Executors.newSingleThreadExecutor()
-    if (outputDirectory != null) {
-        if(!vm.takeImage.value){
-            /*AsyncImage(
-                model = vm.photoUri.value,
-                placeholder = painterResource(R.drawable.final_logo),
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize()
-            )*/
-            showImageTaken(vm)
-        }
-        else
-            CameraView(outputDirectory,cameraExecutor,
-                {uri ->
-                    run {
-                        vm.handleImageCapture(uri)
-                    }
-                },
-                { Log.e("kilo", "View error:", it) })
+    if(!vm.takeImage.value){
+        /*AsyncImage(
+            model = vm.photoUri.value,
+            placeholder = painterResource(R.drawable.final_logo),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize()
+        )*/
+        ShowImageTaken(vm)
     }
+    else
+        CameraView(cameraExecutor,
+            {uri ->
+                run {
+                    vm.handleImageCapture(uri)
+                }
+            },
+            { Log.e("kilo", "View error:", it) })
 }
 
 
 @Composable
-fun showImageTaken(vm: CameraViewModel = viewModel()) {
+fun ShowImageTaken(vm: CameraViewModel = viewModel()) {
     Column(
         modifier = Modifier.padding(40.dp)
 
@@ -168,7 +165,6 @@ fun showImageTaken(vm: CameraViewModel = viewModel()) {
 
 @Composable
 fun CameraView(
-    outputDirectory: File,
     executor: Executor,
     onImageCaptured: (Uri) -> Unit,
     onError: (ImageCaptureException) -> Unit
@@ -215,7 +211,6 @@ fun CameraView(
                 takePhoto(
                     filenameFormat = "yyyy-MM-dd-HH-mm-ss-SSS",
                     imageCapture = imageCapture,
-                    outputDirectory = outputDirectory,
                     executor = executor,
                     onImageCaptured = onImageCaptured,
                     onError = onError
@@ -246,15 +241,14 @@ fun CameraView(
 private fun takePhoto(
     filenameFormat: String,
     imageCapture: ImageCapture,
-    outputDirectory: File,
     executor: Executor,
     onImageCaptured: (Uri) -> Unit,
     onError: (ImageCaptureException) -> Unit
 
 
 ) {
-    val photoFile = File(
-        outputDirectory,
+    val photoFile = File.createTempFile(
+        BuildConfig.APPLICATION_ID,
         SimpleDateFormat(filenameFormat, Locale.US).format(System.currentTimeMillis()) + ".jpg"
     )
 
