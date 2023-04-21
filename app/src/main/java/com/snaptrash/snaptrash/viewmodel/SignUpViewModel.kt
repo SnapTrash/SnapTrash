@@ -1,5 +1,6 @@
 package com.snaptrash.snaptrash.viewmodel
 
+import android.content.Context
 import android.telephony.PhoneNumberUtils
 import android.util.Patterns
 import androidx.compose.runtime.mutableStateOf
@@ -11,7 +12,10 @@ import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
 import com.google.i18n.phonenumbers.PhoneNumberUtil
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber
+import com.snaptrash.snaptrash.R
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
 import java.util.Date
 
@@ -41,7 +45,7 @@ class SignUpViewModel: ViewModel() {
         val reqs = listOf(isLongEnough,hasDigit,isMultiCase)
         return reqs.all{it(password.value)}
     }
-    var error = mutableStateOf("")
+    var error = mutableStateOf(-1)
     val fieldsValid: Boolean get(){
         return emailValid && passwordValid && phoneNumberValid
     }
@@ -60,11 +64,18 @@ class SignUpViewModel: ViewModel() {
                         "birthDate" to dateOfBirth.value.toString()
                     )
                 ).addOnSuccessListener {
+                    runBlocking{
+                        delay(1000)
+                    }
                     Firebase.auth.signInWithEmailAndPassword(email.value,password.value)
                     inProgress.value = false
                 }.addOnFailureListener {
                     //TODO: look up the proper locale for the error message, if exists
-                    error.value = it.message ?: ""
+                    error.value = when(it.message){
+                        "1" -> R.string.error_at_least_one_field_is_missing
+                        "2" -> R.string.error_at_least_one_of_the_fields_is_invalid
+                        else -> R.string.error_signup_unknown_error
+                    }
                     inProgress.value = false
                 }
             }

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SnapTrash</string>
-    <string name="instruction_take_a_snap">Take a snap</string>
-    <string name="account">Account</string>
 </resources>
