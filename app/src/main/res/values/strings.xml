@@ -36,7 +36,10 @@
     <string name="instruction_already_have_an_account">"Already have an account? Login "</string>
     <string name="instruction_take_a_snap">Take a snap</string>
     <string name="account">Account</string>
-    <string name="error_password_requirements">Password requirements:\n-At least 8 characters\n-Contains a number\nContains an upper and a lowercase letter</string>
+    <string name="error_password_requirements">Password requirements:\n- At least 8 characters\n- Contains a number\n- Contains an upper and a lowercase letter</string>
     <string name="error_invalid_email_address">Invalid email address</string>
     <string name="error_invalid_phone_number">Invalid phone number</string>
+    <string name="error_at_least_one_field_is_missing">At least one field is missing! Check your input!</string>
+    <string name="error_at_least_one_of_the_fields_is_invalid">At least one of the fields is invalid! Check your input!</string>
+    <string name="error_signup_unknown_error">Unknown error. Check your network connection.</string>
 </resources>
