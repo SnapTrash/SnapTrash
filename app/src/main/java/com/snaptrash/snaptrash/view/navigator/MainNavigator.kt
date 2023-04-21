@@ -4,11 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.snaptrash.snaptrash.view.HomeScreen.HomeScreen
-import com.snaptrash.snaptrash.view.screens.AboutUsScreen
-import com.snaptrash.snaptrash.view.screens.CameraScreen
-import com.snaptrash.snaptrash.view.screens.CameraView
-import com.snaptrash.snaptrash.view.screens.ListSnapScreen
-import com.snaptrash.snaptrash.view.screens.MapScreen
+import com.snaptrash.snaptrash.view.screens.*
 
 class MainAddressBook{
     companion object {
@@ -19,6 +15,7 @@ class MainAddressBook{
         const val SETTINGS = "settings"
         const val CAMERA = "camera"
         const val MAP = "map"
+        const val ACCOUNT = "account"
         fun addMainGraph(navGraphBuilder: NavGraphBuilder,navController: NavController){
             navGraphBuilder.composable(MainAddressBook.HOME){
                 HomeScreen(navController)
@@ -27,6 +24,10 @@ class MainAddressBook{
                 ListSnapScreen()
             }
             navGraphBuilder.composable(MainAddressBook.HISTORY){
+
+            }
+            navGraphBuilder.composable(MainAddressBook.ACCOUNT){
+                AccountScreen()
 
             }
             navGraphBuilder.composable(MainAddressBook.SETTINGS){
