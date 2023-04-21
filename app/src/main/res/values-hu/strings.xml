@@ -32,11 +32,11 @@
     <string name="instruction_type_phone_number">Írd be a telefonszámod</string>
     <string name="word_email">E-mail cím</string>
     <string name="instruction_type_email">Írd be az e-mail címed</string>
-    <string name="word_sign_up">Regisztáció</string>
+    <string name="word_sign_up">Regisztráció</string>
     <string name="instruction_already_have_an_account">Van már fiókod? Jelentkezz be</string>
     <string name="instruction_take_a_snap">Snap készítése</string>
     <string name="account">Fiók</string>
-    <string name="error_password_requirements">Jelszókövetelmények:\n- Legalább 8 karakterből áll\n- Tartalmaz számot\n- Tartalmaz kis- és nagybetűt</string>
+    <string name="error_password_requirements">Jelszókövetelmények:\n- A jelszónak legalább 8 karakterből kell állnia\n- A jelszónak tartalmaznia kell számot\n- A jelszónak tartalmaznia kell kis- és nagybetűt</string>
     <string name="error_invalid_email_address">Érvénytelen e-mail cím</string>
     <string name="error_invalid_phone_number">Érvénytelen telefonszám</string>
     <string name="error_at_least_one_field_is_missing">Legalább egy mező hiányzik! Ellenőrizd a bevitt információkat!</string>
