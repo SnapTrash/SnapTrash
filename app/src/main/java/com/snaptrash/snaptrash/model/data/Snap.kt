@@ -27,8 +27,12 @@ data class Snap(
     var date: Date,
     var description: String,
     var urgency: Urgency,
+    @JvmField
+    @PropertyName("confirmed_urgency")
+    var confirmedUrgency: Urgency,
+    var status: SnapStatus
 ){
-    constructor(): this("", GeoPoint(0.0,0.0),"","","", Date(),"",Urgency.NOT_URGENT)
+    constructor(): this("", GeoPoint(0.0,0.0),"","","", Date(),"",Urgency.NOT_URGENT,Urgency.NOT_URGENT,SnapStatus.PENDING)
     fun submitSnap(): Task<HttpsCallableResult> {
         return Firebase.functions.getHttpsCallable("createSnap").call(
             hashMapOf(

@@ -21,16 +21,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.snaptrash.snaptrash.model.data.Snap
 
 @Composable
-fun SnapCard(snap: Snap){
+fun SnapCard(snap: Snap,onClick: () -> Unit){
     var snapUri by remember{ mutableStateOf(Uri.EMPTY) }
     if(snap.snapImageUrl.isNotEmpty()) {
-        Firebase.storage.getReference(snap.snapImageUrl).downloadUrl.addOnSuccessListener {
+        Firebase.storage.getReference("/snapImages/${snap.snapImageUrl}").downloadUrl.addOnSuccessListener {
             snapUri = it
         }
     }
@@ -41,7 +42,7 @@ fun SnapCard(snap: Snap){
             //.width(200.dp)
             // .height(100.dp)
             .padding(12.dp)
-            .clickable(onClick = {/* screen with info of snap, the screen want the variable to now the content of the snap */ }) ,
+            .clickable(onClick = onClick) ,
         shape = RoundedCornerShape(16.dp),
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
         colors =  CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,

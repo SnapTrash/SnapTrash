@@ -85,6 +85,9 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:2.5.1"
     ksp "androidx.room:room-compiler:2.5.1"
 
+    implementation "com.squareup.moshi:moshi-kotlin:1.14.0"
+    implementation "com.squareup.moshi:moshi-adapters:1.14.0"
+
     // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:31.4.0')
 

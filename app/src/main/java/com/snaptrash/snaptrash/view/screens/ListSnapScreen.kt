@@ -19,17 +19,28 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.snaptrash.snaptrash.model.data.Snap
 import com.snaptrash.snaptrash.view.commonwidgets.SnapCard
+import com.snaptrash.snaptrash.view.navigator.MainAddressBook
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.util.Date
 
 
 @Composable
-fun ListSnapScreen(snapList: List<Snap>){
+fun ListSnapScreen(snapList: List<Snap>,navController: NavController){
     LazyColumn(modifier = Modifier.fillMaxSize()){
         snapList.forEach {
             item {
-                SnapCard(snap = it)
+                SnapCard(snap = it){
+                    val moshi = Moshi.Builder().add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).addLast(KotlinJsonAdapterFactory()).build()
+                    val adapter = moshi.adapter(Snap::class.java)
+                    val snapJson = adapter.toJson(it)
+                    navController.navigate(MainAddressBook.SINGLE_SNAP.replace("{snap}",snapJson))
+                }
             }
         }
     }

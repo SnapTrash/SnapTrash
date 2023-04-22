@@ -1,6 +1,7 @@
 package com.snaptrash.snaptrash.view.screens
 
 import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -20,24 +21,24 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import com.snaptrash.snaptrash.model.data.Snap
 
 
 @Composable
-fun OpenSnapScreen() {
+fun OpenSnapScreen(snap: Snap) {
     val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
     val secondaryColorTrasparent = MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f)
-
     var showDeleteDialog : MutableState<Boolean> = remember { mutableStateOf(false) }
-
     var showShareDialog by remember { mutableStateOf(false) }
-
-    val sendIntent: Intent = Intent().apply {
-        action = Intent.ACTION_SEND
-        putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
-        type = "text/plain"
+    var snapUri by remember{ mutableStateOf(Uri.EMPTY) }
+    if(snap.snapImageUrl.isNotEmpty()) {
+        Firebase.storage.getReference("/snapImages/${snap.snapImageUrl}").downloadUrl.addOnSuccessListener {
+            snapUri = it
+        }
     }
-    val shareIntent = Intent.createChooser(sendIntent, null)
-
     Column(
     ) {
         Box(
@@ -46,58 +47,22 @@ fun OpenSnapScreen() {
 
 
         ) {
-            Image(
-                modifier = Modifier.fillMaxWidth(),
-                contentScale = ContentScale.Crop,
-                painter = painterResource(com.snaptrash.snaptrash.R.drawable.rifiuti_prova),
-                contentDescription = "My Image"
-            )
-
+            if(snapUri == Uri.EMPTY) CircularProgressIndicator()
+            else
+                Image(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentScale = ContentScale.Crop,
+                    painter = rememberAsyncImagePainter(snapUri),
+                    contentDescription = "My Image"
+                )
         }
-        Spacer(
-            modifier = Modifier
-                .height(30.dp)
-                .width(20.dp)
-        )
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-
-        ) {
-            Spacer(
-                modifier = Modifier
-                    .width(20.dp)
-            )
-            Text(text = "Trash #12345", fontSize = 22.sp, color = MaterialTheme.colorScheme.primary)
-            Spacer(modifier = Modifier.width(140.dp))
-            Icon(
-                Icons.Filled.Undo,
-                contentDescription = "GoBack",
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier
-                    .size(22.dp)
-                    .clickable(onClick = {}) //to implement the go back to the listScreen
-            )
-            Spacer(modifier = Modifier.width(10.dp))
-            Icon(
-                Icons.Filled.Share,
-                contentDescription = "Share",
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier
-                    .size(22.dp)
-                    .clickable(onClick = {
-                        showShareDialog = true
-                    }) //to implement the share app
-            )
-
-        }
-        Spacer(modifier = Modifier.height(15.dp))
         Column(
             modifier = Modifier.padding(20.dp)
         ) {
             Text(text = "Location:", fontSize = 18.sp, color = MaterialTheme.colorScheme.primary)
             Spacer(modifier = Modifier.height(5.dp))
             Text(
-                text = "latitude, longitude",
+                text = "${snap.location.latitude}, ${snap.location.longitude}",
                 fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.secondary
             )
@@ -139,8 +104,7 @@ fun OpenSnapScreen() {
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(5.dp),
-                    text = "There are a lot of plastic bags and glasses close to the lake. \n" +
-                            "The easiest way to reach it is via the parking lot at the end of “Lake Road”. "
+                    text = snap.description
                 )
 
 
@@ -167,18 +131,11 @@ fun OpenSnapScreen() {
                     fontSize = 20.sp,
                     modifier = Modifier
                         .align(alignment = Alignment.Center)
-
-
                 )
                 if (showDeleteDialog.value) {
                     DeleteDialog(onDismiss = {showDeleteDialog.value = false})
                 }
-
-
-
-                //to implement function that delate the item and the ppop up to be sure of that
-
-
+                //TODO: implement delete
             }
         }
     }
