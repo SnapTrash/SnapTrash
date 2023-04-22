@@ -1,5 +1,6 @@
 package com.snaptrash.snaptrash.view.commonwidgets
 
+import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -10,19 +11,29 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
-import com.snaptrash.snaptrash.R
+import coil.compose.rememberAsyncImagePainter
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import com.snaptrash.snaptrash.model.data.Snap
 
 @Composable
-fun SnapCard(){
-    val navControllerList = rememberNavController()
+fun SnapCard(snap: Snap){
+    var snapUri by remember{ mutableStateOf(Uri.EMPTY) }
+    if(snap.snapImageUrl.isNotEmpty()) {
+        Firebase.storage.getReference(snap.snapImageUrl).downloadUrl.addOnSuccessListener {
+            snapUri = it
+        }
+    }
     Card(
         elevation =  CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier
@@ -30,7 +41,7 @@ fun SnapCard(){
             //.width(200.dp)
             // .height(100.dp)
             .padding(12.dp)
-            .clickable(onClick = {/* screen with info of snap, the screen want the variable to now the content of the snap */}) ,
+            .clickable(onClick = {/* screen with info of snap, the screen want the variable to now the content of the snap */ }) ,
         shape = RoundedCornerShape(16.dp),
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
         colors =  CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -48,24 +59,23 @@ fun SnapCard(){
                         width = 1.dp,
                         color = MaterialTheme.colorScheme.primary,
                         shape = RoundedCornerShape(8.dp)
+                    ),
+                contentAlignment = Alignment.Center
+            ){
+                if(snapUri == Uri.EMPTY) CircularProgressIndicator()
+                else
+                    Image(
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop,
+                        painter = rememberAsyncImagePainter(snapUri),
+                        contentDescription = "My Image"
                     )
 
-
-
-            ){
-                Image(
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop,
-                    painter = painterResource(R.drawable.rifiuti_prova),
-                    contentDescription = "My Image"
-                )
-
             }
-            Spacer(modifier = Modifier.width(20.dp)
+            Spacer(modifier = Modifier
+                .width(20.dp)
                 .height(10.dp))
             Column(){
-                Spacer(modifier = Modifier.height(10.dp))
-                Text(text = "Trash #12345", fontSize = 22.sp, color = MaterialTheme.colorScheme.primary )
                 Spacer(modifier = Modifier.height(10.dp))
                 Row(){
                     Icon(
@@ -74,12 +84,12 @@ fun SnapCard(){
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(20.dp)
                     )
-                    Text(text ="longitude, latitude", fontSize = 16.sp ,color = MaterialTheme.colorScheme.primary )
+                    Text(text ="${snap.location.latitude}, ${snap.location.longitude}", fontSize = 16.sp ,color = MaterialTheme.colorScheme.primary )
                 }
                 Spacer(modifier = Modifier.height(10.dp))
                 Row(){
                     Spacer(modifier = Modifier.width(20.dp))
-                    Text("Data", fontSize = 16.sp, color = MaterialTheme.colorScheme.primary )
+                    Text(text = snap.description, fontSize = 16.sp, color = MaterialTheme.colorScheme.primary )
                 }
             }
 

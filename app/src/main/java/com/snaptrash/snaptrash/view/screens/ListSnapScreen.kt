@@ -20,32 +20,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
+import com.snaptrash.snaptrash.model.data.Snap
 import com.snaptrash.snaptrash.view.commonwidgets.SnapCard
 
 
 @Composable
-fun ListSnapScreen(){
+fun ListSnapScreen(snapList: List<Snap>){
     LazyColumn(modifier = Modifier.fillMaxSize()){
-        item{
-            SnapCard()
-        }
-        item{
-            SnapCard()
-        }
-        item{
-            SnapCard()
-        }
-        item{
-            SnapCard()
-        }
-        item{
-            SnapCard()
-        }
-        item{
-            SnapCard()
-        }
-        item{
-            SnapCard()
+        snapList.forEach {
+            item {
+                SnapCard(snap = it)
+            }
         }
     }
 }

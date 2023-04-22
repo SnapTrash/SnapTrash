@@ -19,10 +19,10 @@ class MainAddressBook{
         const val ACCOUNT = "account"
         fun addMainGraph(navGraphBuilder: NavGraphBuilder,navController: NavController,mainNavViewModel: MainNavViewModel){
             navGraphBuilder.composable(MainAddressBook.HOME){
-                HomeScreen(navController,mainNavViewModel.currentLocation.value)
+                HomeScreen(navController,mainNavViewModel)
             }
             navGraphBuilder.composable(MainAddressBook.LIST){
-                ListSnapScreen()
+                ListSnapScreen(mainNavViewModel.snapList)
             }
             navGraphBuilder.composable(MainAddressBook.HISTORY){
 
@@ -41,7 +41,7 @@ class MainAddressBook{
                 CameraScreen()
             }
             navGraphBuilder.composable(MainAddressBook.MAP){
-                MapScreen(navController = navController,mainNavViewModel.currentLocation.value)
+                MapScreen(navController = navController,mainNavViewModel)
             }
         }
     }

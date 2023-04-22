@@ -2,7 +2,6 @@ package com.snaptrash.snaptrash.model.data
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentId
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.PropertyName
 import com.google.firebase.firestore.QuerySnapshot
@@ -15,16 +14,21 @@ import java.util.Date
 data class Snap(
     @DocumentId
     val id: String,
+    @JvmField
     @PropertyName("coordinates")
-    var location: GeoPoint,
+    val location: GeoPoint,
+    var user: String,
+    @JvmField
     @PropertyName("id_snap_image")
-    var snapImageUrl: String,
+    val snapImageUrl: String,
+    @JvmField
     @PropertyName("id_location")
-    var locationId: DocumentReference,
+    val locationId: String,
     var date: Date,
     var description: String,
     var urgency: Urgency,
 ){
+    constructor(): this("", GeoPoint(0.0,0.0),"","","", Date(),"",Urgency.NOT_URGENT)
     fun submitSnap(): Task<HttpsCallableResult> {
         return Firebase.functions.getHttpsCallable("createSnap").call(
             hashMapOf(
@@ -37,6 +41,6 @@ data class Snap(
         )
     }
     fun getAssociationWritableData(): Task<QuerySnapshot>{
-        return Firebase.firestore.collection("${locationId.path}/snaps/${id}/associationWritable").limit(1).get()
+        return Firebase.firestore.collection("/snaps/${id}/associationWritable").limit(1).get()
     }
 }

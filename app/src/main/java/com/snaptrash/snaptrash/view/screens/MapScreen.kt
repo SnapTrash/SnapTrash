@@ -11,11 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import com.snaptrash.snaptrash.view.commonwidgets.map.MapView
+import com.snaptrash.snaptrash.viewmodel.MainNavViewModel
 import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.TilesOverlay
 
 @Composable
-fun MapScreen(navController: NavController,location: GeoPoint){
+fun MapScreen(navController: NavController,mainNavViewModel: MainNavViewModel){
     val context = LocalContext.current
     val nightMode = isSystemInDarkTheme()
     var centerSet by remember { mutableStateOf(false) }
@@ -28,8 +30,14 @@ fun MapScreen(navController: NavController,location: GeoPoint){
         it.setMultiTouchControls(true)
         it.setMultiTouchControls(true)
         if(!centerSet){
-            it.controller.setCenter(location)
+            it.controller.setCenter(mainNavViewModel.currentLocation.value)
             centerSet = true
+        }
+        mainNavViewModel.snapList.forEach { snap ->
+            val marker: Marker = Marker(it)
+            marker.position = GeoPoint(snap.location.latitude, snap.location.longitude)
+            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+            it.overlays.add(marker)
         }
     }
 }

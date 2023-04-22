@@ -20,12 +20,14 @@ import androidx.navigation.NavController
 import com.snaptrash.snaptrash.R
 import com.snaptrash.snaptrash.view.commonwidgets.map.MapView
 import com.snaptrash.snaptrash.view.navigator.MainAddressBook
+import com.snaptrash.snaptrash.viewmodel.MainNavViewModel
 import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.overlay.Marker
 
 
 @SuppressLint("ClickableViewAccessibility")
 @Composable
-fun HomeScreen(navController: NavController,location: GeoPoint) {
+fun HomeScreen(navController: NavController,mainNavViewModel: MainNavViewModel) {
     Column(
         modifier = Modifier.padding(40.dp),
     ) {
@@ -46,7 +48,13 @@ fun HomeScreen(navController: NavController,location: GeoPoint) {
                 modifier = Modifier.fillMaxSize()
             ) {
                 it.controller.setZoom(14.0)
-                it.controller.setCenter(location)
+                it.controller.setCenter(mainNavViewModel.currentLocation.value)
+                mainNavViewModel.snapList.forEach { snap ->
+                    val marker: Marker = Marker(it)
+                    marker.position = GeoPoint(snap.location.latitude, snap.location.longitude)
+                    marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                    it.overlays.add(marker)
+                }
                 it.setOnTouchListener { v, e ->
                     run {
                         if(navController.currentBackStackEntry?.destination?.route != MainAddressBook.MAP)
