@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -119,7 +120,7 @@ fun ShowImageTaken(vm: CameraViewModel = viewModel()) {
             ) { //button composable contains an other composable
                 Text(
                     //text = "Submit",
-                    text = "Retake",
+                    text = stringResource(R.string.word_retake),
                     fontSize = 20.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth()
@@ -136,7 +137,7 @@ fun ShowImageTaken(vm: CameraViewModel = viewModel()) {
             ) { //button composable contains an other composable
                 Text(
                     //text = "Submit",
-                    text = "Done",
+                    text = stringResource(R.string.word_done),
                     fontSize = 20.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth()
