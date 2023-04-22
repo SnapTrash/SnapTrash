@@ -20,11 +20,12 @@ import androidx.navigation.NavController
 import com.snaptrash.snaptrash.R
 import com.snaptrash.snaptrash.view.commonwidgets.map.MapView
 import com.snaptrash.snaptrash.view.navigator.MainAddressBook
+import org.osmdroid.util.GeoPoint
 
 
 @SuppressLint("ClickableViewAccessibility")
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController,location: GeoPoint) {
     Column(
         modifier = Modifier.padding(40.dp),
     ) {
@@ -45,6 +46,7 @@ fun HomeScreen(navController: NavController) {
                 modifier = Modifier.fillMaxSize()
             ) {
                 it.controller.setZoom(14.0)
+                it.controller.setCenter(location)
                 it.setOnTouchListener { v, e ->
                     run {
                         if(navController.currentBackStackEntry?.destination?.route != MainAddressBook.MAP)

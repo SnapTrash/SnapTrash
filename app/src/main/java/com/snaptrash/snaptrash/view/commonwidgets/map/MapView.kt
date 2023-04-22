@@ -40,25 +40,6 @@ fun MapView(
             val locationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(context), mapView)
             locationOverlay.enableMyLocation()
             mapView.overlays.add(locationOverlay)
-            var locationManager: LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            var geoPoint = GeoPoint(0.0,0.0)
-            if (ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                locationManager.requestLocationUpdates(if (Build.VERSION.SDK_INT > 30) LocationManager.FUSED_PROVIDER else LocationManager.GPS_PROVIDER,5000,0.0f,
-                 LocationListener { location ->
-                     if(shouldUpdate){
-                         mapView.controller.setCenter(GeoPoint(location.latitude, location.longitude))
-                         shouldUpdate = false
-                     }
-                })
-
-            }
             if(nightMode) mapView.overlayManager.tilesOverlay.setColorFilter(TilesOverlay.INVERT_COLORS)
             onLoad?.invoke(mapView)
         }
