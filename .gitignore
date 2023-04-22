@@ -85,4 +85,5 @@ lint/tmp/
 # lint/reports/
 .idea/compiler.xml
 .idea/misc.xml
+app/google-services.json
 .idea/inspectionProfiles/Project_Default.xml
