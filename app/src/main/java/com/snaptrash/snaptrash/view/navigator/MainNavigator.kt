@@ -3,8 +3,14 @@ package com.snaptrash.snaptrash.view.navigator
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.snaptrash.snaptrash.model.data.Snap
 import com.snaptrash.snaptrash.view.HomeScreen.HomeScreen
 import com.snaptrash.snaptrash.view.screens.*
+import com.snaptrash.snaptrash.viewmodel.MainNavViewModel
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.util.Date
 
 class MainAddressBook{
     companion object {
@@ -16,12 +22,13 @@ class MainAddressBook{
         const val CAMERA = "camera"
         const val MAP = "map"
         const val ACCOUNT = "account"
-        fun addMainGraph(navGraphBuilder: NavGraphBuilder,navController: NavController){
+        const val SINGLE_SNAP = "snap/snap={snap}"
+        fun addMainGraph(navGraphBuilder: NavGraphBuilder,navController: NavController,mainNavViewModel: MainNavViewModel){
             navGraphBuilder.composable(MainAddressBook.HOME){
-                HomeScreen(navController)
+                HomeScreen(navController,mainNavViewModel)
             }
             navGraphBuilder.composable(MainAddressBook.LIST){
-                ListSnapScreen()
+                ListSnapScreen(mainNavViewModel.snapList,navController)
             }
             navGraphBuilder.composable(MainAddressBook.HISTORY){
 
@@ -40,7 +47,13 @@ class MainAddressBook{
                 CameraScreen()
             }
             navGraphBuilder.composable(MainAddressBook.MAP){
-                MapScreen(navController = navController)
+                MapScreen(navController = navController,mainNavViewModel)
+            }
+            navGraphBuilder.composable(MainAddressBook.SINGLE_SNAP){
+                val moshi = Moshi.Builder().add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).addLast(KotlinJsonAdapterFactory()).build()
+                val adapter = moshi.adapter(Snap::class.java)
+                val snap = adapter.fromJson(it.arguments?.getString("snap")!!)
+                OpenSnapScreen(snap!!)
             }
         }
     }
