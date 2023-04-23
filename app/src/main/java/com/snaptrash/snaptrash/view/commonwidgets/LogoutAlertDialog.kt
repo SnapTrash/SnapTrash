@@ -4,26 +4,28 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.snaptrash.snaptrash.R
 
 
 @Composable
 fun LogoutDialog(onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(text = "Logout") },
-        text = { Text(text = "Are you sure you want to logout?") },
+        title = { Text(text = stringResource(id = R.string.word_logout)) },
+        text = { Text(text = stringResource(R.string.question_are_you_sure_you_want_to_logout)) },
         confirmButton = {
             Button(
                 onClick = { Firebase.auth.signOut() },
-                content = { Text(text = "Yes") }
+                content = { Text(text = stringResource(R.string.word_yes)) }
             )
         },
         dismissButton = {
             Button(
                 onClick = onDismiss,
-                content = { Text(text = "Cancel") }
+                content = { Text(text = stringResource(R.string.word_cancel)) }
             )
         }
     )

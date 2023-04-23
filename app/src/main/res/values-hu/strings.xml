@@ -42,4 +42,13 @@
     <string name="error_at_least_one_field_is_missing">Legalább egy mező hiányzik! Ellenőrizd a bevitt információkat!</string>
     <string name="error_at_least_one_of_the_fields_is_invalid">Legalább egy mező érvénytelrn! Ellenőrizd a bevitt információkat!</string>
     <string name="error_signup_unknown_error">Ismeretlen hiba. Ellenőrizd a hálózati kapcsolatot.</string>
+    <string name="question_are_you_sure_you_want_to_logout">Biztosan ki szeretnél jelentkezni?</string>
+    <string name="word_yes">Igen</string>
+    <string name="word_cancel">Mégse</string>
+    <string name="label_delete_item">Törlés</string>
+    <string name="question_are_you_sure_to_delete">Biztosan törölni szeretnéd ezt?</string>
+    <string name="word_delete">Törlés</string>
+    <string name="label_go_back">Vissza</string>
+    <string name="word_done">Kész</string>
+    <string name="word_retake">Újra</string>
 </resources>

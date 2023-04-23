@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -162,7 +163,7 @@ fun OpenSnapScreen() {
                     .clickable { showDeleteDialog.value = true }
                 //.align(aligmnet = Alignment.Horizontal.CenterHorizontally)
             ) {
-                Text(text = "Delete item",
+                Text(text = stringResource(com.snaptrash.snaptrash.R.string.label_delete_item),
                     color = Color.Red,
                     fontSize = 20.sp,
                     modifier = Modifier
@@ -190,18 +191,18 @@ fun OpenSnapScreen() {
 fun DeleteDialog(onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(text = "Delete item") },
-        text = { Text(text = "Are you sure you want to delete this?") },
+        title = { Text(text = stringResource(com.snaptrash.snaptrash.R.string.label_delete_item)) },
+        text = { Text(text = stringResource(com.snaptrash.snaptrash.R.string.question_are_you_sure_to_delete)) },
         confirmButton = {
             Button(
                 onClick = { /* Implement your share logic here */ },
-                content = { Text(text = "Delete") }
+                content = { Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_delete)) }
             )
         },
         dismissButton = {
             Button(
                 onClick = onDismiss,
-                content = { Text(text = "Go back") }
+                content = { Text(text = stringResource(com.snaptrash.snaptrash.R.string.label_go_back)) }
             )
         }
     )
