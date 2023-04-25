@@ -51,4 +51,13 @@
     <string name="label_go_back">Go back</string>
     <string name="word_done">Done</string>
     <string name="word_retake">Retake</string>
+    <string name="error_badly_formatted_e_mail_address">Badly formatted e-mail address!</string>
+    <string name="error_invalid_user_or_password">Invalid email or password!</string>
+    <string name="error_weak_password">Weak password!</string>
+    <string name="error_recaptcha">RECaptcha error, wait for a few seconds and try again.</string>
+    <string name="error_unknown_error">Unknown login error. Check your network connection and try again!</string>
+    <string name="R_network_error">Network error. Check your connection!</string>
+    <string name="error_too_many_requests">The device has been blocked due to doing too many requests. Try again later.</string>
+    <string name="error_initial_login_failed">Could not login after successful registration. Wait for a few seconds and try to log in.</string>
+    <string name="error_e_mail_address_is_already_in_use">This e-mail address is already in use.</string>
 </resources>

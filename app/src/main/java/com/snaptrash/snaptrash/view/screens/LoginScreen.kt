@@ -1,6 +1,8 @@
 package com.snaptrash.snaptrash.view.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -22,13 +24,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.navOptions
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.R
+import com.snaptrash.snaptrash.view.commonwidgets.ErrorCard
 import com.snaptrash.snaptrash.view.navigator.AuthAddressBook
 import com.snaptrash.snaptrash.view.commonwidgets.TopBarLogin
+import com.snaptrash.snaptrash.viewmodel.LoginViewModel
 
 
 @Composable
@@ -39,98 +44,106 @@ fun LoginScreen(navController: NavController){
 
     }
 }@Composable
-fun LoginBody(navController: NavController){
-    var username: String by remember { mutableStateOf("") }
-    var password: String by remember { mutableStateOf("") }
-    var passwordVisible by rememberSaveable { mutableStateOf(false) }
+fun LoginBody(navController: NavController, vm: LoginViewModel = viewModel()){
+    val passwordVisible by rememberSaveable { mutableStateOf(false) }
     val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
     Column(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        //verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.SpaceEvenly
 
     ){
-        Text(
-            text = "",
-            fontSize = 100.sp,
-        )
-        OutlinedTextField(
-            value = username,
-            onValueChange = {username = it},
-            trailingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = stringResource(
-                            R.string.content_desc_email_icon)
-                        ) },
-            label = {Text(text= stringResource(R.string.word_username))},
-            placeholder = { Text(text = stringResource(R.string.instruction_type_username)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-            singleLine = true,
-            modifier = Modifier.fillMaxWidth(),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                disabledContainerColor = Color.White,
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.primary,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-            ),
-        )
-        Text(
-            text = "",
-            fontSize = 6.sp,
-        )
-        OutlinedTextField(
-            value = password,
-            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            onValueChange = {password = it},
-            trailingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = stringResource(
-                            R.string.content_desc_lock_icon)
-                        ) },
-            label = {Text(text= stringResource(R.string.word_password))},
-            placeholder = { Text(text = stringResource(R.string.instruction_type_password)) },
-            singleLine = true,
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White,
-                disabledContainerColor = Color.White,
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.primary,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-            ),
-        )
-        Text(
-            text = "",
-            fontSize = 12.sp,
-        )
-        Button(
-            onClick = {
-                      Firebase.auth.signInWithEmailAndPassword(username,password)
-            },
-            //modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
-            modifier = Modifier
-                .width(235.dp)
-                .height(95.dp)
-                .padding(top = 36.dp),
-            //colors =  ButtonDefaults.buttonColors.
-
-        ){ //button composable contains an other composable
-            Text(
-                //text = "Submit",
-                text = stringResource(R.string.word_login),
-                fontSize = 24.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+        if(vm.error.value != null) ErrorCard(stringResource(vm.error.value!!))
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            OutlinedTextField(
+                value = vm.email.value,
+                onValueChange = { vm.email.value = it },
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Email, contentDescription = stringResource(
+                            R.string.content_desc_email_icon
+                        )
+                    )
+                },
+                label = { Text(text = stringResource(R.string.word_username)) },
+                placeholder = { Text(text = stringResource(R.string.instruction_type_username)) },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedContainerColor = Color.White,
+                    unfocusedContainerColor = Color.White,
+                    disabledContainerColor = Color.White,
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.primary,
+                    focusedLabelColor = MaterialTheme.colorScheme.primary,
+                    unfocusedLabelColor = MaterialTheme.colorScheme.primary,
+                ),
             )
+            Text(
+                text = "",
+                fontSize = 6.sp,
+            )
+            OutlinedTextField(
+                value = vm.password.value,
+                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                onValueChange = { vm.password.value = it },
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Lock, contentDescription = stringResource(
+                            R.string.content_desc_lock_icon
+                        )
+                    )
+                },
+                label = { Text(text = stringResource(R.string.word_password)) },
+                placeholder = { Text(text = stringResource(R.string.instruction_type_password)) },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedContainerColor = Color.White,
+                    unfocusedContainerColor = Color.White,
+                    disabledContainerColor = Color.White,
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.primary,
+                    focusedLabelColor = MaterialTheme.colorScheme.primary,
+                    unfocusedLabelColor = MaterialTheme.colorScheme.primary,
+                ),
+            )
+            Text(
+                text = "",
+                fontSize = 12.sp,
+            )
+            Spacer(Modifier.height(10.dp))
+            if (vm.inProgress.value) {
+                CircularProgressIndicator()
+            } else {
+                Button(
+                    onClick = {
+                        vm.login()
+                    },
+                    //modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .width(235.dp)
+                        .height(95.dp)
+                        .padding(top = 36.dp),
+                    //colors =  ButtonDefaults.buttonColors.
+
+                ) { //button composable contains an other composable
+                    Text(
+                        //text = "Submit",
+                        text = stringResource(R.string.word_login),
+                        fontSize = 24.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            }
         }
-        Text(
-            text = "",
-            fontSize = 20.sp,
-        )
         SignUpClickableText(navController)
         Text(
             text = "",
