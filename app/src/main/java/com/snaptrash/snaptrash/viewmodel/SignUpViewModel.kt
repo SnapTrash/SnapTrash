@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
@@ -49,7 +50,7 @@ class SignUpViewModel: ViewModel() {
         val reqs = listOf(isLongEnough,hasDigit,isMultiCase)
         return reqs.all{it(password.value)}
     }
-    var error = mutableStateOf(-1)
+    var error = mutableStateOf<Int?>(null)
     val fieldsValid: Boolean get(){
         return emailValid && passwordValid && phoneNumberValid
     }
@@ -68,35 +69,24 @@ class SignUpViewModel: ViewModel() {
                         "birthDate" to dateOfBirth.value.toString()
                     )
                 ).addOnSuccessListener {
-                    suspend{
-                        // Wait for Firebase to catch up
-                        delay(1000)
-                    }.createCoroutine(Continuation(viewModelScope.coroutineContext) {
-                        Firebase.auth.signInWithEmailAndPassword(
-                            email.value,
-                            password.value
-                        ).addOnFailureListener {
-                            // Retry login
-                            Firebase.auth.signInWithEmailAndPassword(
-                                email.value,
-                                password.value
-                            ).addOnFailureListener {
-                                // Retry for last time
-                                Firebase.auth.signInWithEmailAndPassword(
-                                    email.value,
-                                    password.value
-                                ).addOnFailureListener {
-                                    inProgress.value = false
-                                    // Add error message display
-                                }
-                            }
+                    Firebase.auth.signInWithEmailAndPassword(email.value,password.value).addOnFailureListener {
+                        inProgress.value = false
+                        when (it) {
+                            is FirebaseTooManyRequestsException -> error.value =
+                                R.string.error_too_many_requests
+                            else -> error.value = R.string.error_initial_login_failed
                         }
-                    }).resume(Unit)
+                    }
                 }.addOnFailureListener {
-                    error.value = when(it.message){
-                        "1" -> R.string.error_at_least_one_field_is_missing
-                        "2" -> R.string.error_at_least_one_of_the_fields_is_invalid
-                        else -> R.string.error_signup_unknown_error
+                    error.value = if(it.message?.contains("already in use") == true){
+                        R.string.error_e_mail_address_is_already_in_use
+                    }
+                    else {
+                        when (it.message) {
+                            "1" -> R.string.error_at_least_one_field_is_missing
+                            "2" -> R.string.error_at_least_one_of_the_fields_is_invalid
+                            else -> R.string.error_signup_unknown_error
+                        }
                     }
                     inProgress.value = false
                 }

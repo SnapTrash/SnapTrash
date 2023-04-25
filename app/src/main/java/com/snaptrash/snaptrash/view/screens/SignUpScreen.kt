@@ -37,6 +37,7 @@ import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.snaptrash.snaptrash.R
+import com.snaptrash.snaptrash.view.commonwidgets.ErrorCard
 import com.snaptrash.snaptrash.view.navigator.AuthAddressBook
 import com.snaptrash.snaptrash.view.commonwidgets.TopBarLogin
 import com.snaptrash.snaptrash.viewmodel.SignUpViewModel
@@ -292,6 +293,7 @@ fun SignUpBody(navController: NavController,vm:SignUpViewModel){
         if(vm.inProgress.value) CircularProgressIndicator() else
         {
             Button(
+                enabled = vm.fieldsValid ,
             onClick = {
                       vm.register()
             },
@@ -310,13 +312,12 @@ fun SignUpBody(navController: NavController,vm:SignUpViewModel){
                 modifier = Modifier.fillMaxWidth()
             )
         }
-        Text(
-            text = "",
-            fontSize = 10.sp,
+        Spacer(
+            modifier = Modifier.height(10.dp)
         )
-        LoginClickableText(navController)
+            LoginClickableText(navController)
         }
-
+        if(vm.error.value != null) ErrorCard(stringResource(vm.error.value!!))
         Text(
             text = stringResource(id = R.string.text_by_snaptrash),
             color = MaterialTheme.colorScheme.primary,

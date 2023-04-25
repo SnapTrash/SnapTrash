@@ -26,12 +26,13 @@ import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.snaptrash.snaptrash.model.data.Snap
+import java.net.URLDecoder
 
 @Composable
 fun SnapCard(snap: Snap,onClick: () -> Unit){
     var snapUri by remember{ mutableStateOf(Uri.EMPTY) }
     if(snap.snapImageUrl.isNotEmpty()) {
-        Firebase.storage.getReference("/snapImages/${snap.snapImageUrl}").downloadUrl.addOnSuccessListener {
+        Firebase.storage.getReference(URLDecoder.decode(snap.snapImageUrl,"UTF-8")).downloadUrl.addOnSuccessListener {
             snapUri = it
         }
     }

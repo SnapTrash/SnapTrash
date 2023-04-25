@@ -27,6 +27,8 @@ import com.snaptrash.snaptrash.view.navigator.MainAddressBook
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.net.URLDecoder
+import java.net.URLEncoder
 import java.util.Date
 
 
@@ -38,6 +40,7 @@ fun ListSnapScreen(snapList: List<Snap>,navController: NavController){
                 SnapCard(snap = it){
                     val moshi = Moshi.Builder().add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).addLast(KotlinJsonAdapterFactory()).build()
                     val adapter = moshi.adapter(Snap::class.java)
+                    it.snapImageUrl = URLEncoder.encode(it.snapImageUrl,"UTF-8")
                     val snapJson = adapter.toJson(it)
                     navController.navigate(MainAddressBook.SINGLE_SNAP.replace("{snap}",snapJson))
                 }
