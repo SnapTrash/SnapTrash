@@ -22,45 +22,66 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.snaptrash.snaptrash.model.data.Snap
+import com.snaptrash.snaptrash.model.data.SnapStatus
+import com.snaptrash.snaptrash.view.commonwidgets.ErrorCard
+import com.snaptrash.snaptrash.viewmodel.SnapScreenViewModel
+import java.net.URLDecoder
 
 
 @Composable
-fun OpenSnapScreen(snap: Snap) {
+fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: SnapScreenViewModel = viewModel()) {
     val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
     val secondaryColorTrasparent = MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f)
     var showDeleteDialog : MutableState<Boolean> = remember { mutableStateOf(false) }
     var showShareDialog by remember { mutableStateOf(false) }
-    var snapUri by remember{ mutableStateOf(Uri.EMPTY) }
-    if(snap.snapImageUrl.isNotEmpty()) {
-        Firebase.storage.getReference("/snapImages/${snap.snapImageUrl}").downloadUrl.addOnSuccessListener {
-            snapUri = it
+    vm.isNew = isNew
+    vm.snapId = snap.id
+    if(!isNew) vm.description.value = snap.description
+    vm.location.value = snap.location
+    if(!isNew) vm.urgency.value = snap.urgency
+    vm.navController = navController
+    if(!isNew && snap.snapImageUrl.isNotEmpty()) {
+        Firebase.storage.getReference(URLDecoder.decode(snap.snapImageUrl,"UTF-8")).downloadUrl.addOnSuccessListener {
+            vm.snapUrl.value = it
         }
     }
-    Column(
-    ) {
+    else if(snap.snapImageUrl.isNotEmpty()){
+        vm.snapUrl.value = Uri.parse(URLDecoder.decode(snap.snapImageUrl,"UTF-8"))
+    }
+    Column {
         Box(
             Modifier
                 .fillMaxWidth()
-
+                .requiredHeight(250.dp)
 
         ) {
-            if(snapUri == Uri.EMPTY) CircularProgressIndicator()
+            if(vm.snapUrl.value == Uri.EMPTY)
+                Row(modifier=Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.Center){
+                    Spacer(modifier = Modifier.height(5.dp))
+                    CircularProgressIndicator()
+                }
             else
                 Image(
                     modifier = Modifier.fillMaxWidth(),
                     contentScale = ContentScale.Crop,
-                    painter = rememberAsyncImagePainter(snapUri),
+                    painter = rememberAsyncImagePainter(vm.snapUrl.value),
                     contentDescription = "My Image"
                 )
         }
         Column(
             modifier = Modifier.padding(20.dp)
         ) {
-            Text(text = "Location:", fontSize = 18.sp, color = MaterialTheme.colorScheme.primary)
+            if(vm.error.value != null){
+                ErrorCard(error = stringResource(id = vm.error.value!!))
+                Spacer(modifier = Modifier.height(5.dp))
+            }
+            Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_location), fontSize = 18.sp, color = MaterialTheme.colorScheme.primary)
             Spacer(modifier = Modifier.height(5.dp))
             Text(
                 text = "${snap.location.latitude}, ${snap.location.longitude}",
@@ -68,12 +89,11 @@ fun OpenSnapScreen(snap: Snap) {
                 color = MaterialTheme.colorScheme.secondary
             )
             Spacer(modifier = Modifier.height(20.dp))
-            Text(text = "Location:", fontSize = 18.sp, color = MaterialTheme.colorScheme.primary)
+            Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_description), fontSize = 18.sp, color = MaterialTheme.colorScheme.primary)
             Box(
                 Modifier
                     .height(200.dp)
                     .width(540.dp)
-
                     //.aspectRatio(1.0f) // fixed aspect ratio
                     //.clip(RoundedCornerShape(8.dp))
                     .border(
@@ -83,33 +103,11 @@ fun OpenSnapScreen(snap: Snap) {
                     )
                     .background(color = Color.White)
             ) {
-                Row(
-                    modifier = Modifier
-                        .padding(5.dp)
-                        .align(Alignment.BottomEnd),
-                    //.width(IntrinsicSize.Max),
-                    verticalAlignment = Alignment.Bottom
-                ){
-                    Icon(
-                        Icons.Filled.Edit,
-                        contentDescription = "Edit",
-                        tint = secondaryColorTrasparent,
-                        modifier = Modifier
-                            .size(22.dp)
-                            .clickable(onClick = {}) //to implement the share app
-                    )
-
-                }
-
-                Text(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(5.dp),
-                    text = snap.description
-                )
-
-
-
+                OutlinedTextField(
+                    value = vm.description.value,
+                    enabled = isNew,
+                    modifier = Modifier.fillMaxSize(),
+                    onValueChange ={vm.description.value = it})
             }
 
         }
@@ -119,24 +117,38 @@ fun OpenSnapScreen(snap: Snap) {
                 .padding(bottom = 16.dp),
             verticalArrangement = Arrangement.Bottom
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(70.dp)
-                    .background(color = primaryColorTrasparent)
-                    .clickable { showDeleteDialog.value = true }
-                //.align(aligmnet = Alignment.Horizontal.CenterHorizontally)
-            ) {
-                Text(text = stringResource(com.snaptrash.snaptrash.R.string.label_delete_item),
-                    color = Color.Red,
-                    fontSize = 20.sp,
+            if(vm.inProgress.value) Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ){
+                CircularProgressIndicator()
+            }
+            else if(snap.status == SnapStatus.PENDING) {
+                Box(
                     modifier = Modifier
-                        .align(alignment = Alignment.Center)
-                )
-                if (showDeleteDialog.value) {
-                    DeleteDialog(onDismiss = {showDeleteDialog.value = false})
+                        .fillMaxWidth()
+                        .height(70.dp)
+                        .background(color = if (!isNew) primaryColorTrasparent else MaterialTheme.colorScheme.primary)
+                        .clickable {
+                            if (!isNew) showDeleteDialog.value = true
+                            else
+                                vm.doSnapFunction()
+                        }
+                    //.align(aligmnet = Alignment.Horizontal.CenterHorizontally)
+                ) {
+                    Text(
+                        text = if(!isNew) stringResource(com.snaptrash.snaptrash.R.string.label_delete_item) else stringResource(com.snaptrash.snaptrash.R.string.send_snap),
+                        color = if (!isNew) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimary,
+                        fontSize = 20.sp,
+                        modifier = Modifier
+                            .align(alignment = Alignment.Center)
+                    )
+                    if (showDeleteDialog.value && !isNew) {
+                        DeleteDialog(onDismiss = { showDeleteDialog.value = false }, {
+                            vm.doSnapFunction()
+                        })
+                    }
                 }
-                //TODO: implement delete
             }
         }
     }
@@ -145,14 +157,14 @@ fun OpenSnapScreen(snap: Snap) {
 
 
 @Composable
-fun DeleteDialog(onDismiss: () -> Unit) {
+fun DeleteDialog(onDismiss: () -> Unit,onApproval: ()->Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(text = stringResource(com.snaptrash.snaptrash.R.string.label_delete_item)) },
         text = { Text(text = stringResource(com.snaptrash.snaptrash.R.string.question_are_you_sure_to_delete)) },
         confirmButton = {
             Button(
-                onClick = { /* Implement your share logic here */ },
+                onClick = {onApproval() },
                 content = { Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_delete)) }
             )
         },

@@ -60,4 +60,10 @@
     <string name="error_too_many_requests">The device has been blocked due to doing too many requests. Try again later.</string>
     <string name="error_initial_login_failed">Could not login after successful registration. Wait for a few seconds and try to log in.</string>
     <string name="error_e_mail_address_is_already_in_use">This e-mail address is already in use.</string>
+    <string name="error_snap_creation">An error happened during snap creation. Try again later.</string>
+    <string name="error_snap_deletion">Error during snap deletion. Try again later.</string>
+    <string name="send_snap">Send snap</string>
+    <string name="error_snap_image">Failed to upload snap image. Try again later.</string>
+    <string name="word_location">Location</string>
+    <string name="word_description">Description</string>
 </resources>

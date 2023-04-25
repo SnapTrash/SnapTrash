@@ -44,7 +44,7 @@ class MainAddressBook{
                 AboutUsScreen()
             }
             navGraphBuilder.composable(MainAddressBook.CAMERA){
-                CameraScreen()
+                CameraScreen(navController,mainNavViewModel.currentLocation.value)
             }
             navGraphBuilder.composable(MainAddressBook.MAP){
                 MapScreen(navController = navController,mainNavViewModel)
@@ -53,7 +53,7 @@ class MainAddressBook{
                 val moshi = Moshi.Builder().add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).addLast(KotlinJsonAdapterFactory()).build()
                 val adapter = moshi.adapter(Snap::class.java)
                 val snap = adapter.fromJson(it.arguments?.getString("snap")!!)
-                OpenSnapScreen(snap!!)
+                OpenSnapScreen(snap!!,navController, snap.id.isEmpty())
             }
         }
     }
