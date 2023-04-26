@@ -77,7 +77,7 @@ fun SnapCard(snap: Snap,onClick: () -> Unit,vm: SnapCardViewModel = viewModel())
                     Image(
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Crop,
-                        painter = rememberAsyncImagePainter(URLDecoder.decode(vm.snapUri.value.toString(),"UTF-8"), onError = { Log.e("SNAPTRASH_IMAGE",it.result.throwable.message!!)}),
+                        painter = rememberAsyncImagePainter(URLDecoder.decode(vm.snapUri.value.toString(),"UTF-8"), onError = { Log.e("SNAPTRASH_IMAGE",it.result.throwable.message ?: "")}),
                         contentDescription = "My Image"
                     )
 

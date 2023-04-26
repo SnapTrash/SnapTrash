@@ -69,7 +69,7 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: Sn
                 Image(
                     modifier = Modifier.fillMaxWidth(),
                     contentScale = ContentScale.Crop,
-                    painter = rememberAsyncImagePainter(URLDecoder.decode(vm.snapUrl.value.toString(),"UTF-8"),onError = { Log.e("SNAPTRASH_IMAGE",it.result.throwable.message!!)}),
+                    painter = rememberAsyncImagePainter(URLDecoder.decode(vm.snapUrl.value.toString(),"UTF-8"),onError = { Log.e("SNAPTRASH_IMAGE",it.result.throwable.message ?: "")}),
                     contentDescription = "My Image"
                 )
         }
