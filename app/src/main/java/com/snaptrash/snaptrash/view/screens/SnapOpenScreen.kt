@@ -2,6 +2,7 @@ package com.snaptrash.snaptrash.view.screens
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -18,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -27,6 +29,7 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.snaptrash.snaptrash.model.SnapImageDownloader
 import com.snaptrash.snaptrash.model.data.Snap
 import com.snaptrash.snaptrash.model.data.SnapStatus
 import com.snaptrash.snaptrash.view.commonwidgets.ErrorCard
@@ -40,19 +43,17 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: Sn
     val secondaryColorTrasparent = MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f)
     var showDeleteDialog : MutableState<Boolean> = remember { mutableStateOf(false) }
     var showShareDialog by remember { mutableStateOf(false) }
+    val context = LocalContext.current
     vm.isNew = isNew
     vm.snapId = snap.id
     if(!isNew) vm.description.value = snap.description
     vm.location.value = snap.location
     if(!isNew) vm.urgency.value = snap.urgency
     vm.navController = navController
-    if(!isNew && snap.snapImageUrl.isNotEmpty()) {
-        Firebase.storage.getReference(URLDecoder.decode(snap.snapImageUrl,"UTF-8")).downloadUrl.addOnSuccessListener {
-            vm.snapUrl.value = it
-        }
-    }
-    else if(snap.snapImageUrl.isNotEmpty()){
-        vm.snapUrl.value = Uri.parse(URLDecoder.decode(snap.snapImageUrl,"UTF-8"))
+    LaunchedEffect(snap) {
+        if (isNew) vm.snapUrl.value = Uri.parse(snap.snapImageUrl)
+        else
+        vm.snapUrl.value = SnapImageDownloader.downloadSnap(context,snap)
     }
     Column {
         Box(
@@ -70,7 +71,7 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: Sn
                 Image(
                     modifier = Modifier.fillMaxWidth(),
                     contentScale = ContentScale.Crop,
-                    painter = rememberAsyncImagePainter(vm.snapUrl.value),
+                    painter = rememberAsyncImagePainter(URLDecoder.decode(vm.snapUrl.value.toString(),"UTF-8"),onError = { Log.e("SNAPTRASH_IMAGE",it.result.throwable.message ?: "")}),
                     contentDescription = "My Image"
                 )
         }
