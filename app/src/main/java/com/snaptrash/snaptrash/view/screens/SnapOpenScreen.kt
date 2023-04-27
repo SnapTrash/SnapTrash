@@ -51,6 +51,8 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: Sn
     if(!isNew) vm.urgency.value = snap.urgency
     vm.navController = navController
     LaunchedEffect(snap) {
+        if (isNew) vm.snapUrl.value = Uri.parse(snap.snapImageUrl)
+        else
         vm.snapUrl.value = SnapImageDownloader.downloadSnap(context,snap)
     }
     Column {
