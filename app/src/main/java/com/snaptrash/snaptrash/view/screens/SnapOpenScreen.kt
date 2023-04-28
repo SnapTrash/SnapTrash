@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -37,6 +38,7 @@ import com.google.firebase.storage.ktx.storage
 import com.snaptrash.snaptrash.model.SnapImageDownloader
 import com.snaptrash.snaptrash.model.data.Snap
 import com.snaptrash.snaptrash.model.data.SnapStatus
+import com.snaptrash.snaptrash.model.data.Urgency
 import com.snaptrash.snaptrash.view.commonwidgets.ErrorCard
 import com.snaptrash.snaptrash.viewmodel.MainNavViewModel
 import com.snaptrash.snaptrash.viewmodel.SnapScreenViewModel
@@ -149,7 +151,26 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: Mai
                     modifier = Modifier.fillMaxSize(),
                     onValueChange ={vm.description.value = it})
             }
-
+            Spacer(Modifier.height(20.0.dp))
+            Text(stringResource(com.snaptrash.snaptrash.R.string.word_rgency),fontSize = 18.sp, color = MaterialTheme.colorScheme.primary)
+            Slider(
+                value = vm.urgency.value.value.toFloat(),
+                enabled = isNew ,
+                steps = Urgency.values().size,
+                valueRange = 0.0f..Urgency.values().size.toFloat() - 1.0f,
+                onValueChange = {vm.urgency.value = Urgency.values()[it.toInt()]}
+            )
+            Text(
+                text = when(vm.urgency.value){
+                    Urgency.NOT_URGENT -> stringResource(com.snaptrash.snaptrash.R.string.not_urgent)
+                    Urgency.SERIOUS -> stringResource(com.snaptrash.snaptrash.R.string.word_serious)
+                    Urgency.URGENT -> stringResource(com.snaptrash.snaptrash.R.string.word_urgent)
+                },
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.primary,
+                fontSize = 16.sp
+            )
+            Spacer(modifier = Modifier.height(25.dp))
         }
     }
 }
