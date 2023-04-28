@@ -2,6 +2,7 @@ package com.snaptrash.snaptrash.model
 
 import android.content.Context
 import android.net.Uri
+import android.os.Build
 import androidx.core.net.toUri
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -15,7 +16,18 @@ class SnapImageDownloader {
         suspend fun downloadSnap(context: Context,snap: Snap): Uri {
             var url = Uri.EMPTY
             if (snap.snapImageUrl.isNotEmpty()) {
-                val cacheFile = File((context.externalCacheDir ?: context.cacheDir).path + URLDecoder.decode(snap.snapImageUrl,"UTF-8"))
+                val cacheDir =
+                    if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1)
+                        context.externalCacheDir ?: context.cacheDir
+                    else
+                        context.cacheDir
+                context.cacheDir
+                val cacheFile = File(
+                    (cacheDir).path +
+                            URLDecoder.decode(snap.snapImageUrl,"UTF-8")
+                                .lowercase().replace(":","")
+                                .replace("-","")
+                )
                 if(!cacheFile.exists()){
                     cacheFile.parentFile?.mkdirs()
                     val file = Firebase.storage.getReference(

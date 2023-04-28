@@ -19,16 +19,16 @@ import com.snaptrash.snaptrash.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutUsScreen() {
-    val longText =
-
+    val scrollState = rememberScrollState()
     Column(
-        modifier = Modifier.padding(start = 30.dp,top = 30.dp, end= 30.0.dp, bottom = 20.dp)
+        modifier = Modifier.padding(start = 30.dp,
+            top = 30.dp, end= 30.0.dp, bottom = 20.dp)
     ) {
         Text(text = stringResource(R.string.word_about_us), fontWeight = FontWeight.SemiBold, fontSize = 24.sp, color = MaterialTheme.colorScheme.secondary)
         Spacer(modifier = Modifier.height(20.dp))
         Box(
             Modifier
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(scrollState)
         ) {
             Text(text = stringResource(id = R.string.text_about_us),fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.secondary,

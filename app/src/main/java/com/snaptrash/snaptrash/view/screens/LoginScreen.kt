@@ -75,9 +75,9 @@ fun LoginBody(navController: NavController, vm: LoginViewModel = viewModel()){
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = Color.White,
-                    unfocusedContainerColor = Color.White,
-                    disabledContainerColor = Color.White,
+                    focusedContainerColor = MaterialTheme.colorScheme.surface,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                    disabledContainerColor = MaterialTheme.colorScheme.surface,
                     focusedBorderColor = MaterialTheme.colorScheme.primary,
                     unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                     focusedLabelColor = MaterialTheme.colorScheme.primary,
@@ -105,9 +105,9 @@ fun LoginBody(navController: NavController, vm: LoginViewModel = viewModel()){
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = Color.White,
-                    unfocusedContainerColor = Color.White,
-                    disabledContainerColor = Color.White,
+                    focusedContainerColor = MaterialTheme.colorScheme.surface,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                    disabledContainerColor = MaterialTheme.colorScheme.surface,
                     focusedBorderColor = MaterialTheme.colorScheme.primary,
                     unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                     focusedLabelColor = MaterialTheme.colorScheme.primary,
@@ -126,14 +126,12 @@ fun LoginBody(navController: NavController, vm: LoginViewModel = viewModel()){
                     onClick = {
                         vm.login()
                     },
-                    //modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
                     modifier = Modifier
                         .width(235.dp)
                         .height(95.dp)
                         .padding(top = 36.dp),
-                    //colors =  ButtonDefaults.buttonColors.
 
-                ) { //button composable contains an other composable
+                ) {
                     Text(
                         //text = "Submit",
                         text = stringResource(R.string.word_login),
@@ -143,12 +141,9 @@ fun LoginBody(navController: NavController, vm: LoginViewModel = viewModel()){
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(25.dp))
+            SignUpClickableText(navController)
         }
-        SignUpClickableText(navController)
-        Text(
-            text = "",
-            fontSize = 100.sp,
-        )
         Text(
             text = stringResource(R.string.text_by_snaptrash),
             color = MaterialTheme.colorScheme.primary,
