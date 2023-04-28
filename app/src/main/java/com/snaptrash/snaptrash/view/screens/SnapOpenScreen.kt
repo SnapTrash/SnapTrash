@@ -22,6 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -39,7 +40,7 @@ import java.net.URLDecoder
 
 @Composable
 fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: SnapScreenViewModel = viewModel()) {
-    val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+    val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)
     val secondaryColorTrasparent = MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f)
     var showDeleteDialog : MutableState<Boolean> = remember { mutableStateOf(false) }
     var showShareDialog by remember { mutableStateOf(false) }
@@ -99,10 +100,10 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: Sn
                     //.clip(RoundedCornerShape(8.dp))
                     .border(
                         width = 1.dp,
-                        color = MaterialTheme.colorScheme.primary,
+                        color = MaterialTheme.colorScheme.primaryContainer,
                         //shape = RoundedCornerShape(8.dp)
                     )
-                    .background(color = Color.White)
+                    .background(color = MaterialTheme.colorScheme.surfaceVariant)
             ) {
                 OutlinedTextField(
                     value = vm.description.value,
@@ -129,7 +130,8 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: Sn
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(70.dp)
-                        .background(color = if (!isNew) primaryColorTrasparent else MaterialTheme.colorScheme.primary)
+                        //.background(color = if (!isNew) primaryColorTrasparent else MaterialTheme.colorScheme.primary)
+                        .background(color = primaryColorTrasparent)
                         .clickable {
                             if (!isNew) showDeleteDialog.value = true
                             else
@@ -139,8 +141,8 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: Sn
                 ) {
                     Text(
                         text = if(!isNew) stringResource(com.snaptrash.snaptrash.R.string.label_delete_item) else stringResource(com.snaptrash.snaptrash.R.string.send_snap),
-                        color = if (!isNew) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimary,
-                        fontSize = 20.sp,
+                        color = if (!isNew) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimaryContainer,
+                        fontSize = 22.sp,
                         modifier = Modifier
                             .align(alignment = Alignment.Center)
                     )

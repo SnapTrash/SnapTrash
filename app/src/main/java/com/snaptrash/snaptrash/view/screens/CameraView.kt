@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
@@ -112,7 +113,8 @@ fun ShowImageTaken(vm: CameraViewModel = viewModel(),location: GeoPoint,navContr
                 model = vm.photoUri.value,
                 placeholder = painterResource(R.drawable.final_logo),
                 contentDescription = null,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
             )
 
         }
@@ -131,11 +133,11 @@ fun ShowImageTaken(vm: CameraViewModel = viewModel(),location: GeoPoint,navContr
 
             ) { //button composable contains an other composable
                 Text(
-                    //text = "Submit",
                     text = stringResource(R.string.word_retake),
                     fontSize = 20.sp,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
             Spacer(modifier = Modifier.width(10.dp))
@@ -168,7 +170,8 @@ fun ShowImageTaken(vm: CameraViewModel = viewModel(),location: GeoPoint,navContr
                     text = stringResource(R.string.word_done),
                     fontSize = 20.sp,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
 
 
