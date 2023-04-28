@@ -1,15 +1,28 @@
 package com.snaptrash.snaptrash.view.commonwidgets.navigation
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.R
 
 @Composable
@@ -22,10 +35,64 @@ fun DrawerHeader(){
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(100.dp)
+                .height(170.dp)
                 .background(color = MaterialTheme.colorScheme.primary)
+                .align(Alignment.CenterHorizontally),
+            contentAlignment = Alignment.Center
         ) {
-            Text(
+            Row(
+                modifier = Modifier
+                    .padding(10.dp)
+                    .align(Alignment.Center)
+                
+
+            ){
+                Box(
+                    modifier = Modifier
+                        .height(120.dp)
+                        .width(120.dp)
+                        //.border(2.dp, Color.Red)
+                        .align(Alignment.CenterVertically)
+
+                ){
+                    Image(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(shape = CircleShape)
+                            .align(Alignment.Center),
+                        contentScale = ContentScale.Crop,
+                        painter =
+                        if(Firebase.auth.currentUser?.photoUrl != null)
+                            rememberAsyncImagePainter(Firebase.auth.currentUser?.photoUrl)
+                        else
+                            painterResource(R.drawable.profile_image),
+                        contentDescription = "Profile Image"
+                    )
+
+                }
+                Spacer(modifier = Modifier.width(20.dp))
+                Box(
+                    modifier = Modifier
+                        .height(100.dp)
+                        .width(170.dp)
+                        //.border(2.dp, Color.Red)
+                        .align(Alignment.CenterVertically)
+
+                ){
+                    Column(){
+                        Spacer(modifier = Modifier.height(5.dp))
+                        Text(text = "Username",color = MaterialTheme.colorScheme.secondary,
+                            fontWeight = FontWeight.Bold, fontSize = 24.sp
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Text(text = "Points: 2594", fontSize = 20.sp,fontWeight = FontWeight.SemiBold)
+                    }
+
+                }
+
+            }
+
+            /*Text(
                 stringResource(R.string.app_title),
                 maxLines = 1,
                 style = MaterialTheme.typography.titleLarge,
@@ -34,6 +101,8 @@ fun DrawerHeader(){
                 modifier = Modifier
                     .align(Alignment.Center)
             )
+
+             */
         }
     }
 }

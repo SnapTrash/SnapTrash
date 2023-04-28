@@ -20,13 +20,15 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState,pad
         modifier = Modifier
             .fillMaxHeight()
             .requiredWidth(350.dp)
-            .padding(paddingValues)
+            //.padding(paddingValues)
+            .padding(top = 20.dp, bottom = 5.dp) //changes
             .background(MaterialTheme.colorScheme.background)
         ,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Spacer(modifier = Modifier.height(10.dp))
+        DrawerHeader()
+        //Spacer(modifier = Modifier.height(10.dp))
         Divider(color = Color.LightGray)
         Spacer(modifier = Modifier.height(10.dp))
         NavigationDrawerItems(navController,drawerState)
