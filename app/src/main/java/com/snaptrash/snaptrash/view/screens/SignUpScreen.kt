@@ -57,6 +57,7 @@ fun SignUpBody(navController: NavController,vm:SignUpViewModel){
     var calendarState = rememberUseCaseState()
     val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
     var context = LocalContext.current
+    val scrollState = rememberScrollState()
     val datePicker = CalendarDialog(
         state = calendarState,
         config = CalendarConfig(yearSelection = true, monthSelection = true, boundary = LocalDate.of(1900,1,1)..LocalDate.now()),
@@ -66,7 +67,7 @@ fun SignUpBody(navController: NavController,vm:SignUpViewModel){
     Column(
         modifier = Modifier
             .padding(8.dp)
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally) {
         OutlinedTextField(

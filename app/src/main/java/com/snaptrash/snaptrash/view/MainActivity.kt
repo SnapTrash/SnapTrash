@@ -25,8 +25,7 @@ import com.snaptrash.snaptrash.view.screens.AboutUsScreen
 import com.snaptrash.snaptrash.view.theme.SnapTrashTheme
 import com.snaptrash.snaptrash.viewmodel.RootNavViewModel
 import org.osmdroid.config.Configuration
-
-
+import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
@@ -59,9 +58,14 @@ class MainActivity : AppCompatActivity() {
             rootNavViewModel.isLoggedIn.value = Firebase.auth.uid != null
         }
         if(DeviceInfo.isEmulator){
-            Firebase.auth.useEmulator("10.0.2.2", 9099)
-            Firebase.firestore.useEmulator("10.0.2.2", 8080)
-            Firebase.functions.useEmulator("10.0.2.2",5001)
+            try {
+                Firebase.auth.useEmulator("10.0.2.2", 9099)
+                Firebase.firestore.useEmulator("10.0.2.2", 8080)
+                Firebase.functions.useEmulator("10.0.2.2", 5001)
+            }
+            catch(_: Exception){
+
+            }
 
         }
         //Init OSMDroid
