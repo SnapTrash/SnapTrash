@@ -29,7 +29,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState,pad
         modifier = Modifier
             .fillMaxHeight()
             .requiredWidth(350.dp)
-            //.padding(paddingValues)
+            .padding(paddingValues)
             //.padding(top = 1.dp, bottom = 5.dp) //changes
             .background(MaterialTheme.colorScheme.background)
             .verticalScroll(scrollState)
