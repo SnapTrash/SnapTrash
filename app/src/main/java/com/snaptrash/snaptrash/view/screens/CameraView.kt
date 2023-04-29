@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
@@ -90,24 +91,20 @@ fun CameraScreen(navController: NavController,location: GeoPoint,vm: CameraViewM
 
 @Composable
 fun ShowImageTaken(vm: CameraViewModel = viewModel(),location: GeoPoint,navController: NavController) {
+    val configuration = LocalConfiguration.current
     Column(
         modifier = Modifier.padding(40.dp)
 
     ) {
-        Spacer(modifier = Modifier.height(50.dp))
         Box(
             Modifier
-                .height(500.dp)
-                .width(400.dp)
-
-                //.aspectRatio(1.0f) // fixed aspect ratio
-                //.clip(RoundedCornerShape(8.dp))
+                .height((configuration.screenHeightDp * 0.6).dp)
+                .width((configuration.screenWidthDp * 0.75).dp)
                 .border(
                     width = 2.dp,
                     color = MaterialTheme.colorScheme.primary,
-                    //shape = RoundedCornerShape(8.dp)
                 )
-                .background(color = Color.White)
+                .background(color = MaterialTheme.colorScheme.surface)
         ) {
             AsyncImage(
                 model = vm.photoUri.value,
@@ -119,10 +116,7 @@ fun ShowImageTaken(vm: CameraViewModel = viewModel(),location: GeoPoint,navContr
 
         }
         Spacer(modifier = Modifier.height(30.dp))
-        Row(
-
-
-        ) {
+        Row{
             Button(
                 onClick = {
                     vm.takeImage.value = true

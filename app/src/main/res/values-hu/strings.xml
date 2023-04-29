@@ -51,4 +51,20 @@
     <string name="label_go_back">Vissza</string>
     <string name="word_done">Kész</string>
     <string name="word_retake">Újra</string>
+    <string name="error_badly_formatted_e_mail_address">Rosszul formázott e-mail cím</string>
+    <string name="error_invalid_user_or_password">Érvénytelen e-mail cím vagy jelszó</string>
+    <string name="error_weak_password">Gyenge jelszó</string>
+    <string name="error_recaptcha">RECaptcha hiba, várj pár másodpercet és próbálkozz újra.</string>
+    <string name="error_unknown_error">Ismeretlen hiba bejelentkezés közben. Ellenőrizd a hálózati kapcsolatot és próbálkozz újra!</string>
+    <string name="R_network_error">Hálózati hiba. Ellenőrizd a kapcsolatot!</string>
+    <string name="error_too_many_requests">Ez az eszköz letiltásra került túl sok egyidejű kérés miatt. Próbálkozz később.</string>
+    <string name="error_initial_login_failed">Nem sikerült bejelentkezni sikeres regisztráció után. Pár másodperc után próbálkozz újra!</string>
+    <string name="error_e_mail_address_is_already_in_use">Ez az e-mail cím már használatban van.</string>
+    <string name="error_snap_creation">Hiba történt a snap küldése közben. Próbálkozz később.</string>
+    <string name="error_snap_deletion">Hiba történt a snap törlése közben. Próbálkozz később.</string>
+    <string name="send_snap">Snap küldése</string>
+    <string name="error_snap_image">A kép feltöltése közben hiba történt. Próbákozz később.</string>
+    <string name="word_location">Hely</string>
+    <string name="word_description">Leírás</string>
+    <string name="word_home_screen">Főoldal</string>
 </resources>

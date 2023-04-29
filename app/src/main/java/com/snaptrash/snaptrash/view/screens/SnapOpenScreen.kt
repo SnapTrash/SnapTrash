@@ -9,7 +9,11 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.R
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Undo
@@ -19,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -34,12 +39,13 @@ import com.snaptrash.snaptrash.model.SnapImageDownloader
 import com.snaptrash.snaptrash.model.data.Snap
 import com.snaptrash.snaptrash.model.data.SnapStatus
 import com.snaptrash.snaptrash.view.commonwidgets.ErrorCard
+import com.snaptrash.snaptrash.viewmodel.MainNavViewModel
 import com.snaptrash.snaptrash.viewmodel.SnapScreenViewModel
 import java.net.URLDecoder
 
 
 @Composable
-fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: SnapScreenViewModel = viewModel()) {
+fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: MainNavViewModel,isNew: Boolean,vm: SnapScreenViewModel = viewModel()) {
     val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)
     val secondaryColorTrasparent = MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f)
     var showDeleteDialog : MutableState<Boolean> = remember { mutableStateOf(false) }
@@ -51,18 +57,46 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: Sn
     vm.location.value = snap.location
     if(!isNew) vm.urgency.value = snap.urgency
     vm.navController = navController
+    mainNavViewModel.currentFloatingActionButton.value = {
+        FloatingActionButton(
+            onClick = {
+                if(!vm.inProgress.value) {
+                    if (!isNew) showDeleteDialog.value = true
+                    else {
+                        showDeleteDialog.value = false
+                        vm.doSnapFunction()
+                    }
+                }
+            }
+        ) {
+            if(vm.inProgress.value) CircularProgressIndicator() else {
+                Icon(
+                    if (!isNew) Icons.Filled.Delete else Icons.Filled.Add,
+                    contentDescription = null,
+                )
+                if (showDeleteDialog.value && !isNew) {
+                    DeleteDialog(onDismiss = { showDeleteDialog.value = false }, {
+                        vm.doSnapFunction()
+                    })
+                }
+            }
+        }
+    }
+    val configuration = LocalConfiguration.current
     LaunchedEffect(snap) {
-        if (isNew) vm.snapUrl.value = Uri.parse(snap.snapImageUrl)
+        if (isNew)
+            vm.snapUrl.value = Uri.parse(snap.snapImageUrl)
         else
-        vm.snapUrl.value = SnapImageDownloader.downloadSnap(context,snap)
+            vm.snapUrl.value = SnapImageDownloader.downloadSnap(context,snap)
     }
     Column {
         Box(
             Modifier
                 .fillMaxWidth()
-                .requiredHeight(250.dp)
+                .requiredHeight((configuration.screenHeightDp * 0.25).dp)
 
         ) {
+
             if(vm.snapUrl.value == Uri.EMPTY)
                 Row(modifier=Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.Center){
                     Spacer(modifier = Modifier.height(5.dp))
@@ -77,11 +111,15 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: Sn
                 )
         }
         Column(
-            modifier = Modifier.padding(20.dp)
+            modifier = Modifier
+                .padding(20.dp)
+                .fillMaxHeight()
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
         ) {
             if(vm.error.value != null){
                 ErrorCard(error = stringResource(id = vm.error.value!!))
-                Spacer(modifier = Modifier.height(5.dp))
+                Spacer(modifier = Modifier.height(10.dp))
             }
             Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_location), fontSize = 18.sp, color = MaterialTheme.colorScheme.primary)
             Spacer(modifier = Modifier.height(5.dp))
@@ -92,10 +130,11 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: Sn
             )
             Spacer(modifier = Modifier.height(20.dp))
             Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_description), fontSize = 18.sp, color = MaterialTheme.colorScheme.primary)
+            Spacer(modifier = Modifier.height(5.dp))
             Box(
                 Modifier
-                    .height(200.dp)
-                    .width(540.dp)
+                    .height((configuration.screenHeightDp * 0.25).dp)
+                    .fillMaxWidth()
                     //.aspectRatio(1.0f) // fixed aspect ratio
                     //.clip(RoundedCornerShape(8.dp))
                     .border(
@@ -112,47 +151,6 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,isNew: Boolean,vm: Sn
                     onValueChange ={vm.description.value = it})
             }
 
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 16.dp),
-            verticalArrangement = Arrangement.Bottom
-        ) {
-            if(vm.inProgress.value) Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
-            ){
-                CircularProgressIndicator()
-            }
-            else if(snap.status == SnapStatus.PENDING) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(70.dp)
-                        //.background(color = if (!isNew) primaryColorTrasparent else MaterialTheme.colorScheme.primary)
-                        .background(color = primaryColorTrasparent)
-                        .clickable {
-                            if (!isNew) showDeleteDialog.value = true
-                            else
-                                vm.doSnapFunction()
-                        }
-                    //.align(aligmnet = Alignment.Horizontal.CenterHorizontally)
-                ) {
-                    Text(
-                        text = if(!isNew) stringResource(com.snaptrash.snaptrash.R.string.label_delete_item) else stringResource(com.snaptrash.snaptrash.R.string.send_snap),
-                        color = if (!isNew) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimaryContainer,
-                        fontSize = 22.sp,
-                        modifier = Modifier
-                            .align(alignment = Alignment.Center)
-                    )
-                    if (showDeleteDialog.value && !isNew) {
-                        DeleteDialog(onDismiss = { showDeleteDialog.value = false }, {
-                            vm.doSnapFunction()
-                        })
-                    }
-                }
-            }
         }
     }
 }

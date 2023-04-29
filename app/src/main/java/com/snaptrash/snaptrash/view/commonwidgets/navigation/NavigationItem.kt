@@ -23,7 +23,7 @@ fun NavigationItem(text: String,icon: @Composable () -> Unit,route: String,desti
     val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
     val primaryColorTrasparent_L = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
     NavigationDrawerItem(
-        label = { Text(text = text, color = MaterialTheme.colorScheme.secondary, fontSize = 20.sp, fontWeight = FontWeight.SemiBold ) },
+        label = { Text(text = text, color = MaterialTheme.colorScheme.secondary, fontSize = 18.sp, fontWeight = FontWeight.SemiBold ) },
         //shape= RectangleShape ,
         selected = destination?.route == route,
         icon = icon,
