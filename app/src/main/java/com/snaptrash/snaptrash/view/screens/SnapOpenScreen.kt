@@ -61,6 +61,8 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: Mai
     vm.navController = navController
     mainNavViewModel.currentFloatingActionButton.value = {
         FloatingActionButton(
+            containerColor =  MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
             onClick = {
                 if(!vm.inProgress.value) {
                     if (!isNew) showDeleteDialog.value = true

@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -28,6 +29,7 @@ import com.snaptrash.snaptrash.R
 
 @Composable
 fun DrawerHeader(){
+    val configuration = LocalConfiguration.current
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Top,
@@ -36,7 +38,7 @@ fun DrawerHeader(){
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(172.dp)
+                .height((configuration.screenHeightDp * 0.22).dp)
                 .background(color = MaterialTheme.colorScheme.primaryContainer)
                 .align(Alignment.CenterHorizontally),
             contentAlignment = Alignment.Center
@@ -49,7 +51,8 @@ fun DrawerHeader(){
             ){
                 Box(
                     modifier = Modifier
-                        .height(120.dp)
+                        //.height(120.dp)
+                        .height((configuration.screenHeightDp * 0.15).dp)
                         .width(120.dp)
                         //.border(2.dp, Color.Red)
                         .align(Alignment.CenterVertically),
@@ -80,7 +83,8 @@ fun DrawerHeader(){
                 Spacer(modifier = Modifier.width(10.dp))
                 Box(
                     modifier = Modifier
-                        .height(100.dp)
+                        //.height(100.dp)
+                        .height((configuration.screenHeightDp * 0.15).dp)
                         .width(180.dp)
                         //.border(2.dp, Color.Red)
                         .align(Alignment.CenterVertically)
