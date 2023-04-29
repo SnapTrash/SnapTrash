@@ -25,22 +25,27 @@ import androidx.navigation.NavHostController
 @Composable
 fun DrawerContent(navController: NavHostController, drawerState: DrawerState,paddingValues: PaddingValues){
     val scrollState = rememberScrollState()
+    val configuration = LocalConfiguration.current
     Column(
         modifier = Modifier
-            .fillMaxHeight()
-            .requiredWidth(350.dp)
-            .padding(paddingValues)
-            //.padding(top = 1.dp, bottom = 5.dp) //changes
-            .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(scrollState)
-        ,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
+        .fillMaxHeight()
+        .requiredWidth((configuration.screenWidthDp * 0.85).dp)
+        .padding(paddingValues)
+        //.padding(top = 1.dp, bottom = 5.dp) //changes
+        .background(MaterialTheme.colorScheme.background)
+    ){
         DrawerHeader()
-        Spacer(modifier = Modifier.height(10.dp))
-        NavigationDrawerItems(navController,drawerState)
-        Spacer(modifier = Modifier.height(10.dp))
+        Column(
+            modifier = Modifier
+                .padding(5.dp)
+                .verticalScroll(scrollState)
+            ,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Spacer(modifier = Modifier.height(10.dp))
+            NavigationDrawerItems(navController,drawerState)
+            Spacer(modifier = Modifier.height(10.dp))
+        }
     }
-
 }

@@ -38,6 +38,7 @@ import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.snaptrash.snaptrash.R
 import com.snaptrash.snaptrash.view.commonwidgets.ErrorCard
+import com.snaptrash.snaptrash.view.commonwidgets.LoginTextBoxColors
 import com.snaptrash.snaptrash.view.navigator.AuthAddressBook
 import com.snaptrash.snaptrash.view.commonwidgets.TopBarLogin
 import com.snaptrash.snaptrash.viewmodel.SignUpViewModel
@@ -85,15 +86,7 @@ fun SignUpBody(navController: NavController,vm:SignUpViewModel){
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.primary,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-            ),
+            colors = LoginTextBoxColors.loginTextBoxColors(),
         )
 
         Text(
@@ -115,15 +108,7 @@ fun SignUpBody(navController: NavController,vm:SignUpViewModel){
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.primary,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-            ),
+            colors = LoginTextBoxColors.loginTextBoxColors(),
         )
         Text(
             text = "",
@@ -151,20 +136,7 @@ fun SignUpBody(navController: NavController,vm:SignUpViewModel){
                 }
                 ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            colors = OutlinedTextFieldDefaults.colors(
-                disabledTextColor = MaterialTheme.colorScheme.primary,
-                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.primary,
-                disabledBorderColor = MaterialTheme.colorScheme.primary,
-                disabledTrailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                disabledLabelColor = MaterialTheme.colorScheme.primary,
-                disabledPlaceholderColor = MaterialTheme.colorScheme.primary,
-            ),
+            colors = LoginTextBoxColors.loginTextBoxColors(),
         )
 
         Text(
@@ -186,23 +158,10 @@ fun SignUpBody(navController: NavController,vm:SignUpViewModel){
             placeholder = { Text(text = stringResource(R.string.instruction_type_phone_number)) },
             supportingText = {if(!vm.phoneNumberValid) Text(text = stringResource(R.string.error_invalid_phone_number))},
             singleLine = true,
+            isError = !vm.phoneNumberValid,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                focusedBorderColor = if(vm.phoneNumberValid) MaterialTheme.colorScheme.primary
-                else MaterialTheme.colorScheme.error,
-                unfocusedBorderColor =
-                if(vm.phoneNumberValid) MaterialTheme.colorScheme.primary
-                else MaterialTheme.colorScheme.error,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                focusedSupportingTextColor = MaterialTheme.colorScheme.error,
-                disabledSupportingTextColor = MaterialTheme.colorScheme.error,
-                unfocusedSupportingTextColor = MaterialTheme.colorScheme.error
-            ),
+            colors = LoginTextBoxColors.loginTextBoxColors(),
         )
 
         Text(
@@ -232,21 +191,8 @@ fun SignUpBody(navController: NavController,vm:SignUpViewModel){
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             supportingText = {if(!vm.emailValid) Text(text =  stringResource(R.string.error_invalid_email_address))},
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                focusedBorderColor = if(vm.emailValid) MaterialTheme.colorScheme.primary
-                else MaterialTheme.colorScheme.error,
-                unfocusedBorderColor =
-                if(vm.emailValid) MaterialTheme.colorScheme.primary
-                else MaterialTheme.colorScheme.error,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                focusedSupportingTextColor = MaterialTheme.colorScheme.error,
-                disabledSupportingTextColor = MaterialTheme.colorScheme.error,
-                unfocusedSupportingTextColor = MaterialTheme.colorScheme.error
-            ),
+            colors = LoginTextBoxColors.loginTextBoxColors(),
+            isError = !vm.emailValid
         )
 
         Text(
@@ -270,20 +216,8 @@ fun SignUpBody(navController: NavController,vm:SignUpViewModel){
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                focusedBorderColor = if(vm.passwordValid) MaterialTheme.colorScheme.primary
-                else MaterialTheme.colorScheme.error,
-                unfocusedBorderColor = if(vm.passwordValid) MaterialTheme.colorScheme.primary
-                else MaterialTheme.colorScheme.error,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                focusedSupportingTextColor = MaterialTheme.colorScheme.error,
-                disabledSupportingTextColor = MaterialTheme.colorScheme.error,
-                unfocusedSupportingTextColor = MaterialTheme.colorScheme.error
-            ),
+            isError = !vm.passwordValid,
+            colors = LoginTextBoxColors.loginTextBoxColors()
         )
 
 
@@ -321,7 +255,6 @@ fun SignUpBody(navController: NavController,vm:SignUpViewModel){
         if(vm.error.value != null) ErrorCard(stringResource(vm.error.value!!))
         Text(
             text = stringResource(id = R.string.text_by_snaptrash),
-            color = MaterialTheme.colorScheme.primary,
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
             modifier = Modifier
@@ -353,7 +286,7 @@ fun LoginClickableText(navController: NavController) {
             annotation = stringResource(id = R.string.word_here)
         )
         //add text with your different color/style
-        withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)
+        withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.onBackground)
         ) {
             append(" " + stringResource(id = R.string.word_here))
         }

@@ -24,14 +24,13 @@ fun AboutUsScreen() {
         modifier = Modifier.padding(start = 30.dp,
             top = 30.dp, end= 30.0.dp, bottom = 20.dp)
     ) {
-        Text(text = stringResource(R.string.word_about_us), fontWeight = FontWeight.SemiBold, fontSize = 24.sp, color = MaterialTheme.colorScheme.secondary)
+        Text(text = stringResource(R.string.word_about_us), fontWeight = FontWeight.SemiBold, fontSize = 24.sp)
         Spacer(modifier = Modifier.height(20.dp))
         Box(
             Modifier
                 .verticalScroll(scrollState)
         ) {
             Text(text = stringResource(id = R.string.text_about_us),fontSize = 16.sp,
-                color = MaterialTheme.colorScheme.secondary,
                 textAlign = TextAlign.Justify
             )
         }

@@ -44,8 +44,10 @@ fun DrawerHeader(){
             contentAlignment = Alignment.Center
         ) {
             Row(
+                horizontalArrangement = Arrangement.SpaceEvenly ,
                 modifier = Modifier
                     //.padding(5.dp)
+                    .fillMaxWidth()
                     .align(Alignment.Center)
 
             ){
@@ -53,17 +55,16 @@ fun DrawerHeader(){
                     modifier = Modifier
                         //.height(120.dp)
                         .height((configuration.screenHeightDp * 0.15).dp)
-                        .width(120.dp)
                         //.border(2.dp, Color.Red)
                         .align(Alignment.CenterVertically),
 
                 ){
                     Image(
                         modifier = Modifier
-                            .fillMaxSize()
+                            .fillMaxHeight()
                             .clip(shape = CircleShape),
                             //.align(Alignment.Center),
-                        contentScale = ContentScale.Crop,
+                        contentScale = ContentScale.Fit,
                         painter =
                         if(Firebase.auth.currentUser?.photoUrl != null)
                             rememberAsyncImagePainter(Firebase.auth.currentUser?.photoUrl)
@@ -73,14 +74,12 @@ fun DrawerHeader(){
                     )
 
                 }
-                Spacer(modifier = Modifier.width(10.dp))
                 Divider(
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     thickness = 2.dp,
                     modifier = Modifier.width(1.dp)
                         .fillMaxHeight()
                 )
-                Spacer(modifier = Modifier.width(10.dp))
                 Box(
                     modifier = Modifier
                         //.height(100.dp)

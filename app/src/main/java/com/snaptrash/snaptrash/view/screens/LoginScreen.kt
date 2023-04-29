@@ -31,6 +31,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.R
 import com.snaptrash.snaptrash.view.commonwidgets.ErrorCard
+import com.snaptrash.snaptrash.view.commonwidgets.LoginTextBoxColors
 import com.snaptrash.snaptrash.view.navigator.AuthAddressBook
 import com.snaptrash.snaptrash.view.commonwidgets.TopBarLogin
 import com.snaptrash.snaptrash.viewmodel.LoginViewModel
@@ -74,15 +75,7 @@ fun LoginBody(navController: NavController, vm: LoginViewModel = viewModel()){
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.surface,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                    disabledContainerColor = MaterialTheme.colorScheme.surface,
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.primary,
-                    focusedLabelColor = MaterialTheme.colorScheme.primary,
-                    unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                ),
+                colors = LoginTextBoxColors.loginTextBoxColors(),
             )
             Text(
                 text = "",
@@ -104,15 +97,7 @@ fun LoginBody(navController: NavController, vm: LoginViewModel = viewModel()){
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.surface,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                    disabledContainerColor = MaterialTheme.colorScheme.surface,
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.primary,
-                    focusedLabelColor = MaterialTheme.colorScheme.primary,
-                    unfocusedLabelColor = MaterialTheme.colorScheme.primary,
-                ),
+                colors = LoginTextBoxColors.loginTextBoxColors(),
             )
             Text(
                 text = "",
@@ -146,7 +131,7 @@ fun LoginBody(navController: NavController, vm: LoginViewModel = viewModel()){
         }
         Text(
             text = stringResource(R.string.text_by_snaptrash),
-            color = MaterialTheme.colorScheme.primary,
+            color = MaterialTheme.colorScheme.onBackground,
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
             modifier = Modifier
@@ -176,7 +161,7 @@ fun SignUpClickableText(navController: NavController) {
             annotation = " " + stringResource(R.string.word_here)
         )
         //add text with your different color/style
-        withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)
+        withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.onBackground)
         ) {
             append(" " + stringResource(R.string.word_here))
         }

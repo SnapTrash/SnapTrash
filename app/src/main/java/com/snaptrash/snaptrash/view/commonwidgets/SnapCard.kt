@@ -43,7 +43,7 @@ fun SnapCard(snap: Snap,onClick: () -> Unit){
             .padding(12.dp)
             .clickable(onClick = onClick) ,
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.onPrimary)
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline)
     ) {
         Row {
             Box(
@@ -55,7 +55,7 @@ fun SnapCard(snap: Snap,onClick: () -> Unit){
                     .clip(RoundedCornerShape(8.dp))
                     .border(
                         width = 1.dp,
-                        color = MaterialTheme.colorScheme.onPrimary,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = RoundedCornerShape(8.dp)
                     ),
                 contentAlignment = Alignment.Center
@@ -79,15 +79,15 @@ fun SnapCard(snap: Snap,onClick: () -> Unit){
                     Icon(
                         Icons.Filled.LocationOn,
                         contentDescription = "Location",
-                        tint = MaterialTheme.colorScheme.onPrimary,
+                        tint = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.size(20.dp)
                     )
-                    Text(text ="${snap.location.latitude}, ${snap.location.longitude}", fontSize = 16.sp ,color = MaterialTheme.colorScheme.onPrimary )
+                    Text(text ="${snap.location.latitude}, ${snap.location.longitude}", fontSize = 16.sp)
                 }
                 Spacer(modifier = Modifier.height(10.dp))
                 Row(){
                     Spacer(modifier = Modifier.width(20.dp))
-                    Text(text = snap.description, fontSize = 16.sp, color = MaterialTheme.colorScheme.onPrimary )
+                    Text(text = snap.description, fontSize = 16.sp )
                 }
             }
 
