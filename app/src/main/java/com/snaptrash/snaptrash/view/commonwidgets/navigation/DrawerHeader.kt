@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,16 +36,15 @@ fun DrawerHeader(){
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(170.dp)
-                .background(color = MaterialTheme.colorScheme.primary)
+                .height(172.dp)
+                .background(color = MaterialTheme.colorScheme.primaryContainer)
                 .align(Alignment.CenterHorizontally),
             contentAlignment = Alignment.Center
         ) {
             Row(
                 modifier = Modifier
-                    .padding(10.dp)
+                    //.padding(5.dp)
                     .align(Alignment.Center)
-                
 
             ){
                 Box(
@@ -52,14 +52,14 @@ fun DrawerHeader(){
                         .height(120.dp)
                         .width(120.dp)
                         //.border(2.dp, Color.Red)
-                        .align(Alignment.CenterVertically)
+                        .align(Alignment.CenterVertically),
 
                 ){
                     Image(
                         modifier = Modifier
                             .fillMaxSize()
-                            .clip(shape = CircleShape)
-                            .align(Alignment.Center),
+                            .clip(shape = CircleShape),
+                            //.align(Alignment.Center),
                         contentScale = ContentScale.Crop,
                         painter =
                         if(Firebase.auth.currentUser?.photoUrl != null)
@@ -70,22 +70,34 @@ fun DrawerHeader(){
                     )
 
                 }
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width(10.dp))
+                Divider(
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    thickness = 2.dp,
+                    modifier = Modifier.width(1.dp)
+                        .fillMaxHeight()
+                )
+                Spacer(modifier = Modifier.width(10.dp))
                 Box(
                     modifier = Modifier
                         .height(100.dp)
-                        .width(170.dp)
+                        .width(180.dp)
                         //.border(2.dp, Color.Red)
                         .align(Alignment.CenterVertically)
 
                 ){
                     Column(){
                         Spacer(modifier = Modifier.height(5.dp))
-                        Text(text = "Username",color = MaterialTheme.colorScheme.secondary,
+                        Text(text =
+                        Firebase.auth.currentUser?.displayName ?:
+                        "Username",
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
                             fontWeight = FontWeight.Bold, fontSize = 24.sp
                         )
                         Spacer(modifier = Modifier.height(10.dp))
-                        Text(text = "Points: 2594", fontSize = 20.sp,fontWeight = FontWeight.SemiBold)
+                        Text(text = "Points: 2594",
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            fontSize = 20.sp,fontWeight = FontWeight.SemiBold)
                     }
 
                 }
