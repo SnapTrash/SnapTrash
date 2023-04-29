@@ -67,4 +67,8 @@
     <string name="word_location">Location</string>
     <string name="word_description">Description</string>
     <string name="word_home_screen">Home</string>
+    <string name="word_rgency">Urgency</string>
+    <string name="not_urgent">Not urgent</string>
+    <string name="word_serious">Serious</string>
+    <string name="word_urgent">Urgent</string>
 </resources>
