@@ -28,6 +28,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -47,7 +48,7 @@ import java.net.URLDecoder
 
 @Composable
 fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: MainNavViewModel,isNew: Boolean,vm: SnapScreenViewModel = viewModel()) {
-    val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+    val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)
     val secondaryColorTrasparent = MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f)
     var showDeleteDialog : MutableState<Boolean> = remember { mutableStateOf(false) }
     var showShareDialog by remember { mutableStateOf(false) }
@@ -140,10 +141,10 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: Mai
                     //.clip(RoundedCornerShape(8.dp))
                     .border(
                         width = 1.dp,
-                        color = MaterialTheme.colorScheme.primary,
+                        color = MaterialTheme.colorScheme.primaryContainer,
                         //shape = RoundedCornerShape(8.dp)
                     )
-                    .background(color = MaterialTheme.colorScheme.surface)
+                    .background(color = MaterialTheme.colorScheme.surfaceVariant)
             ) {
                 OutlinedTextField(
                     value = vm.description.value,
