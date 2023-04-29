@@ -125,15 +125,14 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: Mai
                 ErrorCard(error = stringResource(id = vm.error.value!!))
                 Spacer(modifier = Modifier.height(10.dp))
             }
-            Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_location), fontSize = 18.sp, color = MaterialTheme.colorScheme.primary)
+            Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_location), fontSize = 18.sp)
             Spacer(modifier = Modifier.height(5.dp))
             Text(
                 text = "${snap.location.latitude}, ${snap.location.longitude}",
                 fontSize = 16.sp,
-                color = MaterialTheme.colorScheme.secondary
             )
             Spacer(modifier = Modifier.height(20.dp))
-            Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_description), fontSize = 18.sp, color = MaterialTheme.colorScheme.primary)
+            Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_description), fontSize = 18.sp)
             Spacer(modifier = Modifier.height(5.dp))
             Box(
                 Modifier
@@ -143,7 +142,7 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: Mai
                     //.clip(RoundedCornerShape(8.dp))
                     .border(
                         width = 1.dp,
-                        color = MaterialTheme.colorScheme.primaryContainer,
+                        color = MaterialTheme.colorScheme.onBackground,
                         //shape = RoundedCornerShape(8.dp)
                     )
                     .background(color = MaterialTheme.colorScheme.surfaceVariant)
@@ -155,12 +154,18 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: Mai
                     onValueChange ={vm.description.value = it})
             }
             Spacer(Modifier.height(20.0.dp))
-            Text(stringResource(com.snaptrash.snaptrash.R.string.word_rgency),fontSize = 18.sp, color = MaterialTheme.colorScheme.primary)
+            Text(stringResource(com.snaptrash.snaptrash.R.string.word_rgency),fontSize = 18.sp)
             Slider(
                 value = vm.urgency.value.value.toFloat(),
                 enabled = isNew ,
                 steps = Urgency.values().size,
                 valueRange = 0.0f..Urgency.values().size.toFloat() - 1.0f,
+                colors = SliderDefaults.colors(
+                    thumbColor = MaterialTheme.colorScheme.onBackground,
+                    activeTickColor = MaterialTheme.colorScheme.onBackground,
+                    activeTrackColor = MaterialTheme.colorScheme.onBackground,
+                    disabledActiveTickColor = MaterialTheme.colorScheme.onBackground,
+                    disabledActiveTrackColor = MaterialTheme.colorScheme.onBackground),
                 onValueChange = {vm.urgency.value = Urgency.values()[it.toInt()]}
             )
             Text(
@@ -170,7 +175,6 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: Mai
                     Urgency.URGENT -> stringResource(com.snaptrash.snaptrash.R.string.word_urgent)
                 },
                 modifier = Modifier.fillMaxWidth(),
-                color = MaterialTheme.colorScheme.primary,
                 fontSize = 16.sp
             )
             Spacer(modifier = Modifier.height(25.dp))

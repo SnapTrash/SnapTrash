@@ -29,7 +29,7 @@ fun TopBarLogin() {
                 stringResource(id = R.string.app_title),
                 maxLines = 1,
                 style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.background,
+                color = MaterialTheme.colorScheme.onPrimary,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier
                     .align(Alignment.Center)

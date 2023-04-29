@@ -20,20 +20,30 @@ import androidx.core.view.ViewCompat
 
 
 private val DarkColorScheme = darkColorScheme(
-    //primary = Purple80,
-    //secondary = PurpleGrey80,
-    //tertiary = Pink80
-    primary = Green2 ,
+    primary = GreenMain1,
     onPrimary = WhiteCream,
+    surface = Gray1,
+    onSurface = WhiteCream,
     primaryContainer = GreenMain1,
     onPrimaryContainer = WhiteCream,
-    secondary = WhiteCream ,
-    tertiary = Gray1 ,
-    background = Black1 ,
+    secondaryContainer = GreenMain1,
+    onSecondaryContainer = WhiteCream,
+    onBackground = Green3,
+    secondary = GreenMain1,
+    onSecondary = WhiteCream,
+    tertiary = Gray1,
+    onTertiary = WhiteCream,
+    background = Black1,
     surfaceVariant = Gray1,
-    error = Red2
-
-
+    onSurfaceVariant = WhiteCream,
+    surfaceTint = Green2,
+    outline = Green3,
+    error = Red2,
+    scrim = WhiteCream,
+    errorContainer = Red1,
+    inverseSurface = WhiteCream,
+    inversePrimary = Green2,
+    inverseOnSurface = Gray1
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -41,14 +51,27 @@ private val LightColorScheme = lightColorScheme(
     //secondary = PurpleGrey40,
     //tertiary = Pink40
     primary = GreenMain1,
-    onPrimary = GreenMain1 ,
+    onPrimary = WhiteCream,
     primaryContainer = GreenMain1,
     onPrimaryContainer = WhiteCream,
-    secondary = Black1,
+    onBackground = GreenMain1,
+    secondary = Green2,
+    onSecondary = WhiteCream,
+    secondaryContainer = GreenMain1,
+    onSecondaryContainer = WhiteCream,
     tertiary = Green3,
     background = WhiteCream,
-    surfaceVariant = Color.White,
-    error = Red1
+    surface = Color.White,
+    onSurface = GreenMain1,
+    outline = GreenMain1 ,
+    surfaceVariant = WhiteCream,
+    onSurfaceVariant = Black1,
+    error = Red1,
+    errorContainer = Red2,
+    inverseSurface = Gray1,
+    inverseOnSurface = WhiteCream,
+    inversePrimary = Green3,
+    scrim = Black1
 
 
     /* Other default colors to override
@@ -81,8 +104,7 @@ fun SnapTrashTheme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
-            (view.context as Activity).window.statusBarColor = colorScheme.primaryContainer.toArgb()
-            ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
+            (view.context as Activity).window.statusBarColor = colorScheme.primary.toArgb()
         }
     }
 
