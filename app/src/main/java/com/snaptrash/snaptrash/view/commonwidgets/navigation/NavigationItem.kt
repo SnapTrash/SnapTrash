@@ -27,8 +27,8 @@ fun NavigationItem(text: String,icon: @Composable () -> Unit,route: String,desti
         //shape= RectangleShape ,
         selected = destination?.route == route,
         icon = icon,
-        /*colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor= primaryColorTrasparent,
-            selectedContainerColor = primaryColorTrasparent_L),*/
+        colors = NavigationDrawerItemDefaults.colors(
+            selectedContainerColor = primaryColorTrasparent_L),
         onClick = onClick,
         /*modifier = Modifier
             .border(1.dp, MaterialTheme.colorScheme.secondary, RectangleShape)*/

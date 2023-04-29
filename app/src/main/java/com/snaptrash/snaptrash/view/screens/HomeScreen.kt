@@ -80,7 +80,8 @@ fun HomeScreen(navController: NavController,mainNavViewModel: MainNavViewModel) 
                 text = stringResource(R.string.instruction_take_a_snap),
                 fontSize = 24.sp,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.onPrimaryContainer
             )
         }
 
