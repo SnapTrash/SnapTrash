@@ -82,7 +82,7 @@ fun AccountScreen(){
             //horizontalArrangement= Arrangement.End,
             verticalAlignment = Alignment.CenterVertically
         ){
-            Text(text = stringResource(id = com.snaptrash.snaptrash.R.string.account),color = MaterialTheme.colorScheme.primary,
+            Text(text = stringResource(id = com.snaptrash.snaptrash.R.string.account),
                 fontWeight = FontWeight.Normal, fontSize = 26.sp,
                 textAlign = TextAlign.Left
             )

@@ -3,6 +3,8 @@ package com.snaptrash.snaptrash.view.navigator
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.model.data.Snap
 import com.snaptrash.snaptrash.view.HomeScreen.HomeScreen
 import com.snaptrash.snaptrash.view.screens.*
@@ -22,6 +24,7 @@ class MainAddressBook{
         const val CAMERA = "camera"
         const val MAP = "map"
         const val ACCOUNT = "account"
+        const val LOGOUT = "logout"
         const val SINGLE_SNAP = "snap/snap={snap}"
         fun addMainGraph(navGraphBuilder: NavGraphBuilder,navController: NavController,mainNavViewModel: MainNavViewModel){
             navGraphBuilder.composable(MainAddressBook.HOME){
@@ -43,7 +46,7 @@ class MainAddressBook{
                 AboutUsScreen()
             }
             navGraphBuilder.composable(MainAddressBook.CAMERA){
-                CameraScreen()
+                CameraScreen(navController,mainNavViewModel.currentLocation.value)
             }
             navGraphBuilder.composable(MainAddressBook.MAP){
                 MapScreen(navController = navController,mainNavViewModel)
@@ -52,7 +55,10 @@ class MainAddressBook{
                 val moshi = Moshi.Builder().add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).addLast(KotlinJsonAdapterFactory()).build()
                 val adapter = moshi.adapter(Snap::class.java)
                 val snap = adapter.fromJson(it.arguments?.getString("snap")!!)
-                OpenSnapScreen(snap!!)
+                OpenSnapScreen(snap!!,navController,mainNavViewModel, snap.id.isEmpty())
+            }
+            navGraphBuilder.composable(MainAddressBook.LOGOUT){
+                Firebase.auth.signOut()
             }
         }
     }

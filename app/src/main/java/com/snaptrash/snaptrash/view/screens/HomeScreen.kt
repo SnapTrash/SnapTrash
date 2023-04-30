@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -29,14 +30,14 @@ import org.osmdroid.views.overlay.Marker
 @SuppressLint("ClickableViewAccessibility")
 @Composable
 fun HomeScreen(navController: NavController,mainNavViewModel: MainNavViewModel) {
+    val configuration = LocalConfiguration.current
     Column(
-        modifier = Modifier.padding(40.dp),
+        modifier = Modifier.padding(20.dp),
     ) {
-        Spacer(modifier = Modifier.height(50.dp))
         Box(
             Modifier
-                .height(400.dp)
-                .width(300.dp)
+                .height((configuration.screenHeightDp * 0.6).dp)
+                .fillMaxWidth()
                 .align(Alignment.CenterHorizontally)
                 //.aspectRatio(1.0f) // fixed aspect ratio could be usefull to resize the map
                 .border(
@@ -69,13 +70,14 @@ fun HomeScreen(navController: NavController,mainNavViewModel: MainNavViewModel) 
                 .fillMaxWidth()
                 .height(70.dp)
 
-        ) { //button composable contains an other composable
+        ) {
             Text(
                 //text = "Submit",
                 text = stringResource(R.string.instruction_take_a_snap),
                 fontSize = 24.sp,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.onPrimaryContainer
             )
         }
 

@@ -15,12 +15,11 @@ data class Snap(
     @DocumentId
     val id: String,
     @JvmField
-    @PropertyName("coordinates")
     val location: GeoPoint,
     var user: String,
     @JvmField
     @PropertyName("id_snap_image")
-    val snapImageUrl: String,
+    var snapImageUrl: String,
     @JvmField
     @PropertyName("id_location")
     val locationId: String,
@@ -41,7 +40,7 @@ data class Snap(
                 "lat" to location.latitude,
                 "lon" to location.longitude,
                 "photoURL" to snapImageUrl,
-                "urgency" to urgency,
+                "urgency" to urgency.name,
                 "description" to description
             )
         )

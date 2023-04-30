@@ -2,6 +2,7 @@ package com.snaptrash.snaptrash.view.commonwidgets
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
@@ -20,18 +21,12 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun NavigationItem(text: String,icon: @Composable () -> Unit,route: String,destination: NavDestination?,onClick: () -> Unit){
-    val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
-    val primaryColorTrasparent_L = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
     NavigationDrawerItem(
-        label = { Text(text = text, color = MaterialTheme.colorScheme.secondary, fontSize = 20.sp, fontWeight = FontWeight.SemiBold ) },
-        //shape= RectangleShape ,
+        label = { Text(text = text, fontSize = 18.sp, fontWeight = FontWeight.SemiBold ) },
         selected = destination?.route == route,
         icon = icon,
-        /*colors = NavigationDrawerItemDefaults.colors(unselectedContainerColor= primaryColorTrasparent,
-            selectedContainerColor = primaryColorTrasparent_L),*/
         onClick = onClick,
-        /*modifier = Modifier
-            .border(1.dp, MaterialTheme.colorScheme.secondary, RectangleShape)*/
-
+        modifier = Modifier.border(1.dp,MaterialTheme.colorScheme.secondaryContainer, RoundedCornerShape(40.dp)) ,
+        shape = RoundedCornerShape(40.dp)
     )
 }

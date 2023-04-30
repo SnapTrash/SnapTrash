@@ -1,4 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SnapTrash</string>
+    <string name="app_title">SnapTrash</string>
+    <string name="word_map">Mappa</string>
+    <string name="word_snap_list">Lista snap</string>
+    <string name="word_history">Storico snap</string>
+    <string name="word_logout">Logout</string>
+    <string name="word_settings">Impostazioni</string>
+    <string name="word_about">Chi siamo</string>
+    <string name="word_about_us">Chi siamo</string>
+    <string name="text_about_us">Benvenuti su SnapTrash! Siamo un gruppo di entusiasti ambientalisti con la voglia di agire per pulire e rendere più sano l’ambiente che ci circonda. La nostra missione è quella di affrontare il problema globale dell’abbandono dei rifiuti consentendo agli utenti come te di segnalare questi episodi e di intervenire per ripulire. \n\nCon la nostra app hai il potere di fare la differenza. Basta scattare una foto alla spazzatura abbandonata che puoi trovare in natura, in città, in montagna, lungo i laghi o nei parchi pubblici, noi arriviamo ovunque. Dopo aver scattato la foto basta caricarla sull’app che automaticamente traccerà le coordinate per identificare il punto preciso. La nostra piattaforma si connette quindi con le nostre organizzazioni partner responsabili della gestione dei rifiuti e della loro raccolta, garantendo che la spazzatura sia trattata in modo tempestivo e responsabile. \n\nNoi di SnapTrash crediamo che ogni rifiuto abbia la sua storia e che condividendo queste storie possa aumentare la consapevolezza circa l’impatto dei rifiuti e inspirare un cambiamento positivo. Utilizzando la nostra app, non solo aiuti a ripulire l\'ambiente, ma ti puoi sentire parte di una comunità globale di persone con  la tua stessa voglia di proteggere l’ambiente e fare qualcosa di attivo per lasciare un mondo migliore alle future generazioni. \n\nIl nostro impegno per la sostenibilità va oltre la semplice pulizia. Siamo anche attivamente impegnati in iniziative educative e di promozione di un trattamento responsabile dei rifiuti per ridurre l’impatto globale che i rifiuti hanno sul nostro pianeta. Collaboriamo con comunità locali, aziende, governi per attuare soluzioni innovative e promuovere una cultura della responsabilità ambientale.</string>
+    <string name="content_desc_email_icon">Email-icona</string>
+    <string name="word_username">Nome utente</string>
+    <string name="instruction_type_username">Inserisci il tuo nome utente</string>
+    <string name="content_desc_lock_icon">Lock-icona</string>
+    <string name="word_password">Password</string>
+    <string name="instruction_type_password">Inserisci la tua password</string>
+    <string name="word_login">Login</string>
+    <string name="text_by_snaptrash">by Dev4E</string>
+    <string name="text_no_account_yet_sign_up">Non hai ancora un account? Registrati</string>
+    <string name="word_here">qui</string>
+    <string name="word_person">Persona</string>
+    <string name="word_name">Nome</string>
+    <string name="instruction_type_name">Inserisci il tuo nome</string>
+    <string name="word_surname">Cognome</string>
+    <string name="instruction_type_surname">Inserisci il tuo cognome</string>
+    <string name="content_desc_calendar_icon">Calendario-Icona</string>
+    <string name="word_birthdate">Data di nascita</string>
+    <string name="instruction_type_birthdate">Inserisci la tua data di nascita</string>
+    <string name="word_phone">Telefono</string>
+    <string name="word_phone_number">Numero di telefono</string>
+    <string name="instruction_type_phone_number">Inserisci il tuo numero di telefono</string>
+    <string name="word_email">Email</string>
+    <string name="instruction_type_email">Inserisci la tua email</string>
+    <string name="word_sign_up">Registrati</string>
+    <string name="instruction_already_have_an_account">Hai già un account? Login</string>
+    <string name="instruction_take_a_snap">Fai uno snap!</string>
+    <string name="account">Account</string>
+    <string name="error_password_requirements">Requisiti password:\n- Almeno 8 caratteri\n- Contenere almeno un numero\n- Contenere almeno una lettere maiuscola e minuscola</string>
+    <string name="error_invalid_email_address">Indirizzo email invalido</string>
+    <string name="error_invalid_phone_number">Numero di telefono invalido</string>
+    <string name="error_at_least_one_field_is_missing">Almeno un campo è manacato! Controlla gli inserimenti!</string>
+    <string name="error_at_least_one_of_the_fields_is_invalid">Almeno un campo è invalido! Controlla gli inserimenti!</string>
+    <string name="error_signup_unknown_error">"Errore sconosciuto. Controlla la connessione internet. "</string>
 </resources>
