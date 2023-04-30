@@ -11,14 +11,14 @@ import com.snaptrash.snaptrash.R
 
 
 @Composable
-fun LogoutDialog(onDismiss: () -> Unit) {
+fun LogoutDialog(onDismiss: () -> Unit, onApproval: ()->Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(text = stringResource(id = R.string.word_logout)) },
         text = { Text(text = stringResource(R.string.question_are_you_sure_you_want_to_logout)) },
         confirmButton = {
             Button(
-                onClick = { Firebase.auth.signOut() },
+                onClick = { onApproval() },
                 content = { Text(text = stringResource(R.string.word_yes)) }
             )
         },

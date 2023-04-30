@@ -1,5 +1,8 @@
 package com.snaptrash.snaptrash.view.navigator
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -28,6 +31,7 @@ class MainAddressBook{
         const val LOGOUT = "logout"
         const val SINGLE_SNAP = "snap/snap={snap}"
         fun addMainGraph(navGraphBuilder: NavGraphBuilder,navController: NavController,mainNavViewModel: MainNavViewModel){
+
             navGraphBuilder.composable(MainAddressBook.HOME){
                 HomeScreen(navController,mainNavViewModel)
             }
@@ -59,7 +63,14 @@ class MainAddressBook{
                 OpenSnapScreen(snap!!,navController,mainNavViewModel, snap.id.isEmpty())
             }
             navGraphBuilder.composable(MainAddressBook.LOGOUT){
-                Firebase.auth.signOut()
+                var showLogoutDialog : MutableState<Boolean> = remember { mutableStateOf(true) }
+                if (showLogoutDialog.value) {
+                    LogoutDialog(onDismiss = {run{
+                        showLogoutDialog.value = false
+                        navController.popBackStack()
+                    }  },
+                        { Firebase.auth.signOut() })
+                }
             }
         }
     }
