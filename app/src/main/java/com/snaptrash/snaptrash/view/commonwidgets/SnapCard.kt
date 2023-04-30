@@ -11,6 +11,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Event
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Note
+import androidx.compose.material.icons.filled.Pages
+import androidx.compose.material.icons.filled.Title
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,6 +30,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.snaptrash.snaptrash.model.SnapImageDownloader
 import com.snaptrash.snaptrash.model.data.Snap
 import java.net.URLDecoder
+import java.time.ZoneId
 
 @Composable
 fun SnapCard(snap: Snap,onClick: () -> Unit){
@@ -74,7 +78,7 @@ fun SnapCard(snap: Snap,onClick: () -> Unit){
             Spacer(modifier = Modifier
                 .width(20.dp)
                 .height(10.dp))
-            Column(){
+            Column(modifier = Modifier.padding(5.dp)){
                 Spacer(modifier = Modifier.height(10.dp))
                 Row(){
                     Icon(
@@ -93,13 +97,18 @@ fun SnapCard(snap: Snap,onClick: () -> Unit){
                         tint = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.size(20.dp)
                     )
-                    Text(text = "${snap.date.day}-${(snap.date.month+1)}-${(snap.date.year+ 1900)} ", fontSize = 16.sp)
+                    Text(text = snap.getFormattedDate(), fontSize = 16.sp)
 
                 }
 
                 Spacer(modifier = Modifier.height(5.dp))
                 Row(){
-                    Spacer(modifier = Modifier.width(20.dp))
+                    Icon(
+                        Icons.Filled.Pages,
+                        contentDescription = "Event",
+                        tint = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.size(20.dp)
+                    )
                     Text(text = snap.description, fontSize = 18.sp )
                 }
             }
