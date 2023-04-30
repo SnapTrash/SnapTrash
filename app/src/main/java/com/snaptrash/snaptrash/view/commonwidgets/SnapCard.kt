@@ -9,6 +9,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Event
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -82,12 +83,24 @@ fun SnapCard(snap: Snap,onClick: () -> Unit){
                         tint = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.size(20.dp)
                     )
-                    Text(text ="${snap.location.latitude}, ${snap.location.longitude}", fontSize = 16.sp)
+                    Text(text ="${"%.${4}f".format(snap.location.latitude)}, ${"%.${4}f".format(snap.location.longitude)}", fontSize = 16.sp)
                 }
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(5.dp))
+                Row(){
+                    Icon(
+                        Icons.Filled.Event,
+                        contentDescription = "Event",
+                        tint = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Text(text = "${snap.date.day}-${(snap.date.month+1)}-${(snap.date.year+ 1900)} ", fontSize = 16.sp)
+
+                }
+
+                Spacer(modifier = Modifier.height(5.dp))
                 Row(){
                     Spacer(modifier = Modifier.width(20.dp))
-                    Text(text = snap.description, fontSize = 16.sp )
+                    Text(text = snap.description, fontSize = 18.sp )
                 }
             }
 

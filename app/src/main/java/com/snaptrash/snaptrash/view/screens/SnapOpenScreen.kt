@@ -125,12 +125,34 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: Mai
                 ErrorCard(error = stringResource(id = vm.error.value!!))
                 Spacer(modifier = Modifier.height(10.dp))
             }
+            Row(){
+                Column(){
+                    Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_location), fontSize = 18.sp)
+                    Spacer(modifier = Modifier.height(5.dp))
+                    Text(
+                        text = "${"%.${4}f".format(snap.location.latitude)}, ${"%.${4}f".format(snap.location.longitude)}",
+                        fontSize = 16.sp,
+                    )
+                }
+                Spacer(modifier = Modifier.width(40.dp))
+                Column(){
+                    Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_date), fontSize = 18.sp)
+                    Spacer(modifier = Modifier.height(5.dp))
+                    Text(text = "${snap.date.day}-${(snap.date.month+1)}-${(snap.date.year+ 1900)} ", fontSize = 16.sp)
+
+                }
+
+            }
+
+            /* previous code just Location
             Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_location), fontSize = 18.sp)
             Spacer(modifier = Modifier.height(5.dp))
             Text(
-                text = "${snap.location.latitude}, ${snap.location.longitude}",
+                text = "${"%.${4}f".format(snap.location.latitude)}, ${"%.${4}f".format(snap.location.longitude)}",
                 fontSize = 16.sp,
             )
+
+             */
             Spacer(modifier = Modifier.height(20.dp))
             Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_description), fontSize = 18.sp)
             Spacer(modifier = Modifier.height(5.dp))

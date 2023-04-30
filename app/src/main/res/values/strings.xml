@@ -65,6 +65,7 @@
     <string name="send_snap">Send snap</string>
     <string name="error_snap_image">Failed to upload snap image. Try again later.</string>
     <string name="word_location">Location</string>
+    <string name="word_date">Date</string>
     <string name="word_description">Description</string>
     <string name="word_home_screen">Home</string>
     <string name="word_rgency">Urgency</string>
