@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.snaptrash.snaptrash.model.data.Snap
+import com.snaptrash.snaptrash.model.data.SnapStatus
 import com.snaptrash.snaptrash.view.commonwidgets.SnapCard
 import com.snaptrash.snaptrash.view.navigator.MainAddressBook
 import com.squareup.moshi.Moshi
@@ -17,11 +18,11 @@ import java.util.Date
 
 
 @Composable
-fun ListSnapScreen(snapList: List<Snap>,navController: NavController){
+fun ListSnapScreen(snapList: List<Snap>,navController: NavController, isHistory: Boolean){
     val state = rememberLazyListState()
-    LazyColumn(modifier = Modifier.fillMaxSize()
-        ,state = state){
-        snapList.forEach {
+    LazyColumn(modifier = Modifier.fillMaxSize()){
+        snapList.filter {(isHistory && it.status != SnapStatus.PENDING) || (!isHistory && it.status == SnapStatus.PENDING) }.
+        forEach {
             item {
                 SnapCard(snap = it,onClick = {
                     val moshi = Moshi.Builder().add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).addLast(KotlinJsonAdapterFactory()).build()

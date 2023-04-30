@@ -25,6 +25,7 @@ import androidx.navigation.NavController
 import com.snaptrash.snaptrash.R
 import com.snaptrash.snaptrash.model.data.SnapStatus
 import com.snaptrash.snaptrash.view.commonwidgets.map.MapView
+import com.snaptrash.snaptrash.view.helper.MapHelper
 import com.snaptrash.snaptrash.view.navigator.MainAddressBook
 import com.snaptrash.snaptrash.viewmodel.MainNavViewModel
 import org.osmdroid.util.GeoPoint
@@ -56,24 +57,7 @@ fun HomeScreen(navController: NavController,mainNavViewModel: MainNavViewModel) 
             ) {
                 it.controller.setZoom(14.0)
                 it.controller.setCenter(mainNavViewModel.currentLocation.value)
-                mainNavViewModel.snapList.forEach { snap ->
-                    val marker: Marker = Marker(it)
-                    var kindIcon = com.snaptrash.snaptrash.R.drawable.pointer_green
-                    if (snap.status == SnapStatus.PENDING) {
-                        kindIcon = com.snaptrash.snaptrash.R.drawable.pointer_blue
-
-                    }
-                    marker.icon = ResourcesCompat.getDrawable(context.resources, kindIcon ,null)
-                    val bitmap = (marker.icon as BitmapDrawable).bitmap
-                    val ratio = (bitmap.width.toFloat() / bitmap.height.toFloat())
-                    val newWidth = (configuration.screenWidthDp.toFloat() * 0.1).toInt()
-                    val newHeight = (newWidth / ratio).toInt()
-                    marker.icon = BitmapDrawable(context.resources,
-                        bitmap.scale(newWidth,newHeight))
-                    marker.position = GeoPoint(snap.location.latitude, snap.location.longitude)
-                    marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                    it.overlays.add(marker)
-                }
+                MapHelper.addSnapsToMap(context,configuration,it,mainNavViewModel.snapList)
                 it.setOnTouchListener { v, e ->
                     run {
                         if(navController.currentBackStackEntry?.destination?.route != MainAddressBook.MAP)

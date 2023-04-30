@@ -29,6 +29,7 @@ data class Snap(
     @JvmField
     @PropertyName("confirmed_urgency")
     var confirmedUrgency: Urgency,
+    @JvmField
     var status: SnapStatus
 ){
     constructor(): this("", GeoPoint(0.0,0.0),"","","", Date(),"",Urgency.NOT_URGENT,Urgency.NOT_URGENT,SnapStatus.PENDING)

@@ -32,14 +32,13 @@ class MainAddressBook{
                 HomeScreen(navController,mainNavViewModel)
             }
             navGraphBuilder.composable(MainAddressBook.LIST){
-                ListSnapScreen(mainNavViewModel.snapList,navController)
+                ListSnapScreen(mainNavViewModel.snapList,navController,false)
             }
             navGraphBuilder.composable(MainAddressBook.HISTORY){
-
+                ListSnapScreen(mainNavViewModel.snapList,navController,true)
             }
             navGraphBuilder.composable(MainAddressBook.ACCOUNT){
                 AccountScreen()
-
             }
             navGraphBuilder.composable(MainAddressBook.SETTINGS){
 

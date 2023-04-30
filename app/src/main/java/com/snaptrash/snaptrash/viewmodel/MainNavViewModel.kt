@@ -10,6 +10,7 @@ import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.model.data.Snap
+import com.snaptrash.snaptrash.model.data.SnapStatus
 import org.osmdroid.util.GeoPoint
 
 class MainNavViewModel : ViewModel(){
