@@ -16,9 +16,6 @@ import org.osmdroid.util.GeoPoint
 class MainNavViewModel : ViewModel(){
     var currentLocation = mutableStateOf<GeoPoint>(GeoPoint(65.0,25.4))
     var snapList = mutableStateListOf<Snap>()
-    val currentSnaps: List<Snap> get(){
-        return snapList.filter{it.status == SnapStatus.PENDING}
-    }
     var locationEnabled = mutableStateOf(false)
     var cameraEnabled = mutableStateOf(false)
     var currentFloatingActionButton: MutableState<@Composable () -> Unit> = mutableStateOf({})

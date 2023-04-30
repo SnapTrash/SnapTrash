@@ -60,7 +60,7 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
         NavMenuPoint(MainAddressBook.HOME,Icons.Outlined.Home, stringResource(R.string.word_home_screen)),
         NavMenuPoint(MainAddressBook.MAP,Icons.Outlined.Map, stringResource(R.string.word_map)),
         NavMenuPoint(MainAddressBook.LIST,Icons.Outlined.List, stringResource(R.string.word_snap_list)),
-        //NavMenuPoint(MainAddressBook.HISTORY,Icons.Outlined.History, stringResource(R.string.word_history)),
+        NavMenuPoint(MainAddressBook.HISTORY,Icons.Outlined.History, stringResource(R.string.word_history)),
         NavMenuPoint(MainAddressBook.ACCOUNT,Icons.Outlined.Person, stringResource(R.string.account)),
         NavMenuPoint(MainAddressBook.ABOUT,Icons.Outlined.Help, stringResource(id = R.string.word_about)),
         NavMenuPoint(MainAddressBook.LOGOUT,Icons.Outlined.Logout, stringResource(id = R.string.word_logout))
