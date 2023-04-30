@@ -138,7 +138,7 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: Mai
                 Column(){
                     Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_date), fontSize = 18.sp)
                     Spacer(modifier = Modifier.height(5.dp))
-                    Text(text = "${snap.date.day}-${(snap.date.month+1)}-${(snap.date.year+ 1900)} ", fontSize = 16.sp)
+                    Text(text = snap.getFormattedDate(), fontSize = 16.sp)
 
                 }
 

@@ -9,6 +9,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.functions.HttpsCallableResult
 import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
+import java.time.ZoneId
 import java.util.Date
 
 data class Snap(
@@ -46,5 +47,9 @@ data class Snap(
     }
     fun getAssociationWritableData(): Task<QuerySnapshot>{
         return Firebase.firestore.collection("/snaps/${id}/associationWritable").limit(1).get()
+    }
+    fun getFormattedDate(): String{
+        val localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
+        return "${localDate.dayOfMonth}-${"%02d".format((localDate.month.value + 1))}-${(localDate.year)} ${localDate.hour}:${"%02d".format(localDate.minute)} "
     }
 }
