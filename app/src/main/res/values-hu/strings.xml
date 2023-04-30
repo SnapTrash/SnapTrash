@@ -67,4 +67,9 @@
     <string name="word_location">Hely</string>
     <string name="word_description">Leírás</string>
     <string name="word_home_screen">Főoldal</string>
+    <string name="not_urgent">Nem sürgős</string>
+    <string name = "word_urgent">Sürgős</string>
+    <string name="word_rgency">Sürgősség</string>
+    <string name="word_serious">Odafigyelést igényel</string>
+    <string name="word_date">Dátum</string>
 </resources>
