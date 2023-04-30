@@ -1,6 +1,7 @@
 package com.snaptrash.snaptrash.view.HomeScreen
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -13,12 +14,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.scale
 import androidx.navigation.NavController
 import com.snaptrash.snaptrash.R
+import com.snaptrash.snaptrash.model.data.SnapStatus
 import com.snaptrash.snaptrash.view.commonwidgets.map.MapView
 import com.snaptrash.snaptrash.view.helper.MapHelper
 import com.snaptrash.snaptrash.view.navigator.MainAddressBook
@@ -30,6 +35,7 @@ import org.osmdroid.views.overlay.Marker
 @SuppressLint("ClickableViewAccessibility")
 @Composable
 fun HomeScreen(navController: NavController,mainNavViewModel: MainNavViewModel) {
+    val context = LocalContext.current
     val configuration = LocalConfiguration.current
     Column(
         modifier = Modifier.padding(20.dp),
@@ -51,7 +57,7 @@ fun HomeScreen(navController: NavController,mainNavViewModel: MainNavViewModel) 
             ) {
                 it.controller.setZoom(14.0)
                 it.controller.setCenter(mainNavViewModel.currentLocation.value)
-                MapHelper.addSnapsToMap(it,mainNavViewModel.currentSnaps)
+                MapHelper.addSnapsToMap(context,configuration,it,mainNavViewModel.snapList)
                 it.setOnTouchListener { v, e ->
                     run {
                         if(navController.currentBackStackEntry?.destination?.route != MainAddressBook.MAP)
