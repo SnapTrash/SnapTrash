@@ -7,6 +7,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.model.data.Snap
 import com.snaptrash.snaptrash.view.HomeScreen.HomeScreen
+import com.snaptrash.snaptrash.view.commonwidgets.LogoutDialog
 import com.snaptrash.snaptrash.view.screens.*
 import com.snaptrash.snaptrash.viewmodel.MainNavViewModel
 import com.squareup.moshi.Moshi
