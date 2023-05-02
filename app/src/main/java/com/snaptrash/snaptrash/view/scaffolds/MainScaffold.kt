@@ -3,10 +3,8 @@ package com.snaptrash.snaptrash.view.scaffolds
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
-import android.os.Bundle
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -28,13 +26,14 @@ import com.snaptrash.snaptrash.view.navigator.MainAddressBook
 import com.snaptrash.snaptrash.view.commonwidgets.navigation.DrawerContent
 import com.snaptrash.snaptrash.view.helper.observeAsState
 import com.snaptrash.snaptrash.viewmodel.MainNavViewModel
+import com.snaptrash.snaptrash.viewmodel.RootNavViewModel
 import kotlinx.coroutines.launch
 import org.osmdroid.util.GeoPoint
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScaffold(
-    navController: NavHostController, vm: MainNavViewModel = viewModel()
+    navController: NavHostController,rootVm: RootNavViewModel, vm: MainNavViewModel = viewModel()
 ) {
     val coroutineScope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -124,7 +123,8 @@ fun MainScaffold(
                 DrawerContent(
                     navController = navController,
                     drawerState = drawerState,
-                    paddingValues = it
+                    paddingValues = it,
+                    rootVm.displayName.value
                 )
             },
             drawerState = drawerState,
