@@ -35,6 +35,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navOptions
 import com.snaptrash.snaptrash.R
+import com.snaptrash.snaptrash.view.commonwidgets.LanguageSelector
 import com.snaptrash.snaptrash.view.commonwidgets.LogoutDialog
 import com.snaptrash.snaptrash.view.navigator.AuthAddressBook
 import com.snaptrash.snaptrash.view.navigator.MainAddressBook
@@ -52,8 +53,6 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
     val currentBackStackEntryAsState = navController.currentBackStackEntryAsState()
     val networkState = connectivityState()
     val destination = currentBackStackEntryAsState.value?.destination
-    val langMenuExpanded = remember{ mutableStateOf(false)}
-
     val primaryColorTrasparent = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
     val primaryColorTrasparent_L = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
 
@@ -68,13 +67,7 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
     )
     if(networkState.value == ConnectionState.Available)
         navigationDestinations.add(1,NavMenuPoint(MainAddressBook.MAP,Icons.Outlined.Map, stringResource(R.string.word_map)))
-    val selectableLanguages = mapOf(
-        "en" to "English",
-        "de" to "Deutsch",
-        "fi" to "suomi",
-        "fr" to "Français",
-        "hu" to "magyar",
-        "it" to "Italiano")
+
     Column{
         navigationDestinations.forEach{
                 NavigationItem(
@@ -95,19 +88,6 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
     Row(modifier = Modifier
         .fillMaxWidth()
         .padding(start = 10.dp)){
-        LocalContext.current.getActivity()?.let { getCurrentLocaleIcon(it) }?.let {
-            FlagIconWithArrow(it,langMenuExpanded.value,onClick = {
-                langMenuExpanded.value = !langMenuExpanded.value
-            })
-        }
-        DropdownMenu(expanded = langMenuExpanded.value, onDismissRequest = {langMenuExpanded.value = false }) {
-            selectableLanguages.forEach {
-                DropdownMenuItem(text = { Text(it.value) }, onClick = {
-                    AppCompatDelegate.setApplicationLocales(
-                        LocaleListCompat.forLanguageTags(it.key)
-                    )
-                })
-            }
-        }
+        LanguageSelector()
     }
 }

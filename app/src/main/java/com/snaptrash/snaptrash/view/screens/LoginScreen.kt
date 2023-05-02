@@ -31,6 +31,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.R
 import com.snaptrash.snaptrash.view.commonwidgets.ErrorCard
+import com.snaptrash.snaptrash.view.commonwidgets.LanguageSelector
 import com.snaptrash.snaptrash.view.commonwidgets.LoginTextBoxColors
 import com.snaptrash.snaptrash.view.navigator.AuthAddressBook
 import com.snaptrash.snaptrash.view.commonwidgets.TopBarLogin
@@ -128,6 +129,7 @@ fun LoginBody(navController: NavController, vm: LoginViewModel = viewModel()){
             }
             Spacer(modifier = Modifier.height(25.dp))
             SignUpClickableText(navController)
+            LanguageSelector()
         }
         Text(
             text = stringResource(R.string.text_by_dev4ev),
