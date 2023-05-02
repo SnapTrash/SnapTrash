@@ -9,6 +9,10 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.functions.HttpsCallableResult
 import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.net.URLEncoder
 import java.time.ZoneId
 import java.util.Date
 
@@ -47,6 +51,14 @@ data class Snap(
     }
     fun getAssociationWritableData(): Task<QuerySnapshot>{
         return Firebase.firestore.collection("/snaps/${id}/associationWritable").limit(1).get()
+    }
+    fun encodeForNavigation(): String{
+        val moshi = Moshi.Builder().add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).addLast(
+            KotlinJsonAdapterFactory()
+        ).build()
+        val adapter = moshi.adapter(Snap::class.java)
+        val urlEncodedSnap = this.copy(snapImageUrl = URLEncoder.encode(this.snapImageUrl,"UTF-8"))
+        return adapter.toJson(urlEncodedSnap)
     }
     fun getFormattedDate(): String{
         val localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()

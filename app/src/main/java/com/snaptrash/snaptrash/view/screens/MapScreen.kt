@@ -40,6 +40,6 @@ fun MapScreen(navController: NavController,mainNavViewModel: MainNavViewModel){
             it.controller.setCenter(mainNavViewModel.currentLocation.value)
             centerSet = true
         }
-        MapHelper.addSnapsToMap(context,configuration,it,mainNavViewModel.snapList)
+        MapHelper.addSnapsToMap(context,navController,configuration,it,mainNavViewModel.snapList)
     }
 }

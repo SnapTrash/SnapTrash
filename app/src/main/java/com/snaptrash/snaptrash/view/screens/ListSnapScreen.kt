@@ -25,11 +25,7 @@ fun ListSnapScreen(snapList: List<Snap>,navController: NavController, isHistory:
         forEach {
             item {
                 SnapCard(snap = it,onClick = {
-                    val moshi = Moshi.Builder().add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).addLast(KotlinJsonAdapterFactory()).build()
-                    val adapter = moshi.adapter(Snap::class.java)
-                    val urlEncodedSnap = it.copy(snapImageUrl = URLEncoder.encode(it.snapImageUrl,"UTF-8"))
-                    val snapJson = adapter.toJson(urlEncodedSnap)
-                    navController.navigate(MainAddressBook.SINGLE_SNAP.replace("{snap}",snapJson))
+                    navController.navigate(MainAddressBook.SINGLE_SNAP.replace("{snap}",it.encodeForNavigation()))
                 })
             }
         }
