@@ -133,6 +133,7 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: Mai
                     Spacer(modifier = Modifier.height(5.dp))
                     Text(
                         text = "${"%.${4}f".format(snap.location.latitude)}, ${"%.${4}f".format(snap.location.longitude)}",
+                        color = MaterialTheme.colorScheme.inverseSurface,
                         fontSize = 16.sp,
                     )
                 }
@@ -140,7 +141,9 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: Mai
                 Column(){
                     Text(text = stringResource(com.snaptrash.snaptrash.R.string.word_date), fontSize = 18.sp)
                     Spacer(modifier = Modifier.height(5.dp))
-                    Text(text = snap.getFormattedDate(), fontSize = 16.sp)
+                    Text(text = snap.getFormattedDate(),
+                        color = MaterialTheme.colorScheme.inverseSurface,
+                        fontSize = 16.sp)
 
                 }
 
