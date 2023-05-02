@@ -26,9 +26,10 @@ import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.R
+import com.snaptrash.snaptrash.viewmodel.MainNavViewModel
 
 @Composable
-fun DrawerHeader(displayName: String){
+fun DrawerHeader(displayName: String,mainNavViewModel: MainNavViewModel){
     val configuration = LocalConfiguration.current
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -97,7 +98,7 @@ fun DrawerHeader(displayName: String){
                             fontWeight = FontWeight.Bold, fontSize = 24.sp
                         )
                         Spacer(modifier = Modifier.height(10.dp))
-                        Text(text = "Points: 2594",
+                        Text(text = stringResource(R.string.points) + ": " + mainNavViewModel.points,
                             color = MaterialTheme.colorScheme.onPrimaryContainer,
                             fontSize = 20.sp,fontWeight = FontWeight.SemiBold)
                     }

@@ -98,4 +98,5 @@
     <string name="wrong_old_password">Ancien mot de passe incorrect!</string>
     <string name="password_changed_successfully">Mot de passe changé avec succès</string>
     <string name="error_password_not_same">Les champs des mots de passe doivent être égal!</string>
+    <string name="points">Points</string>
 </resources>

@@ -78,4 +78,26 @@
     <string name="password_settings">Passworteinstellungen</string>
     <string name="notification">Benachrichtigungen</string>
     <string name="payment">Zahlung</string>
+    <string name="button_request_missing_permissions">Benötigte Erlaubnisse anfragen</string>
+    <string name="error_home_no_network">Es besteht keine Internetverbindung. Manche Funktionen (z.B. Kartenansicht und Snap-Upload) werden nicht unterstützt.</string>
+    <string name="instruction_turn_on_location">Standort aktivieren</string>
+    <string name="change_full_name">Vollen Namen ändern</string>
+    <string name="word_current_name">Aktueller Name</string>
+    <string name="instraction_your_new_name">Geben Sie Ihren Vornamen ein.</string>
+    <string name="word_new_name">Neuer Vorname</string>
+    <string name="word_new_surname">Neuer Nachname</string>
+    <string name="word_current_surname">Aktueller Nachname</string>
+    <string name="word_current_fullname">Aktueller ganzer Name</string>
+    <string name="confirm">Bestätigen</string>
+    <string name="confirm_password">Neues Passwort bestätigen</string>
+    <string name="instruction_type_new_password">Geben Sie Ihre neues Passwort ein.</string>
+    <string name="word_new_password">Neues Passwort</string>
+    <string name="instruction_current_password">Geben Sie Ihr aktuelles Passwort ein.</string>
+    <string name="word_current_password">Aktuelles Passwort</string>
+    <string name="name_changing_error">Namensänderung nicht möglich.</string>
+    <string name="name_changing_success">Name erfolgreich geändert.</string>
+    <string name="wrong_old_password">Falsches Passwort</string>
+    <string name="password_changed_successfully">Passwort erfolgreich geändert.</string>
+    <string name="error_password_not_same">Die Passwörter müssen übereinstimmen.</string>
+    <string name="points">Punkte</string>
 </resources>

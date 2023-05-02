@@ -21,9 +21,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.snaptrash.snaptrash.viewmodel.MainNavViewModel
 
 @Composable
-fun DrawerContent(navController: NavHostController, drawerState: DrawerState,paddingValues: PaddingValues,displayName: String){
+fun DrawerContent(navController: NavHostController, drawerState: DrawerState,paddingValues: PaddingValues,displayName: String,mainNavViewModel: MainNavViewModel){
     val scrollState = rememberScrollState()
     val configuration = LocalConfiguration.current
     Column(
@@ -34,7 +35,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState,pad
         //.padding(top = 1.dp, bottom = 5.dp) //changes
         .background(MaterialTheme.colorScheme.background)
     ){
-        DrawerHeader(displayName)
+        DrawerHeader(displayName,mainNavViewModel)
         Column(
             modifier = Modifier
                 .padding(5.dp)
