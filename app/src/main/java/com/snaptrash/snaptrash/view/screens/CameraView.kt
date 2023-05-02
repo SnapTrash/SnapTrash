@@ -16,6 +16,13 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CreditCard
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.FlipCameraAndroid
+import androidx.compose.material.icons.filled.FlipCameraIos
+import androidx.compose.material.icons.outlined.Done
+import androidx.compose.material.icons.outlined.FlipCameraIos
+import androidx.compose.material.icons.outlined.RestartAlt
 import androidx.compose.material.icons.sharp.Lens
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -93,7 +100,9 @@ fun CameraScreen(navController: NavController,location: GeoPoint,vm: CameraViewM
 fun ShowImageTaken(vm: CameraViewModel = viewModel(),location: GeoPoint,navController: NavController) {
     val configuration = LocalConfiguration.current
     Column(
-        modifier = Modifier.padding(40.dp)
+        modifier = Modifier.padding(40.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+
 
     ) {
         Box(
@@ -126,6 +135,13 @@ fun ShowImageTaken(vm: CameraViewModel = viewModel(),location: GeoPoint,navContr
                     .height(70.dp)
 
             ) { //button composable contains an other composable
+
+                Icon(
+                    Icons.Outlined.RestartAlt,
+                    contentDescription = "Retake Icon",
+                    modifier = Modifier.fillMaxSize(),
+                )
+                /*
                 Text(
                     text = stringResource(R.string.word_retake),
                     fontSize = 20.sp,
@@ -133,6 +149,8 @@ fun ShowImageTaken(vm: CameraViewModel = viewModel(),location: GeoPoint,navContr
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
+
+                 */
             }
             Spacer(modifier = Modifier.width(10.dp))
             Button(
@@ -159,6 +177,13 @@ fun ShowImageTaken(vm: CameraViewModel = viewModel(),location: GeoPoint,navContr
                     .height(70.dp)
 
             ) { //button composable contains an other composable
+
+                Icon(
+                    Icons.Outlined.Done,
+                    contentDescription = "Done Icon",
+                    modifier = Modifier.fillMaxSize(),
+                )
+                /*
                 Text(
                     //text = "Submit",
                     text = stringResource(R.string.word_done),
@@ -167,6 +192,8 @@ fun ShowImageTaken(vm: CameraViewModel = viewModel(),location: GeoPoint,navContr
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
+
+                 */
 
 
             }
