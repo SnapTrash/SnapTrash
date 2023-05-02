@@ -74,7 +74,7 @@
     <string name="text_by_dev4ev">Par Dev4Env</string>
     <string name="word_date">Date</string>
     <string name="personal_details">Détails personnels</string>
-    <string name="password_settings">Paramètres mot de passe</string>
-    <string name="notification">Notification</string>
+    <string name="password_settings">Changer le mot de passe</string>
+    <string name="notification">Notifications</string>
     <string name="payment">Paiement</string>
 </resources>
