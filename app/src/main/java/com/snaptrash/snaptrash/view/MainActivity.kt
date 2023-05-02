@@ -115,4 +115,9 @@ class MainActivity : AppCompatActivity() {
            missingPermissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION)
        }
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        recreate()
+    }
 }
