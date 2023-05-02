@@ -95,4 +95,6 @@
     <string name="word_current_password">Mot de passe actuel</string>
     <string name="name_changing_error">Incapable de changer le prénom</string>
     <string name="name_changing_success">Prénom changé avec succès</string>
+    <string name="wrong_old_password">Ancien mot de passe incorrect!</string>
+    <string name="password_changed_successfully">Mot de passe changé avec succès</string>
 </resources>
