@@ -75,7 +75,7 @@ fun HomeScreen(navController: NavController,mainNavViewModel: MainNavViewModel) 
             ) {
                 it.controller.setZoom(14.0)
                 it.controller.setCenter(mainNavViewModel.currentLocation.value)
-                MapHelper.addSnapsToMap(context, configuration, it, mainNavViewModel.snapList)
+                MapHelper.addSnapsToMap(context, navController, configuration, it, mainNavViewModel.snapList)
                 it.setOnTouchListener { v, e ->
                     run {
                         if (connectivity.value == ConnectionState.Available) {
