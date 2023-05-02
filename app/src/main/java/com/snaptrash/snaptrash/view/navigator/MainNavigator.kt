@@ -11,6 +11,8 @@ import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.model.data.Snap
 import com.snaptrash.snaptrash.view.HomeScreen.HomeScreen
 import com.snaptrash.snaptrash.view.commonwidgets.LogoutDialog
+import com.snaptrash.snaptrash.view.helper.ConnectionState
+import com.snaptrash.snaptrash.view.helper.connectivityState
 import com.snaptrash.snaptrash.view.screens.*
 import com.snaptrash.snaptrash.viewmodel.MainNavViewModel
 import com.squareup.moshi.Moshi
@@ -51,10 +53,18 @@ class MainAddressBook{
                 AboutUsScreen()
             }
             navGraphBuilder.composable(MainAddressBook.CAMERA){
+                val network = connectivityState()
+                if(network.value == ConnectionState.Available)
                 CameraScreen(navController,mainNavViewModel.currentLocation.value)
+                else
+                    HomeScreen(navController = navController, mainNavViewModel = mainNavViewModel)
             }
             navGraphBuilder.composable(MainAddressBook.MAP){
+                val network = connectivityState()
+                if(network.value == ConnectionState.Available)
                 MapScreen(navController = navController,mainNavViewModel)
+                else
+                    HomeScreen(navController = navController, mainNavViewModel = mainNavViewModel)
             }
             navGraphBuilder.composable(MainAddressBook.SINGLE_SNAP){
                 val moshi = Moshi.Builder().add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).addLast(KotlinJsonAdapterFactory()).build()

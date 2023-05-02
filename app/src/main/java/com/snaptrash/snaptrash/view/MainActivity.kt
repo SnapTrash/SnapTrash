@@ -1,7 +1,12 @@
 package com.snaptrash.snaptrash.view
 
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -32,18 +37,17 @@ class MainActivity : AppCompatActivity() {
 
     private val missingPermissions = mutableListOf<String>()
     fun requestMissingPermissions(){
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if(missingPermissions.size > 0) ActivityCompat.requestPermissions(this,missingPermissions.toTypedArray(),2)
-    }
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ){
-            isGranted ->
-        if (isGranted) {
-            Log.i("kilo", "Permission granted")
-        } else {
-            Log.i("kilo", "Permission denied")
-
-            //Exit from application
+        if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            val providerEnabled = if(Build.VERSION.SDK_INT > 30)
+                locationManager.isProviderEnabled(LocationManager.FUSED_PROVIDER)
+            else
+                locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+            if(!providerEnabled){
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
         }
     }
 
