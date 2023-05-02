@@ -3,7 +3,7 @@
 An android app built using [Kotlin](https://developer.android.com/kotlin) that allows users to report trash using a map and camera access.
 It has been built following [MVVM Architecture](https://developer.android.com/topic/libraries/architecture/viewmodel) in the presentation layer as well as Jetpack components(including Jetpack Compose).
 
-## Demo
+
 <img src="https://user-images.githubusercontent.com/66414968/235723111-613acc2b-6945-4dd2-a8e6-f44877256aad.jpg" width=150 height=300> | <img src="https://user-images.githubusercontent.com/66414968/235723168-a5a54eb8-1b37-40ec-bb8f-50c3cb0b3a52.jpg" width=150 height=300>
 <img src="https://user-images.githubusercontent.com/66414968/235723224-ac3900eb-1788-4a9c-86c3-a49c9c154b36.jpg" width=150 height=300>
 <img src="https://user-images.githubusercontent.com/66414968/235723249-c69c2ccf-ad79-44ff-8cf6-d5763bcea1a3.jpg" width=150 height=300>
