@@ -21,9 +21,9 @@
     <string name="word_here">täällä</string>
     <string name="word_person">Henkilö</string>
     <string name="word_name">nimi</string>
-    <string name="instruction_type_name">Kirjoita nimisi</string>
+    <string name="instruction_type_name">Kirjoita nimesi</string>
     <string name="word_surname">sukunimi</string>
-    <string name="instruction_type_surname">Kirjoita sukunimisi</string>
+    <string name="instruction_type_surname">Kirjoita sukunimesi</string>
     <string name="content_desc_calendar_icon">kalenterikuvake</string>
     <string name="word_birthdate">Syntymäaika</string>
     <string name="instruction_type_birthdate">Kirjoita syntymäaikasi</string>
@@ -36,7 +36,7 @@
     <string name="instruction_already_have_an_account">Onko sinulla jo tili? Kirjaudu sisään.</string>
     <string name="instruction_take_a_snap">Ota kuva</string>
     <string name="account">Tili</string>
-    <string name="word_yes">Joo</string>
+    <string name="word_yes">Kyllä</string>
     <string name="error_password_requirements">Salasanavaatimukset: - Vähintään 8 merkkiä - Sisältää numeron - Sisältää ison ja pienen kirjaimen</string>
     <string name="error_invalid_email_address">Virheellinen sähköpostiosoite.</string>
     <string name="error_invalid_phone_number">Virheellinen puhelinnumero.</string>
