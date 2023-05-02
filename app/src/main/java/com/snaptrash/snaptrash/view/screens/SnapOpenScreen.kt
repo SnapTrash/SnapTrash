@@ -73,7 +73,9 @@ fun OpenSnapScreen(snap: Snap,navController: NavController,mainNavViewModel: Mai
                 }
             }
         ) {
-            if(vm.inProgress.value) CircularProgressIndicator() else {
+            if(vm.inProgress.value) CircularProgressIndicator(
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            ) else {
                 Icon(
                     if (!isNew) Icons.Filled.Delete else Icons.Filled.Add,
                     contentDescription = null,
