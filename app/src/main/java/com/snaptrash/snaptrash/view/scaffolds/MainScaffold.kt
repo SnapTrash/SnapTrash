@@ -125,7 +125,8 @@ fun MainScaffold(
                     navController = navController,
                     drawerState = drawerState,
                     paddingValues = it,
-                    rootVm.displayName.value
+                    rootVm.displayName.value,
+                    vm
                 )
             },
             drawerState = drawerState,

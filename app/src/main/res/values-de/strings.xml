@@ -78,4 +78,5 @@
     <string name="password_settings">Passworteinstellungen</string>
     <string name="notification">Benachrichtigungen</string>
     <string name="payment">Zahlung</string>
+    <string name="points">Punkte</string>
 </resources>

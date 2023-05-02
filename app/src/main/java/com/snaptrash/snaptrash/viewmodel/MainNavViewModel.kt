@@ -16,6 +16,7 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.model.data.Snap
+import com.snaptrash.snaptrash.model.data.SnapStatus
 import org.osmdroid.util.GeoPoint
 
 class MainNavViewModel : ViewModel(){
@@ -25,6 +26,12 @@ class MainNavViewModel : ViewModel(){
     var locationEnabled = mutableStateOf(false)
     var cameraEnabled = mutableStateOf(false)
     var currentFloatingActionButton: MutableState<@Composable () -> Unit> = mutableStateOf({})
+    // Temporary calculation locally
+    val points: Int get() {
+        return snapList.filter { it.status != SnapStatus.PENDING }.fold(0) { i, s ->
+            i + (s.status.value + 1)*10
+        }
+    }
     init{
         snapListListener = Firebase.firestore.collection("/snaps").where(
             Filter.equalTo("user",Firebase.auth.currentUser?.uid)).addSnapshotListener { snaps, ex ->
