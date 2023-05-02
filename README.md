@@ -7,7 +7,7 @@ It has been built following [MVVM Architecture](https://developer.android.com/to
 <img src="https://user-images.githubusercontent.com/66414968/235728115-9d697b8c-74cf-4505-96de-02cdd856cac6.jpg" width=150 height=300>
 <img src="https://user-images.githubusercontent.com/66414968/235728130-fea5cb6e-a863-467a-8d7e-d231140c36d3.jpg" width=150 height=300>
 
-
+You can also find a video demo of the application [here](https://youtu.be/AY8k2srVtKY)
 ##  App specifications
 
 * Android device must have version 5 or later installed to run the app.
