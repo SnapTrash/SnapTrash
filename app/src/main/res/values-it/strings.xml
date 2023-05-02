@@ -98,4 +98,5 @@
     <string name="name_changing_success">Nome cambiato con successo</string>
     <string name="wrong_old_password">Password corrente errata</string>
     <string name="password_changed_successfully">Password cambiata con successo</string>
+    <string name="error_password_not_same">I campi della password devono essere uguali!</string>
 </resources>
