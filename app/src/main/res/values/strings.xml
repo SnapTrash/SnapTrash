@@ -77,4 +77,7 @@
     <string name="notification">Notification</string>
     <string name="payment">Payment</string>
     <string name="text_by_snaptrash">By SnapTrash</string>
+    <string name="button_request_missing_permissions">Request missing permissions</string>
+    <string name="error_home_no_network">There is no internet connection available. Some features (like Map and Snap sending) will be restricted.</string>
+    <string name="instruction_turn_on_location">Turn on location</string>
 </resources>
