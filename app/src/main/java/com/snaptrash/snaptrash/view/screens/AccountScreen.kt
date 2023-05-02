@@ -59,7 +59,7 @@ fun AccountScreen(navController: NavController ){
 
                 .border(
                     width = 1.dp,
-                    color = MaterialTheme.colorScheme.primary,
+                    color = MaterialTheme.colorScheme.outline,
                     shape = CircleShape
                 )
 
@@ -79,10 +79,10 @@ fun AccountScreen(navController: NavController ){
 
         }
 
-        Text(text = Firebase.auth.currentUser?.displayName ?: "Noname",color = MaterialTheme.colorScheme.secondary,
+        Text(text = Firebase.auth.currentUser?.displayName ?: "Noname",color = MaterialTheme.colorScheme.inverseSurface,
             fontWeight = FontWeight.SemiBold, fontSize = 24.sp,
             modifier = Modifier.align(Alignment.CenterHorizontally))
-        Text(text = Firebase.auth.currentUser?.email ?: "invalid",color = MaterialTheme.colorScheme.secondary,
+        Text(text = Firebase.auth.currentUser?.email ?: "invalid",color = MaterialTheme.colorScheme.inverseSurface,
             fontWeight = FontWeight.Medium, fontSize = 20.sp,
             modifier = Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.height(60.dp))
@@ -166,7 +166,7 @@ fun AccountScreen(navController: NavController ){
         Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = stringResource(com.snaptrash.snaptrash.R.string.text_by_dev4ev),
-            color = MaterialTheme.colorScheme.onBackground,
+            color = MaterialTheme.colorScheme.onSurface,
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
             modifier = Modifier
@@ -194,7 +194,7 @@ fun ListOptions(navController : NavController) {
                 .clip(RoundedCornerShape(16.dp))
                 .align(Alignment.CenterHorizontally)
                 //.background(MaterialTheme.colorScheme.onPrimaryContainer, RoundedCornerShape(30.dp)),
-                .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
+                .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(16.dp))
                 .clickable(onClick = {
                     navController.navigate(MainAddressBook.PERSONAL_DETAILS)
                 }), //go to screen to set this information
@@ -219,7 +219,7 @@ fun ListOptions(navController : NavController) {
                 .clip(RoundedCornerShape(16.dp))
                 .align(Alignment.CenterHorizontally)
                 //.background(MaterialTheme.colorScheme.onPrimaryContainer, RoundedCornerShape(30.dp)),
-                .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
+                .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(16.dp))
                 .clickable(onClick = {
                     navController.navigate(MainAddressBook.CHANGE_PASSWORD)
                 }), //go to screen to set this information
@@ -245,7 +245,7 @@ fun ListOptions(navController : NavController) {
                 .clip(RoundedCornerShape(16.dp))
                 .align(Alignment.CenterHorizontally)
                 //.background(MaterialTheme.colorScheme.onPrimaryContainer, RoundedCornerShape(30.dp)),
-                .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
+                .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(16.dp))
                 .clickable(onClick = {}), //go to screen to set this information
             headlineContent = { Text(stringResource(com.snaptrash.snaptrash.R.string.notification)) },
             leadingContent = {
@@ -263,7 +263,7 @@ fun ListOptions(navController : NavController) {
                 .clip(RoundedCornerShape(16.dp))
                 .align(Alignment.CenterHorizontally)
                 //.background(MaterialTheme.colorScheme.onPrimaryContainer, RoundedCornerShape(30.dp)),
-                .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
+                .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(16.dp))
                 .clickable(onClick = {}), //go to screen to set this information
             headlineContent = { Text(stringResource(com.snaptrash.snaptrash.R.string.payment)) },
             leadingContent = {
