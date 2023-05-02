@@ -97,4 +97,5 @@
     <string name="name_changing_success">Nimen vaihto onnistui</string>
     <string name="wrong_old_password">Väärä vanha salasana!</string>
     <string name="password_changed_successfully">Salasana vaihdettu onnistuneesti.</string>
+    <string name="error_password_not_same">Salasanakenttien tulee olla samat!</string>
 </resources>
