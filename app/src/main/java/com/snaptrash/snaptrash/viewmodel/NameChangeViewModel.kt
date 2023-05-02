@@ -25,6 +25,7 @@ class NameChangeViewModel: ViewModel() {
                 "full_name" to fullName)
             ).addOnSuccessListener { inProgress.value = false
             success.value = R.string.name_changing_success
+            Firebase.auth.currentUser!!.reload()
             error.value = null}
             .addOnFailureListener {
                 error.value = R.string.name_changing_error

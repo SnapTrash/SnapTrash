@@ -95,4 +95,6 @@
     <string name="word_current_password">Current password</string>
     <string name="name_changing_error">Unable to change name</string>
     <string name="name_changing_success">Name changed successfully</string>
+    <string name="wrong_old_password">Wrong old password!</string>
+    <string name="password_changed_successfully">Password changed successfully</string>
 </resources>
