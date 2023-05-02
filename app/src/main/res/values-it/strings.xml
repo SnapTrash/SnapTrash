@@ -56,9 +56,7 @@
     <string name="error_invalid_user_or_password">Email o password errati!</string>
     <string name="error_weak_password">Password debole!</string>
     <string name="error_recaptcha">RECaptcha error, attendere qualche secondo e riprovare.</string>
-    <string name="error_recaptcha">Errore di recaptcha, attendere qualche secondo e riprovare.</string>
     <string name="error_unknown_error">Errore di login. Controlla la tua connessione di rete e riprova!</string>
-    <string name="R_network_error">Errore di rete. Controlla la tua connessione!</string>
     <string name="R_network_error">Errore di rete. Controlla la tua connessione!</string>
     <string name="error_too_many_requests">Il dispositivo si è bloccato a causa di troppe richieste. Riprova più tardi.</string>
     <string name="error_initial_login_failed">Impossibile effettuare il login dopo la registrazione. Attendere qualche secondo e riprovare.</string>
