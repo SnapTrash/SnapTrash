@@ -123,7 +123,6 @@ fun HomeScreen(navController: NavController,mainNavViewModel: MainNavViewModel) 
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(70.dp)
                 ) {
                     Text(
                         if(!locationEnabled.status.isGranted ||
@@ -131,8 +130,9 @@ fun HomeScreen(navController: NavController,mainNavViewModel: MainNavViewModel) 
                             stringResource(R.string.button_request_missing_permissions)
                         else stringResource(R.string.instruction_turn_on_location),
                         fontSize = 24.sp,
+                        lineHeight = 27.sp,
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth().padding(5.dp)
                     )
                 }
             }
