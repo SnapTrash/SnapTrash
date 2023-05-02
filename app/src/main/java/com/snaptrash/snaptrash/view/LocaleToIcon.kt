@@ -25,6 +25,7 @@ fun getCurrentLocaleIcon(activity: Activity): Int{
         "hu" -> R.drawable.hu
         "de" -> R.drawable.de
         "fr" -> R.drawable.fr
+        "fi" -> R.drawable.fi
         "it" -> R.drawable.it
         else -> R.drawable.gb
     }

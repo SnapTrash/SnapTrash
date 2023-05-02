@@ -36,6 +36,7 @@
     <string name="instruction_already_have_an_account">Van már fiókod? Jelentkezz be</string>
     <string name="instruction_take_a_snap">Snap készítése</string>
     <string name="account">Fiók</string>
+    <string name="text_by_dev4ev">a Dev4Env által</string>
     <string name="error_password_requirements">Jelszókövetelmények:\n- A jelszónak legalább 8 karakterből kell állnia\n- A jelszónak tartalmaznia kell számot\n- A jelszónak tartalmaznia kell kis- és nagybetűt</string>
     <string name="error_invalid_email_address">Érvénytelen e-mail cím</string>
     <string name="error_invalid_phone_number">Érvénytelen telefonszám</string>
@@ -72,4 +73,24 @@
     <string name="word_rgency">Sürgősség</string>
     <string name="word_serious">Odafigyelést igényel</string>
     <string name="word_date">Dátum</string>
+    <string name="personal_details">Személyes adatok</string>
+    <string name="password_settings">Jelszóbeállítások</string>
+    <string name="notification">Értesítések</string>
+    <string name="payment">Fizetési módok</string>
+    <string name="button_request_missing_permissions">Hiányzó jogosultságok kérése</string>
+    <string name="error_home_no_network">Nincs hálózati kapcsolat. Néhány funkció(például térkép, snapküldés) korlátozva lesz.</string>
+    <string name="instruction_turn_on_location">Helyzetmeghatározás bekapcsolása</string>
+    <string name="change_full_name">Teljes név megváltoztatása</string>
+    <string name="word_current_name">Jelenlegi név</string>
+    <string name="instraction_your_new_name">Írd be az új keresztneved</string>
+    <string name="word_new_name">Új keresztnév</string>
+    <string name="word_new_surname">Új vezetéknév</string>
+    <string name="word_current_surname">Jelenlegi vezetéknév</string>
+    <string name="word_current_fullname">Jelenlegi teljes név</string>
+    <string name="confirm">Jóváhagyás</string>
+    <string name="confirm_password">Jelszó ismétlése</string>
+    <string name="instruction_type_new_password">Írd be az új jelszavad</string>
+    <string name="word_new_password">Új jelszó</string>
+    <string name="instruction_current_password">Írd be a jelenlegi jelszavad</string>
+    <string name="word_current_password">Jelenlegi jelszó</string>
 </resources>

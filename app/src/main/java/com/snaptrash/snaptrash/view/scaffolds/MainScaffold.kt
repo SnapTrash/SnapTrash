@@ -33,8 +33,9 @@ import org.osmdroid.util.GeoPoint
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScaffold(
-    navController: NavHostController,rootVm: RootNavViewModel, vm: MainNavViewModel = viewModel()
+    navController: NavHostController,rootVm: RootNavViewModel
 ) {
+    val vm = MainNavViewModel()
     val coroutineScope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val currentBackStack = navController.currentBackStackEntryAsState()
