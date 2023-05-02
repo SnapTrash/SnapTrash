@@ -6,7 +6,6 @@
     <string name="word_history">Historia</string>
     <string name="word_logout">Kirjaudu ulos</string>
     <string name="word_settings">Asetukset</string>
-    <string name="word_settings">Asetukset</string>
     <string name="word_about">Tietoja</string>
     <string name="word_about_us">Tietoja meistä</string>
     <string name="text_about_us">Tervetuloa SnapTrash-sovellukseen! Olemme omistautunut joukko ympäristönsuojelun harrastajia, jotka ovat intohimoisia puhtaamman ja terveellisemmän ympäristön puolesta. Missiomme on ratkaista maailmanlaajuinen roskien ja jätteen ongelma antamalla sinun kaltaisillesi käyttäjille mahdollisuus ilmoittaa niistä ja ryhtyä toimiin niitä vastaan. Käyttämällä mobiilisovellustamme, sinulla on voima tehdä muutoksia. Sinun tarvitsee vain ottaa kuva löytämästäsi roskasta - olipa se sitten luonnossa, kaupungeissa, vuorilla, järvillä tai julkisilla paikoilla - ja ladata se sovellukseen yhdessä koordinaattien kanssa. Sovelluksemme yhdistää sen jälkeen yhteistyökumppanimme vastuussa jätteiden hallinnasta ja siivouksesta, varmistaen, että roskat käsitellään nopeasti ja vastuullisesti. SnapTrash uskoo, että jokaisella roskalla on tarina, ja jakamalla näitä tarinoita voimme lisätä tietoisuutta roskien vaikutuksesta ja inspiroida positiivista muutosta. Käyttämällä sovellustamme, et ainoastaan auta ympäristön puhdistamisessa, vaan myös edistät kansainvälistä yhteisöä samanmielisten ihmisten kanssa, jotka ovat sitoutuneet suojelemaan planeettaamme tuleville sukupolville. Sitoutumisemme kestävyyteen ulottuu yli pelkkien puhdistustoimien. Olemme myös aktiivisesti mukana koulutus- ja edunvalvontatoimissa, joilla pyritään edistämään vastuullista jätteiden hallintaa ja vähentämään roskien vaikutusta ympäristöömme. Teemme yhteistyötä paikallisten yhteisöjen, yritysten ja hallitusten kanssa toteuttaaksemme innovatiivisia ratkaisuja ja edistääksemme ympäristövastuullisuuden kulttuuria. Liity kanssamme tehtävässämme luoda puhtaampi maailma kaikille. Yhdessä voimme tehdä todellisen eron toimimalla roskia vastaan ja säilyttämällä planeettamme kauneus. Ota ensimmäinen Snap tänään ja liity ratkaisun joukkoon!</string>
@@ -16,9 +15,7 @@
     <string name="content_desc_lock_icon">lukon kuva</string>
     <string name="word_password">salasana</string>
     <string name="instruction_type_password">Kirjoita salasanasi</string>
-    <string name="instruction_type_password">Kirjoita salasanasi</string>
     <string name="word_login">kirjautuminen</string>
-    <string name="text_by_snaptrash">SnapTrashin tekemä</string>
     <string name="text_by_snaptrash">SnapTrashin tekemä</string>
     <string name="text_no_account_yet_sign_up">Ei tiliä vielä? Rekisteröidy</string>
     <string name="word_here">täällä</string>
@@ -52,11 +49,8 @@
     <string name="question_are_you_sure_to_delete">Haluatko varmasti poistaa tämän?</string>
     <string name="word_delete">Poista</string>
     <string name="label_go_back">Mene takaisin.</string>
-    <string name="label_go_back">Mene takaisin.</string>
     <string name="word_done">Valmis</string>
     <string name="word_retake">Ota uudelleen</string>
-    <string name="word_retake">Ota uudelleen</string>
-    <string name="error_badly_formatted_e_mail_address">Huonosti muotoiltu sähköpostiosoite!</string>
     <string name="error_badly_formatted_e_mail_address">Huonosti muotoiltu sähköpostiosoite!</string>
     <string name="error_invalid_user_or_password">Virheellinen sähköpostiosoite tai salasana!</string>
     <string name="error_weak_password">Heikko salasana!</string>
@@ -80,8 +74,6 @@
     <string name="text_by_dev4ev">Dev4Env toimesta</string>
     <string name="word_date">Päivämäärä</string>
     <string name="personal_details">Henkilötiedot</string>
-    <string name="personal_details">Henkilötiedot</string>
-    <string name="password_settings">Salasanan asetukset</string>
     <string name="password_settings">Salasanan asetukset</string>
     <string name="notification">Ilmoitus</string>
     <string name="payment">Maksu</string>
