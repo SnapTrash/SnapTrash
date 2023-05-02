@@ -14,17 +14,17 @@ class PasswordChangeViewModel: ViewModel() {
     var password = mutableStateOf("")
     var confirmPassword = mutableStateOf("")
     var oldPassword = mutableStateOf("")
+    val isSame: Boolean get() { return confirmPassword.value == password.value}
     val passwordValid: Boolean get(){
         val isLongEnough: (String) -> Boolean = {it.length >= 8}
         val hasDigit: (String) -> Boolean = {it.count(Char::isDigit) > 0}
-        val isSame: (String) -> Boolean = { confirmPassword.value == password.value}
         val isDifferent: (String) -> Boolean = { oldPassword.value != password.value}
         val isMultiCase: (String) -> Boolean = {it.count(Char::isUpperCase) > 0 && it.count(Char::isLowerCase) > 0}
-        val reqs = listOf(isLongEnough,hasDigit,isMultiCase,isSame,isDifferent)
+        val reqs = listOf(isLongEnough,hasDigit,isMultiCase,isDifferent)
         return reqs.all{it(password.value)}
     }
     val fieldsValid: Boolean get(){
-        return  passwordValid
+        return  passwordValid && isSame
     }
     var error = mutableStateOf<Int?>(null)
     var success = mutableStateOf<Int?>(null)

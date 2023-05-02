@@ -272,6 +272,7 @@ fun ChangePasswordScreen(vm: PasswordChangeViewModel = viewModel()){
 
         OutlinedTextField(
             value = vm.password.value,
+            isError = !vm.passwordValid,
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             onValueChange = { vm.password.value = it },
             trailingIcon = {
@@ -285,6 +286,14 @@ fun ChangePasswordScreen(vm: PasswordChangeViewModel = viewModel()){
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            supportingText =
+            {
+                if(!vm.passwordValid)
+                    Text(
+                         stringResource(id = R.string.error_password_requirements),
+                        color = MaterialTheme.colorScheme.error
+                    )
+            },
             colors = LoginTextBoxColors.loginTextBoxColors()
         )
 
@@ -292,6 +301,7 @@ fun ChangePasswordScreen(vm: PasswordChangeViewModel = viewModel()){
 
         OutlinedTextField(
             value = vm.confirmPassword.value,
+            isError = !vm.isSame,
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             onValueChange = { vm.confirmPassword.value = it },
             trailingIcon = {
@@ -305,13 +315,21 @@ fun ChangePasswordScreen(vm: PasswordChangeViewModel = viewModel()){
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            supportingText =
+            {
+                if(!vm.isSame)
+                    Text(
+                        stringResource(R.string.error_password_not_same),
+                        color = MaterialTheme.colorScheme.error
+                    )
+            },
             colors = LoginTextBoxColors.loginTextBoxColors()
         )
 
         Spacer(modifier = Modifier.height(20.dp))
         if(vm.inProgress.value) CircularProgressIndicator() else {
             Button(
-                //enabled = vm.fieldsValid ,
+                enabled = vm.fieldsValid,
                 onClick = {
                     vm.changePassword()
                 },
