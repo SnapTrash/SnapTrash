@@ -93,4 +93,8 @@
     <string name="word_new_password">Új jelszó</string>
     <string name="instruction_current_password">Írd be a jelenlegi jelszavad</string>
     <string name="word_current_password">Jelenlegi jelszó</string>
+    <string name="name_changing_error">Sikertelen névváltoztatás! Ellenőrizd a hálózati kapcsolatot!</string>
+    <string name="name_changing_success">Név sikeresen megváltoztatva!</string>
+    <string name="wrong_old_password">Rosszul adtad meg a régi jelszót!</string>
+    <string name="password_changed_successfully">Jelszó sikeresen megváltoztatva!</string>
 </resources>
