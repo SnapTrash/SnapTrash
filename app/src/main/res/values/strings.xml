@@ -80,4 +80,17 @@
     <string name="button_request_missing_permissions">Request missing permissions</string>
     <string name="error_home_no_network">There is no internet connection available. Some features (like Map and Snap sending) will be restricted.</string>
     <string name="instruction_turn_on_location">Turn on location</string>
+    <string name="change_full_name">Change full name</string>
+    <string name="word_current_name">Current name</string>
+    <string name="instraction_your_new_name">Type your new name</string>
+    <string name="word_new_name">New name</string>
+    <string name="word_new_surname">New surname</string>
+    <string name="word_current_surname">Current surname</string>
+    <string name="word_current_fullname">Current fullname</string>
+    <string name="confirm">Confirm</string>
+    <string name="confirm_password">Confirm new password</string>
+    <string name="instruction_type_new_password">Type your new password</string>
+    <string name="word_new_password">New password</string>
+    <string name="instruction_current_password">Type your current password</string>
+    <string name="word_current_password">Current password</string>
 </resources>
