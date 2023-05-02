@@ -78,7 +78,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-        }
         Firebase.auth.addAuthStateListener(firebaseAuthListener)
         Firebase.firestore.firestoreSettings = firestoreSettings { isPersistenceEnabled = false }
         if(DeviceInfo.isEmulator){
