@@ -32,6 +32,9 @@ class MainAddressBook{
         const val ACCOUNT = "account"
         const val LOGOUT = "logout"
         const val SINGLE_SNAP = "snap/snap={snap}"
+        const val PERSONAL_DETAILS = "personal_details"
+        const val CHANGE_PASSWORD = "change_password"
+        const val CHANGE_USERNAME = "change_username"
         fun addMainGraph(navGraphBuilder: NavGraphBuilder,navController: NavController,mainNavViewModel: MainNavViewModel){
 
             navGraphBuilder.composable(MainAddressBook.HOME){
@@ -44,8 +47,19 @@ class MainAddressBook{
                 ListSnapScreen(mainNavViewModel.snapList,navController,true)
             }
             navGraphBuilder.composable(MainAddressBook.ACCOUNT){
-                AccountScreen()
+                AccountScreen(navController)
             }
+            navGraphBuilder.composable(MainAddressBook.PERSONAL_DETAILS){
+                PersonalDetailsScreen(navController)
+            }
+            navGraphBuilder.composable(MainAddressBook.CHANGE_PASSWORD){
+                ChangePasswordScreen()
+            }
+
+            navGraphBuilder.composable(MainAddressBook.CHANGE_USERNAME){
+                ChangeUserNameScreen()
+            }
+
             navGraphBuilder.composable(MainAddressBook.SETTINGS){
 
             }

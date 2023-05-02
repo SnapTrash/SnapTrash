@@ -31,14 +31,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.snaptrash.snaptrash.view.navigator.MainAddressBook
 
 
 @Composable
-fun AccountScreen(){
+fun AccountScreen(navController: NavController ){
     val checkStateSwitch = remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
     Column(
@@ -159,7 +161,7 @@ fun AccountScreen(){
 
  */
 
-        ListOptions()
+        ListOptions(navController)
 
         Spacer(modifier = Modifier.height(20.dp))
         Text(
@@ -181,7 +183,7 @@ fun AccountScreen(){
 
 
 @Composable
-fun ListOptions() {
+fun ListOptions(navController : NavController) {
     val configuration = LocalConfiguration.current
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -193,12 +195,20 @@ fun ListOptions() {
                 .align(Alignment.CenterHorizontally)
                 //.background(MaterialTheme.colorScheme.onPrimaryContainer, RoundedCornerShape(30.dp)),
                 .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
-                .clickable(onClick = {}), //go to screen to set this information
+                .clickable(onClick = {
+                    navController.navigate(MainAddressBook.PERSONAL_DETAILS)
+                }), //go to screen to set this information
             headlineContent = { Text(stringResource(com.snaptrash.snaptrash.R.string.personal_details)) },
             leadingContent = {
                 Icon(
                     Icons.Filled.Person,
                     contentDescription = "Person Icon",
+                )
+            },
+            trailingContent = {
+                Icon(
+                    Icons.Filled.ChevronRight,
+                    contentDescription = "Arrow Icon",
                 )
             }
         )
@@ -210,12 +220,20 @@ fun ListOptions() {
                 .align(Alignment.CenterHorizontally)
                 //.background(MaterialTheme.colorScheme.onPrimaryContainer, RoundedCornerShape(30.dp)),
                 .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
-                .clickable(onClick = {}), //go to screen to set this information
+                .clickable(onClick = {
+                    navController.navigate(MainAddressBook.CHANGE_PASSWORD)
+                }), //go to screen to set this information
             headlineContent = { Text(stringResource(com.snaptrash.snaptrash.R.string.password_settings)) },
             leadingContent = {
                 Icon(
                     Icons.Filled.Password,
                     contentDescription = "Password Icon",
+                )
+            },
+            trailingContent = {
+                Icon(
+                    Icons.Filled.ChevronRight,
+                    contentDescription = "Arrow Icon",
                 )
             }
         )
@@ -257,4 +275,5 @@ fun ListOptions() {
         )
     }
 }
+
 
