@@ -6,10 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.R
 import androidx.compose.foundation.lazy.LazyColumn
@@ -43,8 +40,10 @@ import com.google.firebase.ktx.Firebase
 @Composable
 fun AccountScreen(){
     val checkStateSwitch = remember { mutableStateOf(false) }
+    val scrollState = rememberScrollState()
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth()
+            .verticalScroll(scrollState),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(
@@ -84,7 +83,7 @@ fun AccountScreen(){
         Text(text = Firebase.auth.currentUser?.email ?: "invalid",color = MaterialTheme.colorScheme.secondary,
             fontWeight = FontWeight.Medium, fontSize = 20.sp,
             modifier = Modifier.align(Alignment.CenterHorizontally))
-        Spacer(modifier = Modifier.height(80.dp))
+        Spacer(modifier = Modifier.height(60.dp))
 
 
 /*
@@ -162,8 +161,16 @@ fun AccountScreen(){
 
         ListOptions()
 
-
         Spacer(modifier = Modifier.height(20.dp))
+        Text(
+            text = stringResource(com.snaptrash.snaptrash.R.string.text_by_dev4ev),
+            color = MaterialTheme.colorScheme.onBackground,
+            fontSize = 16.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 64.dp)
+        )
 
     }
 
@@ -187,11 +194,11 @@ fun ListOptions() {
                 //.background(MaterialTheme.colorScheme.onPrimaryContainer, RoundedCornerShape(30.dp)),
                 .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
                 .clickable(onClick = {}), //go to screen to set this information
-            headlineContent = { Text("Personal details") },
+            headlineContent = { Text(stringResource(com.snaptrash.snaptrash.R.string.personal_details)) },
             leadingContent = {
                 Icon(
                     Icons.Filled.Person,
-                    contentDescription = "Localized description",
+                    contentDescription = "Person Icon",
                 )
             }
         )
@@ -204,11 +211,11 @@ fun ListOptions() {
                 //.background(MaterialTheme.colorScheme.onPrimaryContainer, RoundedCornerShape(30.dp)),
                 .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
                 .clickable(onClick = {}), //go to screen to set this information
-            headlineContent = { Text("Password settings") },
+            headlineContent = { Text(stringResource(com.snaptrash.snaptrash.R.string.password_settings)) },
             leadingContent = {
                 Icon(
                     Icons.Filled.Password,
-                    contentDescription = "Localized description",
+                    contentDescription = "Password Icon",
                 )
             }
         )
@@ -222,11 +229,11 @@ fun ListOptions() {
                 //.background(MaterialTheme.colorScheme.onPrimaryContainer, RoundedCornerShape(30.dp)),
                 .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
                 .clickable(onClick = {}), //go to screen to set this information
-            headlineContent = { Text("Notification") },
+            headlineContent = { Text(stringResource(com.snaptrash.snaptrash.R.string.notification)) },
             leadingContent = {
                 Icon(
                     Icons.Filled.Notifications,
-                    contentDescription = "Localized description",
+                    contentDescription = "Notification Icon",
                 )
             }
         )
@@ -240,11 +247,11 @@ fun ListOptions() {
                 //.background(MaterialTheme.colorScheme.onPrimaryContainer, RoundedCornerShape(30.dp)),
                 .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
                 .clickable(onClick = {}), //go to screen to set this information
-            headlineContent = { Text("Payment") },
+            headlineContent = { Text(stringResource(com.snaptrash.snaptrash.R.string.payment)) },
             leadingContent = {
                 Icon(
                     Icons.Filled.CreditCard,
-                    contentDescription = "Localized description",
+                    contentDescription = "CreditCard Icon",
                 )
             }
         )

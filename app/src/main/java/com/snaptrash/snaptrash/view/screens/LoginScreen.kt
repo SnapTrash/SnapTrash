@@ -130,7 +130,7 @@ fun LoginBody(navController: NavController, vm: LoginViewModel = viewModel()){
             SignUpClickableText(navController)
         }
         Text(
-            text = stringResource(R.string.text_by_snaptrash),
+            text = stringResource(R.string.text_by_dev4ev),
             color = MaterialTheme.colorScheme.onBackground,
             fontSize = 16.sp,
             textAlign = TextAlign.Center,

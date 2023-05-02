@@ -254,7 +254,7 @@ fun SignUpBody(navController: NavController,vm:SignUpViewModel){
         }
         if(vm.error.value != null) ErrorCard(stringResource(vm.error.value!!))
         Text(
-            text = stringResource(id = R.string.text_by_snaptrash),
+            text = stringResource(id = R.string.text_by_dev4ev),
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
             modifier = Modifier
