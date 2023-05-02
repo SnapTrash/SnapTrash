@@ -72,4 +72,10 @@
     <string name="not_urgent">Pas urgent</string>
     <string name="word_serious">Sérieux</string>
     <string name="word_urgent">Urgent</string>
+    <string name="text_by_dev4ev">Par Dev4Env</string>
+    <string name="word_date">Date</string>
+    <string name="personal_details">Détails personnelles</string>
+    <string name="password_settings">Paramètres mot de passe</string>
+    <string name="notification">Notification</string>
+    <string name="payment">Paiement</string>
 </resources>

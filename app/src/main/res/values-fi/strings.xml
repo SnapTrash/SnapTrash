@@ -77,4 +77,12 @@
     <string name="not_urgent">Ei kiireellinen</string>
     <string name="word_serious">Vakava</string>
     <string name="word_urgent">Kiireellinen</string>
+    <string name="text_by_dev4ev">Dev4Env toimesta</string>
+    <string name="word_date">Päivämäärä</string>
+    <string name="personal_details">Henkilötiedot</string>
+    <string name="personal_details">Henkilötiedot</string>
+    <string name="password_settings">Salasanan asetukset</string>
+    <string name="password_settings">Salasanan asetukset</string>
+    <string name="notification">Ilmoitus</string>
+    <string name="payment">Maksu</string>
 </resources>
