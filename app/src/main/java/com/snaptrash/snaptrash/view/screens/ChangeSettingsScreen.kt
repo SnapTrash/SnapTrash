@@ -27,12 +27,17 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.R
+import com.snaptrash.snaptrash.view.commonwidgets.ErrorCard
 import com.snaptrash.snaptrash.view.commonwidgets.LoginTextBoxColors
+import com.snaptrash.snaptrash.view.commonwidgets.SuccessCard
 import com.snaptrash.snaptrash.view.navigator.MainAddressBook
+import com.snaptrash.snaptrash.viewmodel.NameChangeViewModel
+import com.snaptrash.snaptrash.viewmodel.PasswordChangeViewModel
 
 
 @Composable
@@ -101,7 +106,7 @@ fun ListPersonalDetails(navController : NavController) {
             }
         )
 
-        Spacer(modifier = Modifier.height(10.dp))
+        /*Spacer(modifier = Modifier.height(10.dp))
         ListItem(
             modifier = Modifier
                 .width((configuration.screenWidthDp * 0.85).dp)
@@ -120,18 +125,15 @@ fun ListPersonalDetails(navController : NavController) {
                 )
 
             }
-        )
+        )*/
 
     }
 }
 
 
 @Composable
-fun ChangeUserNameScreen(){
+fun ChangeUserNameScreen(vm: NameChangeViewModel = viewModel()){
     val scrollState = rememberScrollState()
-
-    var newUserName : String = ""
-    var newUserSurname: String = ""
 
     Column(
         modifier = Modifier
@@ -146,7 +148,14 @@ fun ChangeUserNameScreen(){
             modifier = Modifier.padding(top = 30.dp, bottom = 10.dp))
 
         Spacer(modifier = Modifier.height(30.dp))
-
+        if(vm.error.value != null){
+            ErrorCard(error = stringResource(id = vm.error.value!!))
+            Spacer(modifier = Modifier.height(20.dp))
+        }
+        if(vm.success.value != null){
+            SuccessCard(stringResource(id = vm.success.value!!))
+            Spacer(modifier = Modifier.height(20.dp))
+        }
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             enabled = false,
@@ -158,8 +167,8 @@ fun ChangeUserNameScreen(){
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = newUserName,
-            onValueChange = { newUserName = it },
+            value = vm.firstName.value,
+            onValueChange = { vm.firstName.value = it },
             label = { Text(text = stringResource(R.string.word_new_name)) },
             placeholder = { Text(text = stringResource(R.string.instruction_type_name)) },
             singleLine = true,
@@ -171,8 +180,8 @@ fun ChangeUserNameScreen(){
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = newUserSurname,
-            onValueChange = { newUserSurname = it },
+            value = vm.lastName.value,
+            onValueChange = { vm.lastName.value = it },
             label = { Text(text = stringResource(R.string.word_new_surname)) },
             placeholder = { Text(text = stringResource(id = R.string.instruction_type_surname)) },
             singleLine = true,
@@ -183,27 +192,27 @@ fun ChangeUserNameScreen(){
 
 
         Spacer(modifier = Modifier.height(20.dp))
-        //if(vm.inProgress.value) CircularProgressIndicator() else
-        //{
-        Button(
-            //enabled = vm.fieldsValid ,
-            onClick = {
-                //vm.register()
-            },
-            //modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
-            modifier = Modifier
-                .width(235.dp)
-                .height(95.dp)
-                .padding(top = 36.dp),
-            //colors =  ButtonDefaults.buttonColors.
+        if(vm.inProgress.value) CircularProgressIndicator() else {
+            Button(
+                //enabled = vm.fieldsValid ,
+                onClick = {
+                    vm.changeName()
+                },
+                //modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .width(235.dp)
+                    .height(95.dp)
+                    .padding(top = 36.dp),
+                //colors =  ButtonDefaults.buttonColors.
 
-        ){ //button composable contains an other composable
-            Text(
-                text = stringResource(id = R.string.confirm),
-                fontSize = 24.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
+            ) { //button composable contains an other composable
+                Text(
+                    text = stringResource(id = R.string.confirm),
+                    fontSize = 24.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
 
     }
@@ -215,13 +224,10 @@ fun ChangeUserNameScreen(){
 
 
 @Composable
-fun ChangePasswordScreen(){
+fun ChangePasswordScreen(vm: PasswordChangeViewModel = viewModel()){
     val scrollState = rememberScrollState()
 
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
-    var currentPassword : String = ""
-    var newPassword : String = ""
-    var confirmNewPassword : String = ""
 
     Column(
         modifier = Modifier
@@ -236,11 +242,18 @@ fun ChangePasswordScreen(){
             modifier = Modifier.padding(top = 30.dp, bottom = 10.dp))
 
         Spacer(modifier = Modifier.height(30.dp))
-
+        if(vm.error.value != null){
+            ErrorCard(error = stringResource(id = vm.error.value!!))
+            Spacer(modifier = Modifier.height(20.dp))
+        }
+        if(vm.success.value != null){
+            SuccessCard(stringResource(id = vm.success.value!!))
+            Spacer(modifier = Modifier.height(20.dp))
+        }
         OutlinedTextField(
-            value = currentPassword,
+            value = vm.oldPassword.value,
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            onValueChange = { currentPassword = it },
+            onValueChange = { vm.oldPassword.value = it },
             trailingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
@@ -258,9 +271,9 @@ fun ChangePasswordScreen(){
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = newPassword,
+            value = vm.password.value,
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            onValueChange = { newPassword = it },
+            onValueChange = { vm.password.value = it },
             trailingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
@@ -278,9 +291,9 @@ fun ChangePasswordScreen(){
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = confirmNewPassword,
+            value = vm.confirmPassword.value,
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            onValueChange = { confirmNewPassword = it },
+            onValueChange = { vm.confirmPassword.value = it },
             trailingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
@@ -296,12 +309,11 @@ fun ChangePasswordScreen(){
         )
 
         Spacer(modifier = Modifier.height(20.dp))
-        //if(vm.inProgress.value) CircularProgressIndicator() else
-        //{
+        if(vm.inProgress.value) CircularProgressIndicator() else {
             Button(
                 //enabled = vm.fieldsValid ,
                 onClick = {
-                    //vm.register()
+                    vm.changePassword()
                 },
                 //modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
                 modifier = Modifier
@@ -310,7 +322,7 @@ fun ChangePasswordScreen(){
                     .padding(top = 36.dp),
                 //colors =  ButtonDefaults.buttonColors.
 
-            ){ //button composable contains an other composable
+            ) { //button composable contains an other composable
                 Text(
                     text = stringResource(R.string.confirm),
                     fontSize = 24.sp,
@@ -318,6 +330,7 @@ fun ChangePasswordScreen(){
                     modifier = Modifier.fillMaxWidth()
                 )
             }
+        }
 
     }
 

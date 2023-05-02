@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 
 @Composable
-fun DrawerContent(navController: NavHostController, drawerState: DrawerState,paddingValues: PaddingValues){
+fun DrawerContent(navController: NavHostController, drawerState: DrawerState,paddingValues: PaddingValues,displayName: String){
     val scrollState = rememberScrollState()
     val configuration = LocalConfiguration.current
     Column(
@@ -34,7 +34,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState,pad
         //.padding(top = 1.dp, bottom = 5.dp) //changes
         .background(MaterialTheme.colorScheme.background)
     ){
-        DrawerHeader()
+        DrawerHeader(displayName)
         Column(
             modifier = Modifier
                 .padding(5.dp)

@@ -28,7 +28,7 @@ import com.google.firebase.ktx.Firebase
 import com.snaptrash.snaptrash.R
 
 @Composable
-fun DrawerHeader(){
+fun DrawerHeader(displayName: String){
     val configuration = LocalConfiguration.current
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -92,8 +92,7 @@ fun DrawerHeader(){
                     Column(){
                         Spacer(modifier = Modifier.height(5.dp))
                         Text(text =
-                        Firebase.auth.currentUser?.displayName ?:
-                        "Username",
+                        displayName,
                             color = MaterialTheme.colorScheme.onPrimaryContainer,
                             fontWeight = FontWeight.Bold, fontSize = 24.sp
                         )

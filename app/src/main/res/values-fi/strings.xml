@@ -8,7 +8,7 @@
     <string name="word_settings">Asetukset</string>
     <string name="word_about">Tietoja</string>
     <string name="word_about_us">Tietoja meistä</string>
-    <string name="text_about_us">Tervetuloa SnapTrash-sovellukseen! Olemme omistautunut joukko ympäristönsuojelun harrastajia, jotka ovat intohimoisia puhtaamman ja terveellisemmän ympäristön puolesta. Missiomme on ratkaista maailmanlaajuinen roskien ja jätteen ongelma antamalla sinun kaltaisillesi käyttäjille mahdollisuus ilmoittaa niistä ja ryhtyä toimiin niitä vastaan. Käyttämällä mobiilisovellustamme, sinulla on voima tehdä muutoksia. Sinun tarvitsee vain ottaa kuva löytämästäsi roskasta - olipa se sitten luonnossa, kaupungeissa, vuorilla, järvillä tai julkisilla paikoilla - ja ladata se sovellukseen yhdessä koordinaattien kanssa. Sovelluksemme yhdistää sen jälkeen yhteistyökumppanimme vastuussa jätteiden hallinnasta ja siivouksesta, varmistaen, että roskat käsitellään nopeasti ja vastuullisesti. SnapTrash uskoo, että jokaisella roskalla on tarina, ja jakamalla näitä tarinoita voimme lisätä tietoisuutta roskien vaikutuksesta ja inspiroida positiivista muutosta. Käyttämällä sovellustamme, et ainoastaan auta ympäristön puhdistamisessa, vaan myös edistät kansainvälistä yhteisöä samanmielisten ihmisten kanssa, jotka ovat sitoutuneet suojelemaan planeettaamme tuleville sukupolville. Sitoutumisemme kestävyyteen ulottuu yli pelkkien puhdistustoimien. Olemme myös aktiivisesti mukana koulutus- ja edunvalvontatoimissa, joilla pyritään edistämään vastuullista jätteiden hallintaa ja vähentämään roskien vaikutusta ympäristöömme. Teemme yhteistyötä paikallisten yhteisöjen, yritysten ja hallitusten kanssa toteuttaaksemme innovatiivisia ratkaisuja ja edistääksemme ympäristövastuullisuuden kulttuuria. Liity kanssamme tehtävässämme luoda puhtaampi maailma kaikille. Yhdessä voimme tehdä todellisen eron toimimalla roskia vastaan ja säilyttämällä planeettamme kauneus. Ota ensimmäinen Snap tänään ja liity ratkaisun joukkoon!</string>
+    <string name="text_about_us">Tervetuloa SnapTrash-sovellukseen! Olemme omistautunut joukko ympäristönsuojelun harrastajia, jotka ovat intohimoisia puhtaamman ja terveellisemmän ympäristön puolesta. Missiomme on ratkaista maailmanlaajuinen roskien ja jätteiden ongelma antamalla sinun kaltaisillesi käyttäjille mahdollisuuden ilmoittaa niistä ja ryhtyä toimiin niitä vastaan. Käyttämällä mobiilisovellustamme, sinulla on voima tehdä muutoksia. Sinun tarvitsee vain ottaa kuva löytämästäsi roskasta - olipa se sitten luonnossa, kaupungeissa, vuorilla, järvillä tai julkisilla paikoilla - ja ladata se sovellukseen yhdessä koordinaattien kanssa. Sovelluksemme yhdistää sen jälkeen yhteistyökumppanillemme, joka otta vastuun jätteiden hallinnasta ja siivouksesta, varmistaen, että roskat käsitellään nopeasti ja vastuullisesti. SnapTrash uskoo, että jokaisella roskalla on tarina, ja jakamalla näitä tarinoita voimme lisätä tietoisuutta roskien vaikutuksesta ja inspiroida positiivista muutosta. Käyttämällä sovellustamme, et ainoastaan auta ympäristön puhdistamisessa, vaan myös edistät kansainvälistä yhteisöä samanmielisten ihmisten kanssa, jotka ovat sitoutuneet suojelemaan planeettaamme tuleville sukupolville. Sitoutumisemme kestävyyteen ulottuu yli pelkkien puhdistustoimien. Olemme myös aktiivisesti mukana koulutus- ja edunvalvontatoimissa, joilla pyritään edistämään vastuullista jätteiden hallintaa ja vähentämään roskien vaikutusta ympäristöömme. Teemme yhteistyötä paikallisten yhteisöjen, yritysten ja hallitusten kanssa toteuttaaksemme innovatiivisia ratkaisuja ja edistääksemme ympäristövastuullisuuden kulttuuria. Liity mukaan tehtäväämme luoda puhtaampi maailma kaikille. Yhdessä voimme tehdä todellisen eron toimimalla roskia vastaan ja säilyttämällä planeettamme kauneus. Ota ensimmäinen Snap tänään ja liity ratkaisun joukkoon!</string>
     <string name="content_desc_email_icon">sähköpostisymboli</string>
     <string name="word_username">käyttäjänimi</string>
     <string name="instruction_type_username">Kirjoita käyttäjänimesi</string>
@@ -21,9 +21,9 @@
     <string name="word_here">täällä</string>
     <string name="word_person">Henkilö</string>
     <string name="word_name">nimi</string>
-    <string name="instruction_type_name">Kirjoita nimisi</string>
+    <string name="instruction_type_name">Kirjoita nimesi</string>
     <string name="word_surname">sukunimi</string>
-    <string name="instruction_type_surname">Kirjoita sukunimisi</string>
+    <string name="instruction_type_surname">Kirjoita sukunimesi</string>
     <string name="content_desc_calendar_icon">kalenterikuvake</string>
     <string name="word_birthdate">Syntymäaika</string>
     <string name="instruction_type_birthdate">Kirjoita syntymäaikasi</string>
@@ -36,7 +36,7 @@
     <string name="instruction_already_have_an_account">Onko sinulla jo tili? Kirjaudu sisään.</string>
     <string name="instruction_take_a_snap">Ota kuva</string>
     <string name="account">Tili</string>
-    <string name="word_yes">Joo</string>
+    <string name="word_yes">Kyllä</string>
     <string name="error_password_requirements">Salasanavaatimukset: - Vähintään 8 merkkiä - Sisältää numeron - Sisältää ison ja pienen kirjaimen</string>
     <string name="error_invalid_email_address">Virheellinen sähköpostiosoite.</string>
     <string name="error_invalid_phone_number">Virheellinen puhelinnumero.</string>
@@ -77,4 +77,22 @@
     <string name="password_settings">Salasanan asetukset</string>
     <string name="notification">Ilmoitus</string>
     <string name="payment">Maksu</string>
+    <string name="button_request_missing_permissions">Pyydä puuttuvia käyttöoikeuksia</string>
+    <string name="error_home_no_network">" Internet-yhteyttä ei ole käytettävissä. Joitakin ominaisuuksia (kuten kartta ja Snappien lähetys) rajoitetaan"</string>
+    <string name="instruction_turn_on_location">Kytke sijainti päälle</string>
+    <string name="change_full_name">Vaihda koko nimi</string>
+    <string name="word_current_name">Nykyinen nimi</string>
+    <string name="instraction_your_new_name">Kirjoita uusi nimesi</string>
+    <string name="word_new_name">Uusi nimi</string>
+    <string name="word_new_surname">" Uusi sukunimi"</string>
+    <string name="word_current_surname">Nykyinen sukunimi</string>
+    <string name="word_current_fullname">Nykyinen koko nimi</string>
+    <string name="confirm">Vahvista</string>
+    <string name="confirm_password">Vahvista uusi salasana</string>
+    <string name="instruction_type_new_password">Kirjoita uusi salasana</string>
+    <string name="word_new_password">Uusi salasana</string>
+    <string name="instruction_current_password">Kirjoita nykyinen salasanasi</string>
+    <string name="word_current_password">Nykyinen salasana</string>
+    <string name="name_changing_error">Nimen vaihtaminen ei onnistu</string>
+    <string name="name_changing_success">Nimen vaihto onnistui</string>
 </resources>
