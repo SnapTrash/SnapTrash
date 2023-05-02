@@ -15,6 +15,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
@@ -25,6 +26,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.snaptrash.snaptrash.view.navigator.MainAddressBook
 import com.snaptrash.snaptrash.view.commonwidgets.navigation.DrawerContent
+import com.snaptrash.snaptrash.view.helper.observeAsState
 import com.snaptrash.snaptrash.viewmodel.MainNavViewModel
 import kotlinx.coroutines.launch
 import org.osmdroid.util.GeoPoint
@@ -40,6 +42,7 @@ fun MainScaffold(
     val context = LocalContext.current
     val locationProvider =
         if (Build.VERSION.SDK_INT > 30) LocationManager.FUSED_PROVIDER else LocationManager.GPS_PROVIDER
+    vm.checkPermissions(context)
     if (ActivityCompat.checkSelfPermission(
             context,
             android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -65,6 +68,10 @@ fun MainScaffold(
                 }
             })
     }
+    else{
+        vm.locationEnabled.value = false
+    }
+    val lifecycleState by LocalLifecycleOwner.current.lifecycle.observeAsState()
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(

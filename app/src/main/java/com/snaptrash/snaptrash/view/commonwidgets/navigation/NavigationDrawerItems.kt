@@ -41,6 +41,8 @@ import com.snaptrash.snaptrash.view.navigator.MainAddressBook
 import com.snaptrash.snaptrash.view.commonwidgets.NavigationItem
 import com.snaptrash.snaptrash.view.getActivity
 import com.snaptrash.snaptrash.view.getCurrentLocaleIcon
+import com.snaptrash.snaptrash.view.helper.ConnectionState
+import com.snaptrash.snaptrash.view.helper.connectivityState
 import kotlinx.coroutines.launch
 
 @Composable
@@ -48,7 +50,7 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
     val scope = rememberCoroutineScope()
 
     val currentBackStackEntryAsState = navController.currentBackStackEntryAsState()
-
+    val networkState = connectivityState()
     val destination = currentBackStackEntryAsState.value?.destination
     val langMenuExpanded = remember{ mutableStateOf(false)}
 
@@ -56,15 +58,16 @@ fun NavigationDrawerItems(navController: NavHostController, drawerState: DrawerS
     val primaryColorTrasparent_L = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
 
     val showLogoutDialog : MutableState<Boolean> = remember { mutableStateOf(false) }
-    val navigationDestinations = listOf(
+    val navigationDestinations = mutableListOf(
         NavMenuPoint(MainAddressBook.HOME,Icons.Outlined.Home, stringResource(R.string.word_home_screen)),
-        NavMenuPoint(MainAddressBook.MAP,Icons.Outlined.Map, stringResource(R.string.word_map)),
         NavMenuPoint(MainAddressBook.LIST,Icons.Outlined.List, stringResource(R.string.word_snap_list)),
         NavMenuPoint(MainAddressBook.HISTORY,Icons.Outlined.History, stringResource(R.string.word_history)),
         NavMenuPoint(MainAddressBook.ACCOUNT,Icons.Outlined.Person, stringResource(R.string.account)),
         NavMenuPoint(MainAddressBook.ABOUT,Icons.Outlined.Help, stringResource(id = R.string.word_about)),
         NavMenuPoint(MainAddressBook.LOGOUT,Icons.Outlined.Logout, stringResource(id = R.string.word_logout))
     )
+    if(networkState.value == ConnectionState.Available)
+        navigationDestinations.add(1,NavMenuPoint(MainAddressBook.MAP,Icons.Outlined.Map, stringResource(R.string.word_map)))
     val selectableLanguages = mapOf(
         "en" to "English",
         "de" to "Deutsch",
