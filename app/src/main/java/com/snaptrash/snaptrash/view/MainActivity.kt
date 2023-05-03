@@ -52,10 +52,6 @@ class MainActivity : AppCompatActivity() {
                 locationManager.isProviderEnabled(LocationManager.FUSED_PROVIDER)
             else
                 locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-            if(!providerEnabled){
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                startActivity(intent)
-            }
         }
     }
 
